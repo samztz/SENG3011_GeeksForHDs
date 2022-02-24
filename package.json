@@ -1,0 +1,22 @@
+{
+  "name": "seng3011_geeksforhds",
+  "version": "1.0.0",
+  "description": "SENG3011 project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samztz/SENG3011_GeeksForHDs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samztz/SENG3011_GeeksForHDs/issues"
+  },
+  "homepage": "https://github.com/samztz/SENG3011_GeeksForHDs#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

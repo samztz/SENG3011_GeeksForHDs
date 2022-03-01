@@ -4,6 +4,8 @@
   "description": "SENG3011 project",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,11 +14,17 @@
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/samztz/SENG3011_GeeksForHDs/issues"
   },
   "homepage": "https://github.com/samztz/SENG3011_GeeksForHDs#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "morgan": "^1.10.0",
+    "puppeteer": "^13.4.0",
+    "winston": "^3.6.0"
   }
 }

@@ -1,1 +1,5 @@
 /PHASE_1/node_modules
+/PHASE_1/combined.log
+/PHASE_1/error.log
+/PHASE_1/.env
+

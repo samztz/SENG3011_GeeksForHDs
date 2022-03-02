@@ -26,5 +26,8 @@
     "morgan": "^1.10.0",
     "puppeteer": "^13.4.0",
     "winston": "^3.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

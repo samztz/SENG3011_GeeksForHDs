@@ -68,7 +68,7 @@ npm start
 ## Accessing API
 
 ### For Dev
-'''
+'''console
 GET/report/:country/:city/?start=''&end=
 ''' 
 (input country and city with start and end time (DD:MM:YYYY) to receive data)

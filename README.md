@@ -7,7 +7,7 @@
 
 
 
-![plot](./SENG3011_GeeksForHDs/PHASE_1/src/assets/architecture.png)
+![alt text](https://github.com/samztz/SENG3011_GeeksForHDs/blob/main/PHASE_1/src/assets/libraries.png)
 
 
 ## Links

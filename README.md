@@ -68,31 +68,35 @@ npm start
 ## Accessing API
 
 ### For Dev
+
+Input country and city with start and end time (DD:MM:YYYY) to receive data
 ```console
 GET/report/:country/:city/?start=''&end=
 ```
-Input country and city with start and end time (DD:MM:YYYY) to receive data
 
+To get specific reports
 ```console
 GET/report/?{reportId} 
 ```
-To get specific reports
 
+To get all reports
 ```console
 Get/report/all
 ```
-To get all reports
 
 ### User Users
 
+Get user reports by user id
 ```console
 GET/report/:userId/
 ```
-Get user reports by user id
+
+Save reports to user return successful report
 ```console
 POST/report/:userId/:reportId
 ```
-Save reports to user return successful report
 
-- DELETE/api/report/:userId/ (delete report)
-- GET/report/:country/:city/?start=''&end=
+Delete report
+```console
+DELETE/api/report/:userId/
+```

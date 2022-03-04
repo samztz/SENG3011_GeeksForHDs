@@ -48,22 +48,14 @@ npm init
 npm start
 ```
 
-### Requirements
-
-- NodeJS
-- Puppeteer JS
-- Material UI
-- MongoCB libraries
-- React
-- RestAPI
 
 ## Accessing API
 
-### For Dev
+### For Develop environment
 
 Input country and city with start and end time (DD:MM:YYYY) to receive data
 ```console
-GET/report/:country/:city/?start=''&end=
+http://localhost:4000//report/:country/:city/?start=''&end=
 ```
 
 To get specific reports

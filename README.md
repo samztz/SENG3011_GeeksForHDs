@@ -11,14 +11,6 @@
 * Agile Scrum: [Jira](https://unswseng.atlassian.net/jira/your-work)
 * Code Base: [Github](https://github.com/samztz/SENG3011_GeeksForHDs)
 
-## Group Members
-
-- Tingzhuang Zhou
-- Avijit Prasad
-- Mashira Farid
-- Lin Thit
-- Zifan Wei
-
 ## Description
 
 Disease tracking App that lets user keep track of different diseases in user friendly manner. Project specification mentioned in confluence.
@@ -100,3 +92,12 @@ Delete report
 ```console
 DELETE/api/report/:userId/
 ```
+
+## Contributors
+
+- Tingzhuang Zhou
+- Avijit Prasad
+- Mashira Farid
+- Lin Thit
+- Zifan Wei
+

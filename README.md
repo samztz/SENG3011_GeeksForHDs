@@ -7,7 +7,7 @@
 
 
 <p align="center">
-![Alt text](/SENG3011_GeeksForHDs/PHASE_1/src/assets/architecture.png?raw=true "Title")
+![plot](./SENG3011_GeeksForHDs/PHASE_1/src/assets/architecture.png)
 
 
 # Links

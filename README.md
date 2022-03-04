@@ -68,10 +68,10 @@ npm start
 ## Accessing API
 
 ### For Dev
-'''console
+```console
 GET/report/:country/:city/?start=''&end=
-''' 
-(input country and city with start and end time (DD:MM:YYYY) to receive data)
+```
+Input country and city with start and end time (DD:MM:YYYY) to receive data
 - GET/report/?{reportId} (get specific reports)
 - Get/report/all (to get all reports)
 

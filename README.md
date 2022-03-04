@@ -6,10 +6,6 @@
 
 
 
-
-![alt text](https://github.com/samztz/SENG3011_GeeksForHDs/blob/main/PHASE_1/src/assets/libraries.png)
-
-
 ## Links
 * Full documentation: [Confluence](https://unswseng.atlassian.net/wiki/spaces/SE3Y22G14/overview)
 * Agile Scrum: [Jira](https://unswseng.atlassian.net/jira/your-work)

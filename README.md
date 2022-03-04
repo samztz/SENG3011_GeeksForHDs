@@ -65,3 +65,15 @@ npm start
 - React
 - RestAPI
 
+## Accessing API
+
+### For Dev
+- GET/report/:country/:city/?start=''&end= (input country and city with start and end time (DD:MM:YYYY) to receive data)
+- GET/report/?{reportId} (get specific reports)
+- Get/report/all (to get all reports)
+
+### User Users
+- GET/report/:userId/ (get user reports by user id)
+- POST/report/:userId/:reportId (save reports to user return successful report)
+- DELETE/api/report/:userId/ (delete report)
+- GET/report/:country/:city/?start=''&end=

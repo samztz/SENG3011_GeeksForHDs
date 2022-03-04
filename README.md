@@ -51,11 +51,13 @@ Documentation through **Swagger**
 
 ## Getting Started
 
-### Clone and run the app
+### Clone and run the API
 
 ```console
 git clone https://github.com/samztz/SENG3011_GeeksForHDs.git
+cd SENG3011_GeeksForHDs
 npm init
+npm start
 ```
 
 ### Requirements

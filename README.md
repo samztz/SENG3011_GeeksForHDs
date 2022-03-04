@@ -84,7 +84,7 @@ To get all reports
 Get/report/all
 ```
 
-### User Users
+### User related actions
 
 Get user reports by user id
 ```console

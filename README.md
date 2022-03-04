@@ -7,7 +7,7 @@
 
 
 <p align="center">
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](/SENG3011_GeeksForHDs/PHASE_1/src/assets/architecture.png?raw=true "Title")
 
 
 # Links

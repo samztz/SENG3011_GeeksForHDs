@@ -29,8 +29,6 @@ Disease tracking App that lets user keep track of different diseases in user fri
 
 ## Details
 
-<a href="#"><img alt="JS" src="../SENG3011_GeeksForHDs/PHASE_1/src/assets/architecture.png"></a>
-
 ### Scrapper
 
 **Puppeteer JS** is used to scrape the website. Allows us to use the Dev Tools and as the library is in JS can be easily integrated with the App

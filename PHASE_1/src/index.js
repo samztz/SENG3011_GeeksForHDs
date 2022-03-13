@@ -1,8 +1,9 @@
+require('module-alias/register');
 import express from 'express';
 import morgan from 'morgan';
 import logger from './config/winston.js'
 import 'dotenv/config';
-import indexRouter from'../src/routes/index.route.js';
+const indexRouter = require('@routes/index.route');
 
 
 const app = express();

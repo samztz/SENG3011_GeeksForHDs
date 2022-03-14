@@ -1,20 +1,11 @@
-
-
-// return most recent report
+// return most recent report in default 30 days
 const getReports = async (req, res) => {
-  const result = 'default query'
+  const result = 'default report query'
   return res.json(result);
 
 }
 
-
-const getReportByCountryCode = async (req, res) => {
-  const { country } = req.params;
-  const result = 'default query'
-
-  return res.json(result);
-}
-
+// get report from countryId, option start, end date in query parameter
 const getReportsByCountryId = async (req, res) => {
   const { countryId } = req.params;
   const { start, end } = req.query; 
@@ -23,6 +14,8 @@ const getReportsByCountryId = async (req, res) => {
 
   return res.json(result);
 }
+
+// get reports by city name, option start, end date in query parameter
 const getReportsByCityName = async (req, res) => {
   const { cityName } = req.params;
   const { start, end } = req.query; 
@@ -31,10 +24,11 @@ const getReportsByCityName = async (req, res) => {
   return res.json(result);
 }
 
+// get JSON report detail from specific report Page
 const getReportDetailById = async (req, res) => {
-  const { reportId } = req.params;
+  const { id } = req.params;
   const result = `query detail from specific report ID: ${id}`;
   return res.json(result);
 }
 
-export default { getReports, getReportsByCountryId, getReportsByCityName, getReportDetailById };
+export { getReports, getReportsByCountryId, getReportsByCityName, getReportDetailById };

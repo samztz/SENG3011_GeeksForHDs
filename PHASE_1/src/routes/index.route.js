@@ -1,5 +1,6 @@
 import express from 'express';
-import IndexController from '../controllers/index.controller.js'
+import IndexController from '../controllers/index.controller.js';
+import reportRouter from './report.route.js';
 
 const indexRouter = express.Router();
 indexRouter.get('/', IndexController);

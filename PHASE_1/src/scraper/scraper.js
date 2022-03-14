@@ -14,22 +14,6 @@ function run () {
             await page.goto("http://outbreaks.globalincidentmap.com/");
             page.on('console', (msg) => console.log(msg.text()));
 
-            // QUESTION 1: this detail_page parameter is not correct, weird???????????
-            // QUESTION 2: Still haven't figured out how to go to one page and go back to previous page. 
-            // But using page.goto() and page.goback() for sure, the problem is how to go to switch between pages under page.evaluate(.........).
-
-            await page.exposeFunction('extraction', detail_page => {
-                return new Promise((resolve, reject) => {
-
-                    // console.log(detail_page); 
-                    //page.goto(detail_page); 
-                    //  text = detail_page;
-                    //  if (err) reject(err);
-                    resolve(detail_page);
-                    //page.goback();           
-                });
-            });
-
             let urls = await page.evaluate(async() => {
                 let results = [];
                 let tables = document.getElementsByTagName("center")[1].children[1].rows;
@@ -62,27 +46,79 @@ function run () {
 							let detail_page = document.querySelectorAll(".tdline a")[index].href;
 
                             // the detail_page can't be printed out correctly in "extraction" function.
-                            latitude = await window.extraction(detail_page); 
+                            //latitude = await window.extraction(detail_page); 
+                            //latitude = await extractReport(detail_page);
                             
                             diseaseReports.push(JSON.stringify({report: currDiseaseReport.innerText}))
-							detail_pages.push(JSON.stringify({url: detail_page}))
+							detail_pages.push({url: detail_page})
                         }
 						if (flag == 0) {
 							counter = counter + (diseaseReportsAll.length-1);
 						}
                         results.push({
                             diseaseName: diseaseName.innerText,
-                            diseaseReports: diseaseReports,
+                            //diseaseReports: diseaseReports,
 							detail_page: detail_pages,
-                            height: latitude
+                            //height: latitude
                         })
                     }
                 }
                 return results;
             })
+            await page.close();
+
+            // go through results to find details of each report
+            let extractReport = (detailPage) => new Promise(async(resolve, reject) => {
+                // open new tab to report details
+                let newPage = await browser.newPage();
+                await newPage.goto(detailPage);
+                //console.log(detailPage);
+
+                // get report details
+                let report = await newPage.evaluate(async() => {
+                    let detailsTable = document.querySelectorAll("table table table");
+                    let diseaseName = detailsTable[1].rows[0].cells[1].innerText;
+                    let dateTime = detailsTable[1].rows[0].cells[3].innerText;
+                    let country = detailsTable[1].rows[1].cells[1].innerText;
+                    let city = detailsTable[1].rows[1].cells[3].innerText;
+                    let latitude = detailsTable[1].rows[2].cells[1].innerText;
+                    let longitude = detailsTable[1].rows[2].cells[3].innerText;
+                    let articleURL = detailsTable[1].rows[3].cells[1].innerText;
+                    let description = detailsTable[3].textContent;
+                    //console.log(`current report: ${detailsTable}`);
+                    return {
+                        diseaseName: diseaseName,
+                        dateTime: dateTime,
+                        country: country,
+                        city: city,
+                        latitude: latitude,
+                        longitude: longitude,
+                        articleURL: articleURL,
+                        description: description,
+                    };
+                });
+
+                resolve(report);
+                await newPage.close();
+            });
+
+            let reportInfo = [];
+            for (let disease of urls) {
+                let diseaseReports = []
+                //console.log(`getting reports for '${disease.diseaseName}'`);
+                for (let details of disease.detail_page) {
+                    //console.log(details.url);
+                    diseaseReports.push(JSON.stringify({report: await extractReport(details.url)}))
+                }
+                reportInfo.push({
+                    diseaseName: disease.diseaseName,
+                    diseaseReports: diseaseReports,
+                })
+            }
 
             browser.close();
-            return resolve(urls);
+            return resolve(reportInfo);
+            //return resolve(urls);
         } catch (e) {
             return reject(e);
         }

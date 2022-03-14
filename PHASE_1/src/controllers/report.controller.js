@@ -4,7 +4,7 @@
 const getReports = async (req, res) => {
   const result = 'default query'
   return res.json(result);
-  
+
 }
 
 
@@ -37,4 +37,4 @@ const getReportDetailById = async (req, res) => {
   return res.json(result);
 }
 
-export default { getReports, getReportsByCountryId, getReportsByCityName };
+export default { getReports, getReportsByCountryId, getReportsByCityName, getReportDetailById };

@@ -42,7 +42,7 @@ const getReports = async (req, res) => {
  * /report/country/{countryId}:
  *  get:
  *    tags: [Report]
- *    summary: get all report from main page (default past 30 days)
+ *    summary: get all report query from countryId
  *    parameters:
  *      - name: countryId
  *        in: path
@@ -87,7 +87,7 @@ const getReportsByCountryId = async (req, res) => {
  * /report/city/{cityId}:
  *  get:
  *    tags: [Report]
- *    summary: get all report from main page (default past 30 days)
+ *    summary: get all report query from given cityId
  *    parameters:
  *      - name: cityId
  *        in: path
@@ -103,10 +103,14 @@ const getReportsByCountryId = async (req, res) => {
  *            example:
  *              - diseaseName: Salmonella Outbreak (Suspected or Confirmed)
  *                diseaseReports:
- *                  - '{"dateTime":"2022-03-15 14:44:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43634","country":"China","city":"Beijing","description":"CHINA - Growing Trend Of Salmonella In Pork In China"}'
- *                  - '{"dateTime":"2022-03-12 15:54:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43580","country":"United Kingdom","city":"Scunthorpe","description":"UNITED KINGDOM - Dog Food Recalled From Stores After Salmonella Found"}'
- *                  - '{"dateTime":"2022-03-10 16:18:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43545","country":"Mexico","city":"Chihuahua","description":"MEXICO - Salmonella Victims Hospitalized After Consuming Onions - Numerous Salmonella Lawsuits Resu"}'
- *                  - '{"dateTime":"2022-03-06 21:05:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43462","country":"United Kingdom","city":"London (UK)","description":"UNITED KINGDOM - John Lewis And Morrisons Recall Popular Food Due To Salmonella Fears – Do Not Consu"}'
+ *                  - url: http://outbreaks.globalincidentmap.com/xxx
+ *                    date_of_publication: '2022-02-23 16:07:00'
+ *                    country: United Kingdom
+ *                    city: London
+ *                    eventType: Salmonella Outbreak (Suspected or Confirmed)
+ *                    location:
+ *                      latitude: 51.507
+ *                      longitude: -0.128
  *      '400':
  *        description: Duplicate key
  *        content:
@@ -130,7 +134,7 @@ const getReportsByCityName = async (req, res) => {
  * /report/detail/{reportId}:
  *  get:
  *    tags: [Report]
- *    summary: get all report from main page (default past 30 days)
+ *    summary: get a single report base on report ID
  *    parameters:
  *      - name: reportId
  *        in: path
@@ -144,12 +148,14 @@ const getReportsByCityName = async (req, res) => {
  *            schema:
  *              type: object
  *            example:
- *              - diseaseName: Salmonella Outbreak (Suspected or Confirmed)
- *                diseaseReports:
- *                  - '{"dateTime":"2022-03-15 14:44:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43634","country":"China","city":"Beijing","description":"CHINA - Growing Trend Of Salmonella In Pork In China"}'
- *                  - '{"dateTime":"2022-03-12 15:54:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43580","country":"United Kingdom","city":"Scunthorpe","description":"UNITED KINGDOM - Dog Food Recalled From Stores After Salmonella Found"}'
- *                  - '{"dateTime":"2022-03-10 16:18:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43545","country":"Mexico","city":"Chihuahua","description":"MEXICO - Salmonella Victims Hospitalized After Consuming Onions - Numerous Salmonella Lawsuits Resu"}'
- *                  - '{"dateTime":"2022-03-06 21:05:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43462","country":"United Kingdom","city":"London (UK)","description":"UNITED KINGDOM - John Lewis And Morrisons Recall Popular Food Due To Salmonella Fears – Do Not Consu"}'
+ *              url: http://outbreaks.globalincidentmap.com/xxx
+ *              date_of_publication: '2022-02-23 16:07:00'
+ *              country: United Kingdom
+ *              city: London
+ *              eventType: Salmonella Outbreak (Suspected or Confirmed)
+ *              location:
+ *                latitude: 51.507
+ *                longitude: -0.128
  *      '400':
  *        description: Duplicate key
  *        content:

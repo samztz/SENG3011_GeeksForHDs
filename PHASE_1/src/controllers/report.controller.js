@@ -74,8 +74,7 @@ const getReports = async (req, res) => {
  *                  exmaple: 'error message'
  */
 const getReportsByCountryId = async (req, res) => {
-  const { countryId } = req.params;
-  const { start, end } = req.query;
+  const { start_date, end_date, city, country, key_tearm } = req.query;
 
   const result = await mainPageScraper();
 

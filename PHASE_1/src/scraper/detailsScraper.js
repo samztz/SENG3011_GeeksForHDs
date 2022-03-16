@@ -45,3 +45,5 @@ function detailsScraper(detailPage) {
 
 // only for testing, remove once working with api
 detailsScraper(process.argv.slice(2)[0]).then(console.log).catch(console.error);
+
+export default detailsScraper;

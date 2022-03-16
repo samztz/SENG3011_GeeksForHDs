@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-function run () {
+function mainPageScraper () {
     return new Promise(async (resolve, reject) => {
         try {
             const browser = await puppeteer.launch({
@@ -82,4 +82,6 @@ function run () {
 }
 
 // only for testing, remove once working with api
-run().then(console.log).catch(console.error);
+// run().then(console.log).catch(console.error);
+
+export default mainPageScraper;

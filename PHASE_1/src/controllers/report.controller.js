@@ -1,6 +1,10 @@
+import mainPageScraper from "../scraper/mainPageScraper.js";
+import detailsScraper from "../scraper/detailsScraper.js";
+import Country_city_scraper from "../scraper/country_city_scraper.js";
+
 // return most recent report in default 30 days
 const getReports = async (req, res) => {
-  const result = 'default report query'
+  const result = await mainPageScraper();
   return res.json(result);
 
 }

@@ -69,3 +69,4 @@ function Country_city_scraper(country1, city1) {
 
 Country_city_scraper('AE', 'Antigua').then(console.log).catch(console.error);
 
+export default Country_city_scraper;

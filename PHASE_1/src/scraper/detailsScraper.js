@@ -1,47 +1,90 @@
 import puppeteer from 'puppeteer';
+//import js from 'js'
 
-function detailsScraper(detailPage) {
+function Country_city_scraper(country1, city1) {
     return new Promise(async (resolve, reject) => {
-        try {
-            const browser = await puppeteer.launch({
+		try {
+			const browser = await puppeteer.launch({
 				args: ['--no-sandbox', '--disable-setuid-sandbox'],	
 			});
 
             const newPage = await browser.newPage();
-            await newPage.goto(detailPage);
-            console.log(detailPage);
 
-            // get report details
-            let report = await newPage.evaluate(async() => {
-                let detailsTable = document.querySelectorAll("table table table");
-                let diseaseName = detailsTable[1].rows[0].cells[1].innerText;
-                let dateTime = detailsTable[1].rows[0].cells[3].innerText;
-                let country = detailsTable[1].rows[1].cells[1].innerText;
-                let city = detailsTable[1].rows[1].cells[3].innerText;
-                let latitude = detailsTable[1].rows[2].cells[1].innerText;
-                let longitude = detailsTable[1].rows[2].cells[3].innerText;
-                let articleURL = detailsTable[1].rows[3].cells[1].innerText;
-                let description = detailsTable[3].textContent;
+			
+			await newPage.goto("http://outbreaks.globalincidentmap.com/");
+			newPage.on('console', (msg) => console.log(msg.text()));
+
+			const a = country1; 
+			const b = city1; 
+			let report = await newPage.evaluate(async(a,b) => {
+
+			    let country_list = document.getElementsByClassName('textbox')[2].options;
+				let city_list = document.getElementsByClassName('textbox')[3].options;
+
+			    let data = [];
+				
+				const country_array = []; 
+				const city_array = [];
+				for (let i = 0; i < country_list.length; i++) { 
+					country_array.push(country_list[i].value); 
+				}
+				for (let i = 0; i < city_list.length; i++) {
+					city_array.push(city_list[i].value); 
+				}
+				
+				data.push(JSON.stringify({
+					country: country_array, 
+					city: city_array, 
+				}))
+				
+				var json = JSON.parse(data); 
+
+				await newPage.close(); $
+
+				if (json["country"].includes(a) && json["city"].includes(b)) {
+				    
+                    await extractInformation(a, b); 
+
+					//console.log(w);
+
+					// The target table we want to scrape after clicking search button. 
+
+					//document.getElementsByTagName("table")[18];
+
+				}
+				
+				//js.writeFile("../JSON/country_city.json", data); 
+
                 //console.log(`current report: ${detailsTable}`);
+
                 return {
-                    diseaseName: diseaseName,
-                    dateTime: dateTime,
-                    country: country,
-                    city: city,
-                    latitude: latitude,
-                    longitude: longitude,
-                    articleURL: articleURL,
-                    description: description,
+					//data: data,
                 };
-            });
-            browser.close();
-            return resolve(report);
-            //await newPage.close();
-        } catch (e) {
-            return reject(e);
-        }
+            }, a, b);
 
-})}
 
-// only for testing, remove once working with api
-detailsScraper(process.argv.slice(2)[0]).then(console.log).catch(console.error);
+			let extractInformation = (country, city ) => new Promise(async(resolve, reject) => {
+				// open new tab to report details
+				let page = await browser.page();
+				await page.goto("http://outbreaks.globalincidentmap.com/home.php#searchlist");
+				await page.close(); 
+			
+				//document.querySelector('#search').click(); 
+			});
+
+
+			browser.close(); 
+			return resolve(report); 
+
+		} catch (e) {
+			return reject(e);
+		}
+	})
+}
+
+
+
+
+
+Country_city_scraper('AE', 'Antigua').then(console.log).catch(console.error);
+

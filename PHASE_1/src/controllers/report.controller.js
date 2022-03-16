@@ -1,6 +1,5 @@
-// import mainPageScraper from "../scraper/mainPageScraper.js";
-// import detailsScraper from "../scraper/detailsScraper.js";
-// import Country_city_scraper from "../scraper/country_city_scraper.js";
+import mainPageScraper from "../scraper/mainPageScraper.js";
+import detailsScraper from "../scraper/detailsScraper.js";
 
 /**
  * @swagger
@@ -16,23 +15,12 @@
  *            schema:
  *              type: object
  *            example:
- *              _id: 61da409632c8196efc5dd789
- *              email: ante@aol.net
- *              firstName: Caleb Collins
- *              lastName: Baxter Burt
- *              dob: '1996-02-28T00:00:00.000Z'
- *              phone: (06) 5828 5812
- *              notification:
- *                - email
- *              address:
- *                street: '245 George St'
- *                city: 'Syndey'
- *                state: 'NSW'
- *                postcode: '2000'
- *              gender: Male
- *              totalSpent: 0
- *              orderAccumulation: 0
- *              __v: 0
+ *              - diseaseName: Salmonella Outbreak (Suspected or Confirmed)
+ *                diseaseReports:
+ *                  - '{"dateTime":"2022-03-15 14:44:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43634","country":"China","city":"Beijing","description":"CHINA - Growing Trend Of Salmonella In Pork In China"}'
+ *                  - '{"dateTime":"2022-03-12 15:54:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43580","country":"United Kingdom","city":"Scunthorpe","description":"UNITED KINGDOM - Dog Food Recalled From Stores After Salmonella Found"}'
+ *                  - '{"dateTime":"2022-03-10 16:18:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43545","country":"Mexico","city":"Chihuahua","description":"MEXICO - Salmonella Victims Hospitalized After Consuming Onions - Numerous Salmonella Lawsuits Resu"}'
+ *                  - '{"dateTime":"2022-03-06 21:05:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43462","country":"United Kingdom","city":"London (UK)","description":"UNITED KINGDOM - John Lewis And Morrisons Recall Popular Food Due To Salmonella Fears – Do Not Consu"}'
  *      '400':
  *        description: Duplicate key
  *        content:
@@ -45,18 +33,21 @@
  *                  exmaple: 'error message'
  */
 const getReports = async (req, res) => {
-  // const result = await mainPageScraper();
+  const result = await mainPageScraper();
   return res.json(result);
 };
 
-
-
 /**
  * @swagger
- * /report:
+ * /report/country/{countryId}:
  *  get:
  *    tags: [Report]
  *    summary: get all report from main page (default past 30 days)
+ *    parameters:
+ *      - name: countryId
+ *        in: path
+ *        required: true
+ *        schema: object
  *    responses:
  *      '201':
  *        description: Success returned
@@ -65,23 +56,12 @@ const getReports = async (req, res) => {
  *            schema:
  *              type: object
  *            example:
- *              _id: 61da409632c8196efc5dd789
- *              email: ante@aol.net
- *              firstName: Caleb Collins
- *              lastName: Baxter Burt
- *              dob: '1996-02-28T00:00:00.000Z'
- *              phone: (06) 5828 5812
- *              notification:
- *                - email
- *              address:
- *                street: '245 George St'
- *                city: 'Syndey'
- *                state: 'NSW'
- *                postcode: '2000'
- *              gender: Male
- *              totalSpent: 0
- *              orderAccumulation: 0
- *              __v: 0
+ *              - diseaseName: Salmonella Outbreak (Suspected or Confirmed)
+ *                diseaseReports:
+ *                  - '{"dateTime":"2022-03-15 14:44:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43634","country":"China","city":"Beijing","description":"CHINA - Growing Trend Of Salmonella In Pork In China"}'
+ *                  - '{"dateTime":"2022-03-12 15:54:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43580","country":"United Kingdom","city":"Scunthorpe","description":"UNITED KINGDOM - Dog Food Recalled From Stores After Salmonella Found"}'
+ *                  - '{"dateTime":"2022-03-10 16:18:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43545","country":"Mexico","city":"Chihuahua","description":"MEXICO - Salmonella Victims Hospitalized After Consuming Onions - Numerous Salmonella Lawsuits Resu"}'
+ *                  - '{"dateTime":"2022-03-06 21:05:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43462","country":"United Kingdom","city":"London (UK)","description":"UNITED KINGDOM - John Lewis And Morrisons Recall Popular Food Due To Salmonella Fears – Do Not Consu"}'
  *      '400':
  *        description: Duplicate key
  *        content:
@@ -104,10 +84,15 @@ const getReportsByCountryId = async (req, res) => {
 
 /**
  * @swagger
- * /report:
+ * /report/city/{cityId}:
  *  get:
  *    tags: [Report]
  *    summary: get all report from main page (default past 30 days)
+ *    parameters:
+ *      - name: cityId
+ *        in: path
+ *        required: true
+ *        schema: object
  *    responses:
  *      '201':
  *        description: Success returned
@@ -116,23 +101,12 @@ const getReportsByCountryId = async (req, res) => {
  *            schema:
  *              type: object
  *            example:
- *              _id: 61da409632c8196efc5dd789
- *              email: ante@aol.net
- *              firstName: Caleb Collins
- *              lastName: Baxter Burt
- *              dob: '1996-02-28T00:00:00.000Z'
- *              phone: (06) 5828 5812
- *              notification:
- *                - email
- *              address:
- *                street: '245 George St'
- *                city: 'Syndey'
- *                state: 'NSW'
- *                postcode: '2000'
- *              gender: Male
- *              totalSpent: 0
- *              orderAccumulation: 0
- *              __v: 0
+ *              - diseaseName: Salmonella Outbreak (Suspected or Confirmed)
+ *                diseaseReports:
+ *                  - '{"dateTime":"2022-03-15 14:44:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43634","country":"China","city":"Beijing","description":"CHINA - Growing Trend Of Salmonella In Pork In China"}'
+ *                  - '{"dateTime":"2022-03-12 15:54:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43580","country":"United Kingdom","city":"Scunthorpe","description":"UNITED KINGDOM - Dog Food Recalled From Stores After Salmonella Found"}'
+ *                  - '{"dateTime":"2022-03-10 16:18:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43545","country":"Mexico","city":"Chihuahua","description":"MEXICO - Salmonella Victims Hospitalized After Consuming Onions - Numerous Salmonella Lawsuits Resu"}'
+ *                  - '{"dateTime":"2022-03-06 21:05:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43462","country":"United Kingdom","city":"London (UK)","description":"UNITED KINGDOM - John Lewis And Morrisons Recall Popular Food Due To Salmonella Fears – Do Not Consu"}'
  *      '400':
  *        description: Duplicate key
  *        content:
@@ -153,10 +127,15 @@ const getReportsByCityName = async (req, res) => {
 
 /**
  * @swagger
- * /report:
+ * /report/detail/{reportId}:
  *  get:
  *    tags: [Report]
  *    summary: get all report from main page (default past 30 days)
+ *    parameters:
+ *      - name: reportId
+ *        in: path
+ *        required: true
+ *        schema: object
  *    responses:
  *      '201':
  *        description: Success returned
@@ -165,23 +144,12 @@ const getReportsByCityName = async (req, res) => {
  *            schema:
  *              type: object
  *            example:
- *              _id: 61da409632c8196efc5dd789
- *              email: ante@aol.net
- *              firstName: Caleb Collins
- *              lastName: Baxter Burt
- *              dob: '1996-02-28T00:00:00.000Z'
- *              phone: (06) 5828 5812
- *              notification:
- *                - email
- *              address:
- *                street: '245 George St'
- *                city: 'Syndey'
- *                state: 'NSW'
- *                postcode: '2000'
- *              gender: Male
- *              totalSpent: 0
- *              orderAccumulation: 0
- *              __v: 0
+ *              - diseaseName: Salmonella Outbreak (Suspected or Confirmed)
+ *                diseaseReports:
+ *                  - '{"dateTime":"2022-03-15 14:44:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43634","country":"China","city":"Beijing","description":"CHINA - Growing Trend Of Salmonella In Pork In China"}'
+ *                  - '{"dateTime":"2022-03-12 15:54:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43580","country":"United Kingdom","city":"Scunthorpe","description":"UNITED KINGDOM - Dog Food Recalled From Stores After Salmonella Found"}'
+ *                  - '{"dateTime":"2022-03-10 16:18:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43545","country":"Mexico","city":"Chihuahua","description":"MEXICO - Salmonella Victims Hospitalized After Consuming Onions - Numerous Salmonella Lawsuits Resu"}'
+ *                  - '{"dateTime":"2022-03-06 21:05:00","detail":"http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43462","country":"United Kingdom","city":"London (UK)","description":"UNITED KINGDOM - John Lewis And Morrisons Recall Popular Food Due To Salmonella Fears – Do Not Consu"}'
  *      '400':
  *        description: Duplicate key
  *        content:

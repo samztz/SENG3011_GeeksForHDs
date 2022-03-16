@@ -145,7 +145,7 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                     if (currDateTime >= timeStart && currDateTime <= timeEnd) {
                         // if within time period, check if city matches
                         if ((city != '' && currCity == city) || city == '') {
-                            results.push(article);
+                            results.push(article.detail);
                         }
                     }
                 }

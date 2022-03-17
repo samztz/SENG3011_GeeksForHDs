@@ -5,9 +5,11 @@ async function scraper(page, keyTerm, country) {
     await page.waitForSelector("select[name='type'], select[name='country']");
 
     // using xpath here because this dropdown is stupid and need to select by text instead of value
-    const option = (await page.$x(`//select[@name="type"]/option[text() = "${keyTerm}"]`))[0];
-    const value = await (await option.getProperty('value')).jsonValue();
-    await page.select("select[name='type']", value);
+    if (keyTerm != '') {
+        const option = (await page.$x(`//select[@name="type"]/option[text() = "${keyTerm}"]`))[0];
+        const value = await (await option.getProperty('value')).jsonValue();
+        await page.select("select[name='type']", value);
+    }
 
     // select country
     await page.select("select[name='country']", country);
@@ -28,6 +30,7 @@ async function scraper(page, keyTerm, country) {
             let dateTime = currRow.cells[2].textContent;
             let country = currRow.cells[3].textContent;
             let city = currRow.cells[4].textContent;
+            let description = currRow.cells[5].textContent;
 
             items.push({
                 type: type,
@@ -35,6 +38,7 @@ async function scraper(page, keyTerm, country) {
                 dateTime: dateTime,
                 country: country,
                 city: city,
+                description: description,
             })
         }
         return items;
@@ -121,17 +125,22 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
             for (let keyTerm of keyTerms) {
                 let searchTerm;
 
-                // if keyTerm is generic
-                if (keyTermsJSON.generic.includes(keyTerm)) {
-                    console.log("generic term");
-                    searchTerm = '';
-                } else if (keyTermsJSON.specific.includes(keyTerm)) {
+                // if keyTerm is specific
+                if (keyTermsJSON.specific.includes(keyTerm)) {
                     console.log("specific term");
                     searchTerm = keyTerm;
+
+                // if keyterm is generic/none given
+                } else if (keyTerm == '' || keyTermsJSON.generic.includes(keyTerm)) {
+                    console.log("generic/no term");
+                    searchTerm = '';
+
+                // if unknown keyTerm given
                 } else {
                     console.log(`error, keyterm is: ${keyTerm}`);
+                    return;
                 }
-
+                
                 // scrape page
                 // first filter results by country, then scrape only results that match city (if given) and time period
                 let scrapedResults = await scraper(page, searchTerm, country);
@@ -145,7 +154,10 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                     if (currDateTime >= timeStart && currDateTime <= timeEnd) {
                         // if within time period, check if city matches
                         if ((city != '' && currCity == city) || city == '') {
-                            results.push(article.detail);
+                            // if city matches, and generic term given, check if generic term in description
+                            if ((keyTermsJSON.generic.includes(keyTerm) && article.description.includes(keyTerm)) || !keyTermsJSON.generic.includes(keyTerm)) {
+                                results.push(article.detail);
+                            }
                         }
                     }
                 }
@@ -160,6 +172,6 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 }
 
 // only for testing, remove once working with api
-//dataSourceScraper(["Hantavirus"], new Date("2011-04-19T11:48:00"), new Date("2022-03-16T09:38:00"), 'AU', '').then(console.log).catch(console.error);
+dataSourceScraper(["Outbreak", "Hantavirus"], new Date("2011-04-19T11:48:00"), new Date("2022-03-16T09:38:00"), 'AU', 'Canberra').then(console.log).catch(console.error);
 
 export default dataSourceScraper;

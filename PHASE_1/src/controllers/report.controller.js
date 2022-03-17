@@ -1,17 +1,38 @@
-import mainPageScraper from "../scraper/mainPageScraper.js";
+import dataSourceScraper from "../scraper/dataSourceScraper.js";
 import detailsScraper from "../scraper/detailsScraper.js";
 
 /**
  * @swagger
- * /report/country/{countryId}:
+ * /report:
  *  get:
  *    tags: [Report]
  *    summary: get all report query from countryId
  *    parameters:
- *      - name: countryId
- *        in: path
+ *      - name: start_date
+ *        in: query
  *        required: true
- *        schema: object
+ *        type: string
+ *        example: '2011-04-19T11:48:00'
+ *      - name: end_date
+ *        in: query
+ *        required: true
+ *        type: string
+ *        example: '2022-03-16T09:38:00'
+ *      - name: city
+ *        in: query
+ *        required: true
+ *        type: string
+ *        example: Canberra
+ *      - name: country
+ *        in: query
+ *        required: true
+ *        type: string
+ *        example: AU
+ *      - name: key_terms
+ *        in: query
+ *        required: true
+ *        type: string
+ *        example: Outbreak,Hantavirus
  *    responses:
  *      '201':
  *        description: Success returned
@@ -50,21 +71,10 @@ import detailsScraper from "../scraper/detailsScraper.js";
  *                    location:
  *                      latitude: 51.507
  *                      longitude: -0.128
- *      '400':
- *        description: Duplicate key
- *        content:
- *          appplication/json:
- *            schema:
- *              type: object
- *              properties:
- *                error:
- *                  type: string
- *                  exmaple: 'error message'
  */
 const getReportsByQuery = async (req, res) => {
-  const { start_date, end_date, city, country, key_tearm } = req.query;
-
-  const result = await mainPageScraper();
+  const { start_date, end_date, city, country, key_terms } = req.query;
+  const result = await dataSourceScraper(key_terms, start_date, end_date,city,country);
 
   return res.json(result);
 };
@@ -79,7 +89,6 @@ const getReportsByQuery = async (req, res) => {
  *      - name: reportId
  *        in: path
  *        required: true
- *        schema: object
  *    responses:
  *      '201':
  *        description: Success returned

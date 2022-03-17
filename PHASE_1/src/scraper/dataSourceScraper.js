@@ -59,89 +59,114 @@ async function scraper(page, keyTerm, country) {
  */
 
 function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const browser = await puppeteer.launch({
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      });
-      const page = await browser.newPage();
-      page.on("pageerror", (err) => {
-        console.error(err);
-      });
+    return new Promise(async (resolve, reject) => {
+        try {
+            const browser = await puppeteer.launch({
+                headless: true,
+				args: ['--no-sandbox', '--disable-setuid-sandbox'],	
+			});
+            const page = await browser.newPage();
+            page.on('pageerror', (err) => {
+                console.error(err);
+            });
+            
+            // removes timeout error
+            await page.setDefaultNavigationTimeout(0); 
+            
+            await page.goto("http://outbreaks.globalincidentmap.com/");
 
-      // removes timeout error
-      await page.setDefaultNavigationTimeout(0);
+            // array to store all links to articles that match search terms
+            let results = [];
+            //let keyTermsString = ;
+            let keyTermsJSON = {
+                "generic": [
+                    "Outbreak",
+                    "Infection",
+                    "Fever",
+                    "Virus",
+                    "Epidemic",
+                    "Infectious",
+                    "Illness",
+                    "Bacteria",
+                    "Emerging",
+                    "Unknown virus",
+                    "Mysterious disease",
+                    "Mystery disease"
+                ],
+                "specific": [
+                    "Zika",
+                    "MERS",
+                    "Salmonella",
+                    "Legionnaire",
+                    "Measles",
+                    "Anthrax",
+                    "Botulism",
+                    "Plague",
+                    "Smallpox and other related pox viruses",
+                    "Tularemia",
+                    "Junin Fever",
+                    "Machupo Fever",
+                    "Guanarito Fever",
+                    "Chapare Fever",
+                    "Lassa Fever",
+                    "Lujo Fever",
+                    "Hantavirus",
+                    "Rift Valley Fever",
+                    "Crimean Congo Hemorrhagic Fever",
+                    "Dengue",
+                    "Ebola",
+                    "Marburg"
+                ]
+            };
 
-      await page.goto("http://outbreaks.globalincidentmap.com/");
+            // for each keyTerm in keyTerms, check if keyTerm is generic or specific
+            // if generic keyTerm, scrape whole page based on what matches key term
+            // if specific keyTerm, change dropdown
 
-      // array to store all links to articles that match search terms
-      let results = [];
-      //let keyTermsString = ;
-      let keyTermsJSON = {
-        generic: [
-          "Outbreak",
-          "Infection",
-          "Fever",
-          "Virus",
-          "Epidemic",
-          "Infectious",
-          "Illness",
-          "Bacteria",
-          "Emerging",
-          "Unknown virus",
-          "Mysterious disease",
-          "Mystery disease",
-        ],
-        specific: [
-          "Zika",
-          "MERS",
-          "Salmonella",
-          "Legionnaire",
-          "Measles",
-          "Anthrax",
-          "Botulism",
-          "Plague",
-          "Smallpox and other related pox viruses",
-          "Tularemia",
-          "Junin Fever",
-          "Machupo Fever",
-          "Guanarito Fever",
-          "Chapare Fever",
-          "Lassa Fever",
-          "Lujo Fever",
-          "Hantavirus",
-          "Rift Valley Fever",
-          "Crimean Congo Hemorrhagic Fever",
-          "Dengue",
-          "Ebola",
-          "Marburg",
-        ],
-      };
+            // check if keyterm is generic or specific
+            for (let keyTerm of keyTerms) {
+                let searchTerm;
 
-      // for each keyTerm in keyTerms, check if keyTerm is generic or specific
-      // if generic keyTerm, scrape whole page based on what matches key term
-      // if specific keyTerm, change dropdown
+                // if keyTerm is specific
+                if (keyTermsJSON.specific.includes(keyTerm)) {
+                    console.log("specific term");
+                    searchTerm = keyTerm;
 
-      // check if keyterm is generic or specific
-      for (let keyTerm of keyTerms) {
-        let searchTerm;
+                // if keyterm is generic/none given
+                } else if (keyTerm == '' || keyTermsJSON.generic.includes(keyTerm)) {
+                    console.log("generic/no term");
+                    searchTerm = '';
 
-        // if keyTerm is specific
-        if (keyTermsJSON.specific.includes(keyTerm)) {
-          console.log("specific term");
-          searchTerm = keyTerm;
+                // if unknown keyTerm given
+                } else {
+                    console.log(`error, keyterm is: ${keyTerm}`);
+                    return;
+                }
 
-          // if keyterm is generic/none given
-        } else if (keyTerm == "" || keyTermsJSON.generic.includes(keyTerm)) {
-          console.log("generic/no term");
-          searchTerm = "";
+                // scrape page
+                // first filter results by country, then scrape only results that match city (if given) and time period
+                let scrapedResults = await scraper(page, searchTerm, country);
 
-          // if unknown keyTerm given
-        } else {
-          console.log(`error, keyterm is: ${keyTerm}`);
-          return;
-        }
+                // select results that match time period, then city (if given)
+                for (let article of scrapedResults) {
+                    let currDateTime = new Date(article.dateTime);
+                    let currCity = article.city;
+
+                    // check if article within time period
+                    if (currDateTime >= timeStart && currDateTime <= timeEnd) {
+                        // if within time period, check if city matches
+                        if ((city != '' && currCity == city) || city == '') {
+                            // if city matches, and generic term given, check if generic term in description
+                            if ((keyTermsJSON.generic.includes(keyTerm) && article.description.includes(keyTerm)) || !keyTermsJSON.generic.includes(keyTerm)) {
+                                results.push({
+                                    url: article.detail,
+                                    datePublished: article.dateTime,
+                                });
+                            }
+                        }
+                    }
+                }
+            }
 
         // scrape page
         // first filter results by country, then scrape only results that match city (if given) and time period

@@ -74,8 +74,31 @@ import detailsScraper from "../scraper/detailsScraper.js";
  */
 const getReportsByQuery = async (req, res) => {
   const { start_date, end_date, city, country, key_terms } = req.query;
-  const result = await dataSourceScraper(key_terms, start_date, end_date,city,country);
-
+  const keyTerms = key_terms.split(",");
+  console.log(
+    `input = ${keyTerms} | ${start_date} | ${end_date} | ${city} | ${country}`
+  );
+  console.log(keyTerms);
+  try {
+    // const result = await dataSourceScraper(
+    //   keyTerms,
+    //   new Date(start_date),
+    //   new Date(end_date),
+    //   city,
+    //   country
+    // );
+    // return res.json(result);
+  } catch (e) {
+    console.log(e.massage);
+    return res.status(400).json(e.message);
+  }
+  const result = await dataSourceScraper(
+    keyTerms,
+    new Date(start_date),
+    new Date(end_date),
+    city,
+    country
+  );
   return res.json(result);
 };
 
@@ -124,7 +147,4 @@ const getReportDetailById = async (req, res) => {
   return res.json(result);
 };
 
-export {
-  getReportsByQuery,
-  getReportDetailById,
-};
+export { getReportsByQuery, getReportDetailById };

@@ -1,20 +1,29 @@
-import express from 'express';
-import morgan from 'morgan';
-import logger from './config/winston.js'
-import 'dotenv/config';
-import indexRouter from './routes/index.route.js';
-import swaggerUi from 'swagger-ui-express';
-import swaggerJSDoc from './ultils/swagger.js';
-
+import express from "express";
+import morgan from "morgan";
+import logger from "./config/winston.js";
+import "dotenv/config";
+import indexRouter from "./routes/index.route.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerJSDoc from "./ultils/swagger.js";
+import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(morgan('dev'));
-app.use('/', indexRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc));
+app.use(morgan("dev"));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:4000",
+      "https://news-website-seng.herokuapp.com/",
+    ],
+  })
+);
+
+app.use("/", indexRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc));
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, ()=> {
+app.listen(PORT, () => {
   logger.info(`App is listening on ${PORT}`);
 });

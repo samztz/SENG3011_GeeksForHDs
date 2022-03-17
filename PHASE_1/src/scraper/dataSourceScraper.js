@@ -178,14 +178,14 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 }
 
 // only for testing, remove once working with api
-dataSourceScraper(
-  ["Outbreak", "Hantavirus"],
-  new Date("2011-04-19T11:48:00"),
-  new Date("2022-03-16T09:38:00"),
-  "AU",
-  "Canberra"
-)
-  .then(console.log)
-  .catch(console.error);
+// dataSourceScraper(
+//   ["Outbreak", "Hantavirus"],
+//   new Date("2011-04-19T11:48:00"),
+//   new Date("2022-03-16T09:38:00"),
+//   "AU",
+//   "Canberra"
+// )
+//   .then(console.log)
+//   .catch(console.error);
 
 export default dataSourceScraper;

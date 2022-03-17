@@ -156,7 +156,10 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                         if ((city != '' && currCity == city) || city == '') {
                             // if city matches, and generic term given, check if generic term in description
                             if ((keyTermsJSON.generic.includes(keyTerm) && article.description.includes(keyTerm)) || !keyTermsJSON.generic.includes(keyTerm)) {
-                                results.push(article.detail);
+                                results.push({
+                                    url: article.detail,
+                                    datePublished: article.dateTime,
+                                });
                             }
                         }
                     }

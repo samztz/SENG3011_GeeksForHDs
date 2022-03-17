@@ -140,7 +140,7 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                     console.log(`error, keyterm is: ${keyTerm}`);
                     return;
                 }
-                
+
                 // scrape page
                 // first filter results by country, then scrape only results that match city (if given) and time period
                 let scrapedResults = await scraper(page, searchTerm, country);
@@ -172,6 +172,6 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 }
 
 // only for testing, remove once working with api
-dataSourceScraper(["Outbreak", "Hantavirus"], new Date("2011-04-19T11:48:00"), new Date("2022-03-16T09:38:00"), 'AU', 'Canberra').then(console.log).catch(console.error);
+//dataSourceScraper(["Outbreak", "Hantavirus"], new Date("2011-04-19T11:48:00"), new Date("2022-03-16T09:38:00"), 'AU', 'Canberra').then(console.log).catch(console.error);
 
 export default dataSourceScraper;

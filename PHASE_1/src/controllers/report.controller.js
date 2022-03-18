@@ -89,7 +89,7 @@ import articleScraper from "../scraper/articleScraper.js";
  */
 const getReportsByQuery = async (req, res) => {
   const { start_date, end_date, city, country, key_terms } = req.query;
-  if (!start_date || !end_date || !city || !country || !keyTerms) {
+  if (!start_date || !end_date || !city || !country || !key_terms) {
     return res.status(400).json({error:'input field missing.'});
   }
   const keyTerms = key_terms.split(",");

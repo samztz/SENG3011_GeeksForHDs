@@ -98,27 +98,19 @@ const getReportsByQuery = async (req, res) => {
   );
   console.log(keyTerms);
   try {
-    // const result = await dataSourceScraper(
-    //   keyTerms,
-    //   new Date(start_date),
-    //   new Date(end_date),
-    //   city,
-    //   country
-    // );
-    // return res.json(result);
+    const urls = await dataSourceScraper(
+      keyTerms,
+      new Date(start_date),
+      new Date(end_date),
+      country,
+      city
+    );
+    const result = await articleScraper(urls)
+    return res.json(result);
   } catch (e) {
     console.log(e.massage);
     return res.status(400).json(e.message);
   }
-  const urls = await dataSourceScraper(
-    keyTerms,
-    new Date(start_date),
-    new Date(end_date),
-    country,
-    city
-  );
-  const result = await articleScraper(urls)
-  return res.json(result);
 };
 
 /**

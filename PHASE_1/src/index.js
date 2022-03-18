@@ -6,6 +6,7 @@ import indexRouter from "./routes/index.route.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "./ultils/swagger.js";
 import cors from "cors";
+import fs from 'fs';
 const app = express();
 
 app.use(express.json());

@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "c5552228-ed75-477c-9fc6-dae27833ce50",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET All Reports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the Website, Status Code is 200\", function() {\r",
+							"    // Asserts that we can get the website from the report\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Making sure that there is urls in the return\", function() {\r",
+							"    // Asserts that we have 3 URLs from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.upi.com/Top_News/World-News/2013/05/15/Salmonella-poisoning-outbreak-in-Australia/UPI-30421368619035/\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"https://www.foodsafetynews.com/2021/07/salmonella-dominates-outbreaks-in-australia/\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"https://www.foodsafetynews.com/2021/11/salmonella-top-cause-of-foodborne-outbreaks-in-australia/\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.healthcanal.com/infections/36035-Deadly-virus-discovered-bats-also-jumps-species.html\");\r",
+							"})\r",
+							"pm.test(\"Making sure that there is url in the return\", function() {\r",
+							"    // Asserts that we have 3 URLs from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.upi.com/Top_News/World-News/2013/05/15/Salmonella-poisoning-outbreak-in-Australia/UPI-30421368619035/\");\r",
+							"})\r",
+							"pm.test(\"Making sure that there is headline in the return\", function() {\r",
+							"    // Asserts that we have a headline from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"Salmonella poisoning outbreak in Australia\");\r",
+							"})\r",
+							"pm.test(\"Making sure that there is main text in the return\", function() {\r",
+							"    // Asserts that we have 3 main text from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"DICKSON, Australia, May 15 (UPI) --  At least 100 people have been diagnosed with salmonella poisoning after eating at a new restaurant in Australia, health officials said.\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Salmonella dominated reported outbreaks in Australia in 2016 causing several large incidents, according to a study published recently.\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"More than 450 foodborne outbreaks were reported over a three-year period in Australia, according to a new study.\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Making sure to account for unscrapable data\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"1 article(s) could not be scraped from:\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.healthcanal.com/infections/36035-Deadly-virus-discovered-bats-also-jumps-species.html\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=Canberra&country=AU&key_terms=Outbreak%2CHantavirus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2011-04-19T11%3A48%3A00"
+						},
+						{
+							"key": "end_date",
+							"value": "2022-03-16T09%3A38%3A00"
+						},
+						{
+							"key": "city",
+							"value": "Canberra"
+						},
+						{
+							"key": "country",
+							"value": "AU"
+						},
+						{
+							"key": "key_terms",
+							"value": "Outbreak%2CHantavirus"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Reports No Keyterm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the Website, Status Code is 200\", function() {\r",
+							"    // Asserts that we can get the website from the report\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"Making sure that there is urls in the return\", function() {\r",
+							"    // Asserts that we have 3 URLs from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.upi.com/Top_News/World-News/2013/05/15/Salmonella-poisoning-outbreak-in-Australia/UPI-30421368619035/\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"https://www.foodsafetynews.com/2021/07/salmonella-dominates-outbreaks-in-australia/\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"https://www.foodsafetynews.com/2021/11/salmonella-top-cause-of-foodborne-outbreaks-in-australia/\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.healthcanal.com/infections/36035-Deadly-virus-discovered-bats-also-jumps-species.html\");\r",
+							"})\r",
+							"pm.test(\"Making sure that there is url in the return\", function() {\r",
+							"    // Asserts that we have 3 URLs from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"http://www.upi.com/Top_News/World-News/2013/05/15/Salmonella-poisoning-outbreak-in-Australia/UPI-30421368619035/\");\r",
+							"})\r",
+							"pm.test(\"Making sure that there is headline in the return\", function() {\r",
+							"    // Asserts that we have a headline from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"Salmonella poisoning outbreak in Australia\");\r",
+							"})\r",
+							"pm.test(\"Making sure that there is url in the return\", function() {\r",
+							"    // Asserts that we have 3 main text from the test case\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.expect(pm.response.text()).to.include(\"DICKSON, Australia, May 15 (UPI) --  At least 100 people have been diagnosed with salmonella poisoning after eating at a new restaurant in Australia, health officials said.\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Salmonella dominated reported outbreaks in Australia in 2016 causing several large incidents, according to a study published recently.\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"More than 450 foodborne outbreaks were reported over a three-year period in Australia, according to a new study.\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=Canberra&country=AU&key_terms=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2011-04-19T11%3A48%3A00"
+						},
+						{
+							"key": "end_date",
+							"value": "2022-03-16T09%3A38%3A00"
+						},
+						{
+							"key": "city",
+							"value": "Canberra"
+						},
+						{
+							"key": "country",
+							"value": "AU"
+						},
+						{
+							"key": "key_terms",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Failed Reports Date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the Website, Status Code is 400\", function() {\r",
+							"    // Asserts that it crashes when we have a blank date\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report?start_date=2011-04-19T11%3A48%3A00&end_date=&city=Canberra&country=AU&key_terms=Outbreak%2CHantavirus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2011-04-19T11%3A48%3A00"
+						},
+						{
+							"key": "end_date",
+							"value": ""
+						},
+						{
+							"key": "city",
+							"value": "Canberra"
+						},
+						{
+							"key": "country",
+							"value": "AU"
+						},
+						{
+							"key": "key_terms",
+							"value": "Outbreak%2CHantavirus"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Failed Reports Date 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the Website, Status Code is 200\", function() {\r",
+							"    // Asserts that we can get the website from the report\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report?start_date=2011-04-19T11%3A48%3A00&end_date=gibberish&city=Canberra&country=AU&key_terms=Outbreak%2CHantavirus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2011-04-19T11%3A48%3A00"
+						},
+						{
+							"key": "end_date",
+							"value": "gibberish"
+						},
+						{
+							"key": "city",
+							"value": "Canberra"
+						},
+						{
+							"key": "country",
+							"value": "AU"
+						},
+						{
+							"key": "key_terms",
+							"value": "Outbreak%2CHantavirus"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Failed Reports City",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the Website with no city, Status Code is 400\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=&country=AU&key_terms=Outbreak%2CHantavirus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2011-04-19T11%3A48%3A00"
+						},
+						{
+							"key": "end_date",
+							"value": "2022-03-16T09%3A38%3A00"
+						},
+						{
+							"key": "city",
+							"value": ""
+						},
+						{
+							"key": "country",
+							"value": "AU"
+						},
+						{
+							"key": "key_terms",
+							"value": "Outbreak%2CHantavirus"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Failed Reports Country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the website with no country, Status Code is 400\", function() {\r",
+							"    // Asserts that we can get the website from the report\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=Canberra&country=&key_terms=Outbreak%2CHantavirus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2011-04-19T11%3A48%3A00"
+						},
+						{
+							"key": "end_date",
+							"value": "2022-03-16T09%3A38%3A00"
+						},
+						{
+							"key": "city",
+							"value": "Canberra"
+						},
+						{
+							"key": "country",
+							"value": ""
+						},
+						{
+							"key": "key_terms",
+							"value": "Outbreak%2CHantavirus"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Specific Report",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting the Website, Status Code is 200\", function() {\r",
+							"    // Asserts that we can get the website from the report\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/report/detail/13315",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"report",
+						"detail",
+						"13315"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

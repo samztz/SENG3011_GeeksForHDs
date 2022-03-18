@@ -75,28 +75,21 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
             await page.goto("http://outbreaks.globalincidentmap.com/");
 
             // check if country exists in dropdown
-            let countryValid = await page.evaluate(async (country) => {
+            console.log(country)
+            let countryValid = await page.evaluate((country) => {
                 let countryDropdown = document.getElementsByClassName("textbox")[2].options;
+                let res = [];
                 for (let currCountry of countryDropdown) {
-                    console.log(currCountry)
                     if (currCountry.value == country) {
                         return true;
                     }
                 }
                 return false;
-            });
-            console.log(countryValid)
-
-            /*let couuntryValid = false;
-            for (let currCountry of countryDropdown) {
-                if (currCountry.value == country) {
-                    couuntryValid = true;
-                }
-            }*/
+            }, country);
 
             // if country doesnt exist, throw error
             if (!countryValid) {
-                console.log("country not valid");
+                throw "country not valid";
             }
 
             // array to store all links to articles that match search terms
@@ -163,8 +156,8 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 
                 // if unknown keyTerm given
                 } else {
-                    console.log(`error, keyterm is: ${keyTerm}`);
-                    return;
+                    console.log(`unknown keyTerm: ${keyTerm}`);
+                    throw `unknown keyTerm: ${keyTerm}`;
                 }
 
                 // scrape page
@@ -190,6 +183,8 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                                 });
                             }
                         }
+                        // if city didn't match
+                        throw "city doesn't exist";
                     }
                 }
             }
@@ -207,7 +202,7 @@ dataSourceScraper(
   ["Outbreak", "Hantavirus"],
   new Date("2011-04-19T11:48:00"),
   new Date("2022-03-16T09:38:00"),
-  "AU",
+  "AUstralia",
   "Canberra"
 ).then(console.log).catch(console.error);
 

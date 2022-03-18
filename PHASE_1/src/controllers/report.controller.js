@@ -89,6 +89,9 @@ import articleScraper from "../scraper/articleScraper.js";
  */
 const getReportsByQuery = async (req, res) => {
   const { start_date, end_date, city, country, key_terms } = req.query;
+  if (!start_date || !end_date || !city || !country || !keyTerms) {
+    return res.status(400).json({error:'input field missing.'});
+  }
   const keyTerms = key_terms.split(",");
   console.log(
     `input = ${keyTerms} | ${start_date} | ${end_date} | ${city} | ${country}`
@@ -161,14 +164,18 @@ const getReportsByQuery = async (req, res) => {
  *              properties:
  *                error:
  *                  type: string
- *                  exmaple: 'error message'
+ *                  exmaple: 'artical id not found'
  */
 const getReportDetailById = async (req, res) => {
   const { id } = req.params;
-  const result = await articleScraper(
-    [`http://outbreaks.globalincidentmap.com/eventdetail.php?ID=${id}`]
-  );
-  return res.json(result);
+  try {
+    const result = await articleScraper(
+      [`http://outbreaks.globalincidentmap.com/eventdetail.php?ID=${id}`]
+      );
+      return res.json(result);
+  } catch(e) {
+    return res.status(404).json('artical id not found');
+  }
 };
 
 export { getReportsByQuery, getReportDetailById };

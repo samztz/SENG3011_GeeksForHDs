@@ -184,7 +184,7 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                             }
                         }
                         // if city didn't match
-                        throw "city doesn't exist";
+                        //throw "city doesn't exist";
                     }
                 }
             }

@@ -96,8 +96,8 @@ const getReportsByQuery = async (req, res) => {
     keyTerms,
     new Date(start_date),
     new Date(end_date),
-    city,
-    country
+    country,
+    city
   );
   return res.json(result);
 };

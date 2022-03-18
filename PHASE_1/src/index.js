@@ -9,6 +9,9 @@ import cors from "cors";
 const app = express();
 
 app.use(express.json());
+app.use(morgan('common', {
+  stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(morgan("dev"));
 app.use(
   cors({

@@ -72,8 +72,25 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
             
             // removes timeout error
             await page.setDefaultNavigationTimeout(0); 
-            
             await page.goto("http://outbreaks.globalincidentmap.com/");
+
+            // check if country exists in dropdown
+            console.log(country)
+            let countryValid = await page.evaluate((country) => {
+                let countryDropdown = document.getElementsByClassName("textbox")[2].options;
+                let res = [];
+                for (let currCountry of countryDropdown) {
+                    if (currCountry.value == country) {
+                        return true;
+                    }
+                }
+                return false;
+            }, country);
+
+            // if country doesnt exist, throw error
+            if (!countryValid) {
+                throw "country not valid";
+            }
 
             // array to store all links to articles that match search terms
             let results = [];
@@ -139,8 +156,8 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 
                 // if unknown keyTerm given
                 } else {
-                    console.log(`error, keyterm is: ${keyTerm}`);
-                    return;
+                    console.log(`unknown keyTerm: ${keyTerm}`);
+                    throw `unknown keyTerm: ${keyTerm}`;
                 }
 
                 // scrape page
@@ -166,6 +183,8 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
                                 });
                             }
                         }
+                        // if city didn't match
+                        //throw "city doesn't exist";
                     }
                 }
             }
@@ -183,7 +202,7 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
   ["Outbreak", "Hantavirus"],
   new Date("2011-04-19T11:48:00"),
   new Date("2022-03-16T09:38:00"),
-  "AU",
+  "AUstralia",
   "Canberra"
 ).then(console.log).catch(console.error);*/
 

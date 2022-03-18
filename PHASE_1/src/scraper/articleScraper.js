@@ -48,7 +48,6 @@ async function articleScraper(results) {
         } else {
             let Disease_and_syndrome_keywords = {
                 "disease": [
-
                     "unknown" ,
                     "other" ,
                     "anthrax cutaneous" ,
@@ -131,17 +130,28 @@ async function articleScraper(results) {
                 ]
             };
 
-            let diseases = ""; 
-            let sydromes = ""; 
+            let diseases = []; 
+            let syndromes = []; 
 
 
-            for (let word of article.textContent) {
-                if (Disease_and_syndrome_keywords.disease.includes(word)) {
-                    diseases.concat(word); 
+            for (let disease of Disease_and_syndrome_keywords.disease) {
+                //console.log(word)
+                if (article.textContent.includes(disease)) {
+                    diseases.push(disease); 
                 }
-                if (Disease_and_syndrome_keywords.syndrome.includes(word)) {
-                    sydromes.concat(word);
+            }
+            for (let syndrome of Disease_and_syndrome_keywords.syndrome) {
+                //console.log(word)
+                if (article.textContent.includes(syndrome)) {
+                    syndromes.push(syndrome); 
                 }
+            }
+            //console.log(diseases)
+            let reports = {
+                diseases: diseases, 
+                syndromes: syndromes,
+                //event_date: event_date,
+                locations: [],
             }
 
             articles.push({
@@ -149,12 +159,7 @@ async function articleScraper(results) {
                 date_of_publication: dateOfPublication,
                 headline: headline,
                 main_text: mainText,
-                reports: [
-                    diseases, 
-                    sydromes,
-                    event_date,
-                    locations = [],
-                ],
+                reports: reports,
             });
         }
     });

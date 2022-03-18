@@ -72,8 +72,32 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
             
             // removes timeout error
             await page.setDefaultNavigationTimeout(0); 
-            
             await page.goto("http://outbreaks.globalincidentmap.com/");
+
+            // check if country exists in dropdown
+            let countryValid = await page.evaluate(async (country) => {
+                let countryDropdown = document.getElementsByClassName("textbox")[2].options;
+                for (let currCountry of countryDropdown) {
+                    console.log(currCountry)
+                    if (currCountry.value == country) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            console.log(countryValid)
+
+            /*let couuntryValid = false;
+            for (let currCountry of countryDropdown) {
+                if (currCountry.value == country) {
+                    couuntryValid = true;
+                }
+            }*/
+
+            // if country doesnt exist, throw error
+            if (!countryValid) {
+                console.log("country not valid");
+            }
 
             // array to store all links to articles that match search terms
             let results = [];
@@ -179,12 +203,12 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 }
 
 // only for testing, remove once working with api
-/*dataSourceScraper(
+dataSourceScraper(
   ["Outbreak", "Hantavirus"],
   new Date("2011-04-19T11:48:00"),
   new Date("2022-03-16T09:38:00"),
   "AU",
   "Canberra"
-).then(console.log).catch(console.error);*/
+).then(console.log).catch(console.error);
 
 export default dataSourceScraper;

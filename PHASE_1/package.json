@@ -12,6 +12,18 @@
     "type": "git",
     "url": "git+https://github.com/samztz/SENG3011_GeeksForHDs.git"
   },
+  "_moduleAliases": {
+    "@root": ".",
+    "@models/*": "src/models/*",
+    "@config/*": "src/config/*",
+    "@routes/*": "src/routes/*",
+    "@services/*": "src/services/*",
+    "@controllers/*": "src/controllers/*",
+    "@utils/*": "src/utils/*"
+  },
+  "_moduleDirectories": [
+    "node_modules_custom"
+  ],
   "author": "",
   "license": "ISC",
   "type": "module",
@@ -20,11 +32,18 @@
   },
   "homepage": "https://github.com/samztz/SENG3011_GeeksForHDs#readme",
   "dependencies": {
+    "@mozilla/readability": "^0.4.2",
+    "chromium": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "jsdom": "^19.0.0",
+    "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "puppeteer": "^13.4.0",
+    "puppeteer-cluster": "^0.23.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0",
     "winston": "^3.6.0"
   },
   "devDependencies": {

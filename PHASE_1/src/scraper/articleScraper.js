@@ -18,8 +18,12 @@ async function articleScraper(results) {
         let { url, dateOfPublication } = data;
         await page.goto(url);
         // find article URL
+        let event_date = ""; 
         let articleURL = await page.evaluate(async () => {
             let detailsTable = document.querySelectorAll("table table table");
+            event_date = detailsTable[1].rows[0].cells[3].innerText; 
+
+
             return detailsTable[1].rows[3].cells[1].innerText;
         });
 
@@ -150,8 +154,8 @@ async function articleScraper(results) {
             let reports = {
                 diseases: diseases, 
                 syndromes: syndromes,
-                //event_date: event_date,
-                locations: [],
+                event_date: event_date, 
+                locations: [], 
             }
 
             articles.push({

@@ -15,7 +15,10 @@ async function articleScraper(results) {
 
     // Define a task
     await cluster.task(async ({ page, data }) => {
-        let { url, dateOfPublication } = data;
+        //let { url, dateOfPublication } = data;
+        let url = data.url;
+        let dateOfPublication = data.datePublished;
+        //console.log(dateOfPublication)
         await page.goto(url);
         // find article URL
         let event_date = ""; 
@@ -186,7 +189,7 @@ async function articleScraper(results) {
 }
 
 // only for testing, remove once working with api
-let testArray = [{
+/*let testArray = [{
     url: 'http://outbreaks.globalincidentmap.com/eventdetail.php?ID=13315',
     datePublished: '2013-05-12 04:00:00'
   },
@@ -202,7 +205,7 @@ let testArray = [{
     url: 'http://outbreaks.globalincidentmap.com/eventdetail.php?ID=12525',
     datePublished: '2013-02-09 02:30:00'
   }]
-articleScraper(testArray).then(console.log).catch(console.error);
+articleScraper(testArray).then(console.log).catch(console.error);*/
 
 export default articleScraper;
 

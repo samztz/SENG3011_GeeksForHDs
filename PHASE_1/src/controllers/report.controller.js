@@ -92,13 +92,14 @@ const getReportsByQuery = async (req, res) => {
     console.log(e.massage);
     return res.status(400).json(e.message);
   }
-  const result = await dataSourceScraper(
+  const urls = await dataSourceScraper(
     keyTerms,
     new Date(start_date),
     new Date(end_date),
     country,
     city
   );
+  const result = await articleScraper(urls)
   return res.json(result);
 };
 

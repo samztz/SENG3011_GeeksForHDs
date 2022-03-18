@@ -1,5 +1,5 @@
 import dataSourceScraper from "../scraper/dataSourceScraper.js";
-import detailsScraper from "../scraper/detailsScraper.js";
+import articleScraper from "../scraper/articleScraper.js";
 
 /**
  * @swagger
@@ -74,8 +74,31 @@ import detailsScraper from "../scraper/detailsScraper.js";
  */
 const getReportsByQuery = async (req, res) => {
   const { start_date, end_date, city, country, key_terms } = req.query;
-  const result = await dataSourceScraper(key_terms, start_date, end_date,city,country);
-
+  const keyTerms = key_terms.split(",");
+  console.log(
+    `input = ${keyTerms} | ${start_date} | ${end_date} | ${city} | ${country}`
+  );
+  console.log(keyTerms);
+  try {
+    // const result = await dataSourceScraper(
+    //   keyTerms,
+    //   new Date(start_date),
+    //   new Date(end_date),
+    //   city,
+    //   country
+    // );
+    // return res.json(result);
+  } catch (e) {
+    console.log(e.massage);
+    return res.status(400).json(e.message);
+  }
+  const result = await dataSourceScraper(
+    keyTerms,
+    new Date(start_date),
+    new Date(end_date),
+    city,
+    country
+  );
   return res.json(result);
 };
 
@@ -118,13 +141,10 @@ const getReportsByQuery = async (req, res) => {
  */
 const getReportDetailById = async (req, res) => {
   const { id } = req.params;
-  const result = detailsScraper(
-    `http://outbreaks.globalincidentmap.com/eventdetail.php?ID=${id}`
+  const result = articleScraper(
+    [`http://outbreaks.globalincidentmap.com/eventdetail.php?ID=${id}`]
   );
   return res.json(result);
 };
 
-export {
-  getReportsByQuery,
-  getReportDetailById,
-};
+export { getReportsByQuery, getReportDetailById };

@@ -15,7 +15,7 @@ const swaggerDoc = swaggerJsDoc({
         },
         servers: [
             {
-                url: "https://news-website-seng.herokuapp.com/",
+                url: "https://news-website-seng3011.herokuapp.com/",
                 description: "Deployed server",
             },
             {

@@ -101,4 +101,4 @@ async function articleScraper(results) {
 // only for testing, remove once working with api
 articleScraper(["http://outbreaks.globalincidentmap.com/eventdetail.php?ID=12525", "http://outbreaks.globalincidentmap.com/eventdetail.php?ID=35543"]).then(console.log).catch(console.error);
 
-//export default articleScraper;
+export default articleScraper;

@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:4000",
-      "https://news-website-seng.herokuapp.com/",
+      "https://news-website-seng3011.herokuapp.com//",
     ],
   })
 );

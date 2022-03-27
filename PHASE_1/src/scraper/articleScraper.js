@@ -20,6 +20,7 @@ async function articleScraper(results) {
         let url = data.url;
         let dateOfPublication = data.datePublished;
         //console.log(dateOfPublication)
+        await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36")
         await page.goto(url);
         // find article URL
         let event_date = ""; 
@@ -86,7 +87,7 @@ async function articleScraper(results) {
 }
 
 // only for testing, remove once working with api
-let testArray = [{
+/*let testArray = [{
     url: 'http://outbreaks.globalincidentmap.com/eventdetail.php?ID=13315',
     datePublished: '2013-05-12 04:00:00'
   },
@@ -107,7 +108,7 @@ let testArray = [{
     url: 'http://outbreaks.globalincidentmap.com/eventdetail.php?ID=43845',
     datePublished: '2013-02-09 02:30:00'
 }]*/
-articleScraper(testArray).then(console.log).catch(console.error);
+//articleScraper(testArray).then(console.log).catch(console.error);
 
 export default articleScraper;
 

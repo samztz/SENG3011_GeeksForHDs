@@ -97,7 +97,7 @@ function reportGenerator(articleText, datePublished) {
                 }
             })
             // add parsed year if it isn't isn't already in dateArray
-            if (!yearExists) {
+            if (!yearExists && parsedYear >= 1000 && parsedYear <= 2022) {
                 dateArray.push(`${parsedYear}-xx-xx xx:xx:xx`)
             }
         }
@@ -140,15 +140,12 @@ function reportGenerator(articleText, datePublished) {
         })
     }
 
-    // in some instances country in text detector labels a city as a country, while 
-    /*console.log({
-        diseases: diseases,
-        syndromes: syndromes,
-        event_date: eventDate,
-        locations: locations
-        //locations: JSON.stringify(locations, null, 2),
-    })*/
-
+    // remove duplicate location objects
+    let myArrSerialized = locations.map(e => JSON.stringify(e));
+    const mySetSerialized = new Set(myArrSerialized);
+    const myUniqueArrSerialized = [...mySetSerialized];
+    locations = myUniqueArrSerialized.map(e => JSON.parse(e));
+    
     return {
         diseases: diseases,
         syndromes: syndromes,
@@ -172,7 +169,8 @@ function reportGenerator(articleText, datePublished) {
 //let testArticle = `CAGAYAN DE ORO CITY—The Department of Health in Region 10 (DOH-10) on Wednesday noted an increase of deaths related to rabies infection in 2021.DOH-10 senior health program officer for rabies Jenny Alabado said the 18 rabies deaths in 2021 were much higher compared to the seven deaths in 2020. Most of the deaths were recorded in Bukidnon.“There are a lot of factors why the deaths have increased. Maybe because of the pandemic, the vaccination (for rabies) is difficult, and maybe the others choose not to visit the Animal Bite Treatment Center (ABTC),” Alabado said in a media forum here.She also noted that most of the areas in Bukidnon are identified as geographically isolated disadvantaged areas (GIDA), which might be one of the causes the residents are having a hard time availing of the rabies vaccination.Aside from the number of deaths, the DOH-10 also recorded an increase in the number of individuals that have been bitten by animals, tallying 67,186 cases in 2021—higher by 1,116 cases compared to the cases in 2020.Alabado said DOH has always considered rabies a health problem, reiterating that rabies is a deadly virus, although it is 100 percent preventable with complete vaccination.A person who is manifesting the signs and symptoms of rabies such as fever, spitting, afraid of light and water, and has not received the vaccine doesn’t have the chance to survive, Alabado said.For this year, DOH-10 has allocated a minimal budget of PHP500,000 for rabies vaccines as it is only tasked to augment local supplies.Northern Mindanao has 29 ABTC facilities operated by the government, and three Animal Bite Centers which are operated by private companies.Alabado said achieving the rabies-free area is not easy, and that DOH and the Department of Agriculture (DA) have been coordinating with the different LGUs to assist in their rabies program.According to DOH, only the province of Camiguin has achieved rabies-free status since 2013.Alabado encouraged other LGUs in the region to improve local policies on rabies and enhance their rabies programs, as well as the availability of vaccines.Under Executive Order No. 84, March is declared as the Rabies Awareness Month. (PNA)`
 //let testArticle = "h7n9 is Ho Chi Minh City in 2021 in this Meningitis sentence. Sydney salmonella influenza a/h7n9 influenza a/h7n9 New York, bangladesh zika salmonellosis 3 March 1986 6pm"
 //let testArticle = 'Salmonella dominated reported outbreaks in Australia in 2016 '
-//let testArticle = 'B2022 is the suite number in 1932'
+//let testArticle = 'United States United States Australia'
+//reportGenerator(testArticle, '2022-03-24 08:58:00')
 //reportGenerator(testArticle, '2022-03-24 08:58:00').then(console.log).catch(console.error);
 
 export default reportGenerator;

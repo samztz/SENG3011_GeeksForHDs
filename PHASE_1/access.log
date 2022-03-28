@@ -50,3 +50,17 @@
 ::1 - - [28/Mar/2022:03:18:26 +0000] "GET /api-docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
 ::1 - - [28/Mar/2022:03:18:26 +0000] "GET /api-docs/favicon-32x32.png HTTP/1.1" 304 -
 ::1 - - [28/Mar/2022:03:18:55 +0000] "GET /report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=Canberra&country=AU&key_terms=Outbreak%2CHantavirus HTTP/1.1" 200 2317
+::1 - - [28/Mar/2022:03:22:53 +0000] "GET /api-docs/ HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:22:53 +0000] "GET /api-docs/swagger-ui.css HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:22:53 +0000] "GET /api-docs/swagger-ui-bundle.js HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:22:53 +0000] "GET /api-docs/swagger-ui-init.js HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:22:53 +0000] "GET /api-docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:22:53 +0000] "GET /api-docs/favicon-32x32.png HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:23:02 +0000] "GET /report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=Canberra&country=AU&key_terms=Outbreak%2CHantavirus HTTP/1.1" 400 58
+::1 - - [28/Mar/2022:03:29:12 +0000] "GET /api-docs/ HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:29:12 +0000] "GET /api-docs/swagger-ui.css HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:29:12 +0000] "GET /api-docs/swagger-ui-bundle.js HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:29:12 +0000] "GET /api-docs/swagger-ui-init.js HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:29:12 +0000] "GET /api-docs/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:29:12 +0000] "GET /api-docs/favicon-32x32.png HTTP/1.1" 304 -
+::1 - - [28/Mar/2022:03:29:43 +0000] "GET /report?start_date=2011-04-19T11%3A48%3A00&end_date=2022-03-16T09%3A38%3A00&city=Canberra&country=AU&key_terms=Outbreak%2CHantavirus HTTP/1.1" 200 2317

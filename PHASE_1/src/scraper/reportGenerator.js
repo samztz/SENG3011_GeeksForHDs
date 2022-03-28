@@ -3,8 +3,8 @@ import countryDetector from 'country-in-text-detector';
 import chrono from 'chrono-node';
 
 // import disease and syndrome lists
-let diseaseList = JSON.parse(fs.readFileSync('./diseaseList.json'));
-let syndromeList = JSON.parse(fs.readFileSync('./syndromeList.json'));
+let diseaseList = JSON.parse(fs.readFileSync('./src/scraper/diseaseList.json'));
+let syndromeList = JSON.parse(fs.readFileSync('./src/scraper/syndromeList.json'));
 
 // map to replace disease name with scientific name
 let diseaseMap = [

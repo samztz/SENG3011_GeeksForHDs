@@ -83,7 +83,7 @@ async function articleScraper(results) {
     if (blockedArticles.length > 0) {
         articles.push(`${blockedArticles.length} article(s) could not be scraped from: ${JSON.stringify(blockedArticles)}`);
     }
-    return JSON.stringify(articles, null, 2);
+    return articles;
 }
 
 // only for testing, remove once working with api

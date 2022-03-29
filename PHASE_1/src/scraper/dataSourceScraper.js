@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import * as fs from 'fs';
 
 async function scraper(page, keyTerm, country) {
     // wait until dropdowns are loaded
@@ -95,46 +96,8 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
             // array to store all links to articles that match search terms
             let results = [];
             //let keyTermsString = ;
-            let keyTermsJSON = {
-                "generic": [
-                    "Outbreak",
-                    "Infection",
-                    "Fever",
-                    "Virus",
-                    "Epidemic",
-                    "Infectious",
-                    "Illness",
-                    "Bacteria",
-                    "Emerging",
-                    "Unknown virus",
-                    "Mysterious disease",
-                    "Mystery disease"
-                ],
-                "specific": [
-                    "Zika",
-                    "MERS",
-                    "Salmonella",
-                    "Legionnaire",
-                    "Measles",
-                    "Anthrax",
-                    "Botulism",
-                    "Plague",
-                    "Smallpox and other related pox viruses",
-                    "Tularemia",
-                    "Junin Fever",
-                    "Machupo Fever",
-                    "Guanarito Fever",
-                    "Chapare Fever",
-                    "Lassa Fever",
-                    "Lujo Fever",
-                    "Hantavirus",
-                    "Rift Valley Fever",
-                    "Crimean Congo Hemorrhagic Fever",
-                    "Dengue",
-                    "Ebola",
-                    "Marburg"
-                ]
-            };
+            let keyTermsJSON = JSON.parse(fs.readFileSync('./src/scraper/searchTerms.json'));
+            //console.log(keyTermsJSON)
 
             // for each keyTerm in keyTerms, check if keyTerm is generic or specific
             // if generic keyTerm, scrape whole page based on what matches key term
@@ -198,12 +161,12 @@ function dataSourceScraper(keyTerms, timeStart, timeEnd, country, city) {
 }
 
 // only for testing, remove once working with api
-/*dataSourceScraper(
+dataSourceScraper(
   ["Outbreak", "Hantavirus"],
   new Date("2011-04-19T11:48:00"),
   new Date("2022-03-16T09:38:00"),
-  "AUstralia",
+  "AU",
   "Canberra"
-).then(console.log).catch(console.error);*/
+).then(console.log).catch(console.error);
 
 export default dataSourceScraper;

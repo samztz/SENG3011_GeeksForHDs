@@ -34,6 +34,7 @@ export default function DashNav() {
           <AppBar
             position="fixed"
             sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+            color='secondary'
           >
             <Toolbar>
               <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
@@ -49,6 +50,7 @@ export default function DashNav() {
               '& .MuiDrawer-paper': {
                 width: drawerWidth,
                 boxSizing: 'border-box',
+                backgroundColor: "#1F363D",
               },
             }}
             variant="permanent"
@@ -58,27 +60,27 @@ export default function DashNav() {
             <Divider />
             <List>
                 <ListItemButton>
-                    <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} />
+                    <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClick}>
-                    <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center', marginLeft:24}} />
-                    {open ? <ExpandLess /> : <ExpandMore />}
+                    <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center', marginLeft:24}} primaryTypographyProps={{ color: 'secondary' }} />
+                    {open ? <ExpandLess color="secondary" /> : <ExpandMore color="secondary" />}
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         <ListItemButton>
-                            <ListItemText primary="Diseases" style={{display:'flex', justifyContent:'center'}} />
+                            <ListItemText primary="Diseases" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
                         </ListItemButton>
                         <ListItemButton>
-                            <ListItemText primary="Locations" style={{display:'flex', justifyContent:'center'}} />
+                            <ListItemText primary="Locations" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
                         </ListItemButton>
                     </List>
                 </Collapse>
                 <ListItemButton>
-                    <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} />
+                    <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
                 </ListItemButton>
                 <ListItemButton>
-                    <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} />
+                    <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
                 </ListItemButton>
             </List>
             <Grid alignItems="flex-end">
@@ -87,9 +89,9 @@ export default function DashNav() {
                     <List>
                         <ListItemButton>
                             <ListItemIcon style={{minWidth:40}}>
-                                <AccountCircleIcon />
+                                <AccountCircleIcon color="secondary" />
                             </ListItemIcon>
-                            <ListItemText primary="Account" />
+                            <ListItemText primary="Account" primaryTypographyProps={{ color: 'secondary' }} />
                         </ListItemButton>
                     </List> 
                 </Grid>

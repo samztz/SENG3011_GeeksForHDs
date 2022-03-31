@@ -18,6 +18,7 @@ import { Grid, ListItemButton } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
+//import logo_dark from '../images/Logo_dark.png';
 
 const drawerWidth = 240;
 
@@ -56,7 +57,10 @@ export default function DashNav() {
             variant="permanent"
             anchor="left"
           >
-            <Toolbar />
+            <Toolbar disableGutters style={{justifyContent:'center', alignContent:'center'}}>
+                <img src="/Logo_dark.png" alt="logo" width={drawerWidth - 40} />
+            </Toolbar>
+                
             <Divider />
             <List>
                 <ListItemButton>

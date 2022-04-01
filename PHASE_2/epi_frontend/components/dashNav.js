@@ -18,7 +18,8 @@ import { Grid, ListItemButton } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
-//import logo_dark from '../images/Logo_dark.png';
+import { useRouter } from 'next/router';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 
 const drawerWidth = 240;
 
@@ -28,6 +29,14 @@ export default function DashNav() {
     const handleClick = () => {
         setOpen(!open);
     };
+    const router = useRouter();
+
+    // set selected
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const buttonProps = (value) => ({
+        selected: selectedIndex === value,
+        onClick: () => setSelectedIndex(value),
+    });
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -35,13 +44,13 @@ export default function DashNav() {
           <AppBar
             position="fixed"
             sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-            color='secondary'
+            color='white'
           >
             <Toolbar>
               <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                Permanent drawer
+                {router.pathname}
               </Typography>
-              <Button variant="contained">Logout</Button>
+              <Button variant="contained" color='secondary'>Logout</Button>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -60,42 +69,44 @@ export default function DashNav() {
             <Toolbar disableGutters style={{justifyContent:'center', alignContent:'center'}}>
                 <img src="/Logo_dark.png" alt="logo" width={drawerWidth - 40} />
             </Toolbar>
-                
             <Divider />
             <List>
-                <ListItemButton>
-                    <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
+                <ListItemButton href='/home' {...buttonProps(0)}>
+                    <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClick}>
-                    <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center', marginLeft:24}} primaryTypographyProps={{ color: 'secondary' }} />
-                    {open ? <ExpandLess color="secondary" /> : <ExpandMore color="secondary" />}
+                <ListItemButton href='/reports' {...buttonProps(1)}>
+                    <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                    <ListItemSecondaryAction onClick={handleClick}>
+                        {open ? <ExpandLess color="white" /> : <ExpandMore color="white" />}
+                    </ListItemSecondaryAction>
+                    
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton>
-                            <ListItemText primary="Diseases" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
+                        <ListItemButton href='/diseases' {...buttonProps(2)}>
+                            <ListItemText primary="Diseases" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                         </ListItemButton>
-                        <ListItemButton>
-                            <ListItemText primary="Locations" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
+                        <ListItemButton href='/locations' {...buttonProps(3)}>
+                            <ListItemText primary="Locations" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                         </ListItemButton>
                     </List>
                 </Collapse>
-                <ListItemButton>
-                    <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
+                <ListItemButton href={'/predictions'} {...buttonProps(4)}>
+                    <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                 </ListItemButton>
-                <ListItemButton>
-                    <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'secondary' }} />
+                <ListItemButton href='/bookmarks' {...buttonProps(5)}>
+                    <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                 </ListItemButton>
             </List>
             <Grid alignItems="flex-end">
                 <Grid item style={{position: 'absolute', bottom: 0, width: '100%', display:'flex', justifyContent:'center'}}>
                    <Divider />
                     <List>
-                        <ListItemButton>
+                        <ListItemButton href='/account' {...buttonProps(6)}>
                             <ListItemIcon style={{minWidth:40}}>
-                                <AccountCircleIcon color="secondary" />
+                                <AccountCircleIcon color="white" />
                             </ListItemIcon>
-                            <ListItemText primary="Account" primaryTypographyProps={{ color: 'secondary' }} />
+                            <ListItemText primary="Account" primaryTypographyProps={{ color: 'white.main' }} />
                         </ListItemButton>
                     </List> 
                 </Grid>

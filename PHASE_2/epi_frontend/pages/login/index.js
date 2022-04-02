@@ -18,32 +18,33 @@ function Login() {
             container
             direction="column"
             justifyContent="center"
-            alignItems="center"
+            alignContent="center"
         >
-            <Grid item>
-                <Card>
-                <Typography>Log In</Typography>
-                <TextField
-                    id="outlined-email-input"
-                    label="Email"
-                    type="email"
-                    autoComplete="current-email"
-                    fullWidth
-                />
-                <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    fullWidth
-                />
-                <Box>
-                    <Button variant="outlined" color='secondary' sx={{m:2}}>Cancel</Button>
-                    <Button variant="contained" color='secondary'>Log In</Button>
-                </Box>
+            <Card>
+                <CardContent>
+                    <Typography variant="h3" color="primary" fontWeight="fontWeightBold" textAlign="center" sx={{mb:1}}>Log In</Typography>
+                    <TextField
+                        id="outlined-email-input"
+                        label="Email"
+                        type="email"
+                        autoComplete="current-email"
+                        margin="dense"
+                        fullWidth
+                    />
+                    <TextField
+                        id="outlined-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        margin="dense"
+                        fullWidth
+                    />
+                    <Grid container justifyContent={'center'}>
+                        <Button variant="outlined" color='secondary' sx={{m:1}}>Cancel</Button>
+                        <Button variant="contained" color='secondary' sx={{m:1}}>Log In</Button>
+                    </Grid>
+                </CardContent>
             </Card>
-            </Grid>
-            
         </Grid>
         
     </ThemeProvider>

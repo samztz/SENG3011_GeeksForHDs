@@ -38,10 +38,11 @@ function Login() {
                         autoComplete="current-password"
                         margin="dense"
                         fullWidth
+                        sx={{mb:1}}
                     />
                     <Grid container justifyContent={'center'}>
-                        <Button variant="outlined" color='secondary' sx={{m:1}}>Cancel</Button>
-                        <Button variant="contained" color='secondary' sx={{m:1}}>Log In</Button>
+                        <Button variant="outlined" color='secondary' sx={{m:1, mb:0}}>Cancel</Button>
+                        <Button variant="contained" color='secondary' sx={{m:1, mb:0}}>Log In</Button>
                     </Grid>
                 </CardContent>
             </Card>

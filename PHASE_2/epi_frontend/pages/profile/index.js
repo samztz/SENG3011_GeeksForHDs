@@ -1,11 +1,11 @@
-import AccountNav from "../components/accountNav";
+import AccountNav from "../../components/accountNav";
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from "../components/theme.js"
+import { theme } from "../../components/theme.js"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Card from '@mui/material/Card';
-import ReportsTable from "../components/reportsTable";
+import ReportsTable from "../../components/reportsTable";
 import React, { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container';
 import { CardMedia } from "@mui/material";
@@ -66,7 +66,7 @@ function Profile() {
     }
   }
 
-
+  
   return (
     <ThemeProvider theme={theme}>
 

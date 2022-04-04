@@ -10,6 +10,7 @@ import ReportsTable from "../../components/reportsTable";
 function About() {
   return (
     <ThemeProvider theme={theme}>
+
       <Box sx={{ display: 'flex' }}>
         <DashNav />
         <Box
@@ -29,6 +30,7 @@ function About() {
         </Box>
       </Box>
       
+
     </ThemeProvider>
   );
 }

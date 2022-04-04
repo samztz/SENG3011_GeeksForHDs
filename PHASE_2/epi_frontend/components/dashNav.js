@@ -79,15 +79,14 @@ export default function DashNav() {
                         <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                     </ListItemButton>
                 </Link>
-                <Link href="/reports">
                     <ListItemButton {...buttonProps(1)}>
-                        <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                        <Link href="/reports">
+                            <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                        </Link>
                         <ListItemSecondaryAction onClick={handleClick}>
                             {open ? <ExpandLess color="white" /> : <ExpandMore color="white" />}
                         </ListItemSecondaryAction>
-                        
                     </ListItemButton>
-                </Link>
                 
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>

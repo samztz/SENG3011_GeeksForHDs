@@ -16,11 +16,14 @@ function Login() {
         <GlobalStyles styles={{ body: { backgroundColor: theme.palette.primary.main } }} />
         <Grid
             container
+            spacing={0}
             direction="column"
+            alignItems="center"
             justifyContent="center"
-            alignContent="center"
+            style={{ minHeight: '100vh' }}
         >
-            <Card>
+            <Grid item>
+                <Card>
                 <CardContent>
                     <Typography variant="h3" color="primary" fontWeight="fontWeightBold" textAlign="center" sx={{mb:1}}>Log In</Typography>
                     <TextField
@@ -46,6 +49,8 @@ function Login() {
                     </Grid>
                 </CardContent>
             </Card>
+            </Grid>
+            
         </Grid>
         
     </ThemeProvider>

@@ -1,11 +1,11 @@
-import BookmarkNav from "../components/bookmarkNav";
+import BookmarkNav from "../../components/BookmarkNav";
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from "../components/theme.js"
+import { theme } from "../../reportsTable"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Card from '@mui/material/Card';
-import ReportsTable from "../components/reportsTable";
+import ReportsTable from "../../components/reportsTable";
 import { TextField } from '@material-ui/core';
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const Star = ({ selected = false, StarClicked = (f) => f }) => (
   <FaStar color={selected ? "red" : "grey"} onClick={StarClicked} />
 );
 
-function About() {
+function Bookmark() {
 
   const [firstStar, setfirstStar] = useState(false);
   //........................................
@@ -373,4 +373,4 @@ function About() {
   );
 }
 
-export default About 
+export default Bookmark 

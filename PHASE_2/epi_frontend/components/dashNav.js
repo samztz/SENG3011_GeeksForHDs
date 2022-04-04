@@ -20,6 +20,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Link from 'next/link';
 
 const drawerWidth = 240;
 
@@ -50,7 +51,9 @@ export default function DashNav() {
               <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                 {router.pathname}
               </Typography>
-              <Button variant="contained" color='secondary'>Logout</Button>
+              <Link href="/">
+                  <Button variant="contained" color='secondary'>Logout</Button>
+              </Link>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -71,43 +74,59 @@ export default function DashNav() {
             </Toolbar>
             <Divider />
             <List>
-                <ListItemButton href='/home' {...buttonProps(0)}>
-                    <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
-                </ListItemButton>
-                <ListItemButton href='/reports' {...buttonProps(1)}>
-                    <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
-                    <ListItemSecondaryAction onClick={handleClick}>
-                        {open ? <ExpandLess color="white" /> : <ExpandMore color="white" />}
-                    </ListItemSecondaryAction>
-                    
-                </ListItemButton>
+                <Link href="/home">
+                    <ListItemButton {...buttonProps(0)}>
+                        <ListItemText primary="Home" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                    </ListItemButton>
+                </Link>
+                <Link href="/reports">
+                    <ListItemButton {...buttonProps(1)}>
+                        <ListItemText primary="Reports" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                        <ListItemSecondaryAction onClick={handleClick}>
+                            {open ? <ExpandLess color="white" /> : <ExpandMore color="white" />}
+                        </ListItemSecondaryAction>
+                        
+                    </ListItemButton>
+                </Link>
+                
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton href='/diseases' {...buttonProps(2)}>
-                            <ListItemText primary="Diseases" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
-                        </ListItemButton>
-                        <ListItemButton href='/locations' {...buttonProps(3)}>
-                            <ListItemText primary="Locations" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
-                        </ListItemButton>
+                        <Link href="/diseases">
+                            <ListItemButton {...buttonProps(2)}>
+                                <ListItemText primary="Diseases" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                            </ListItemButton>
+                        </Link>
+                        <Link href="/locations">
+                            <ListItemButton {...buttonProps(3)}>
+                                <ListItemText primary="Locations" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                            </ListItemButton>
+                        </Link>
                     </List>
                 </Collapse>
-                <ListItemButton href={'/predictions'} {...buttonProps(4)}>
-                    <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
-                </ListItemButton>
-                <ListItemButton href='/bookmarks' {...buttonProps(5)}>
-                    <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
-                </ListItemButton>
+                <Link href="/predictions">
+                    <ListItemButton {...buttonProps(4)}>
+                        <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                    </ListItemButton>
+                </Link>
+                <Link href="/bookmarks">
+                    <ListItemButton {...buttonProps(5)}>
+                        <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                    </ListItemButton>
+                </Link>
+                
             </List>
             <Grid alignItems="flex-end">
                 <Grid item style={{position: 'absolute', bottom: 0, width: '100%', display:'flex', justifyContent:'center'}}>
                    <Divider />
                     <List>
-                        <ListItemButton href='/account' {...buttonProps(6)}>
-                            <ListItemIcon style={{minWidth:40}}>
-                                <AccountCircleIcon color="white" />
-                            </ListItemIcon>
-                            <ListItemText primary="Account" primaryTypographyProps={{ color: 'white.main' }} />
-                        </ListItemButton>
+                        <Link href="/reports">
+                            <ListItemButton {...buttonProps(6)}>
+                                <ListItemIcon style={{minWidth:40}}>
+                                    <AccountCircleIcon color="white" />
+                                </ListItemIcon>
+                                <ListItemText primary="Account" primaryTypographyProps={{ color: 'white.main' }} />
+                            </ListItemButton>
+                        </Link>
                     </List> 
                 </Grid>
                 

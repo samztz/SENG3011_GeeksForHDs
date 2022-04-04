@@ -20,6 +20,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Link from 'next/link';
 
 const drawerWidth = 240;
 
@@ -45,15 +46,30 @@ export default function Navbar() {
             <Toolbar>
                 <img src="/Logo_dark.png" alt="logo" width='200' />
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, paddingLeft:'20px' }}>
-                    <Button variant="text" color='white'>Home</Button>
-                    <Button variant="text" color='white'>Features</Button>
-                    <Button variant="text" color='white'>Pricing</Button>
-                    <Button variant="text" color='white'>About</Button>
-                    <Button variant="text" color='white'>Contact Us</Button>
+                    <Link href="/#Home">
+                        <Button variant="text" color='white'>Home</Button>
+                    </Link>
+                    <Link href="/#Features">
+                        <Button variant="text" color='white'>Features</Button>
+                    </Link>
+                    <Link href="/#Pricing">
+                        <Button variant="text" color='white'>Pricing</Button>
+                    </Link>
+                    <Link href="/#About">
+                        <Button variant="text" color='white'>About</Button>
+                    </Link>
+                    <Link href="/#ContactUs">
+                        <Button variant="text" color='white'>Contact Us</Button>
+                    </Link>
                 </Box>
                 <Box>
-                    <Button variant="outlined" color='white' sx={{m:2}}>Sign Up</Button>
-                    <Button variant="contained" color='secondary'>Log In</Button>
+                    <Link href="/signup">
+                        <Button variant="outlined" color='white' sx={{m:2}}>Sign Up</Button>
+                    </Link>
+                    <Link href="/login">
+                        <Button variant="contained" color='secondary'>Log In</Button>
+                    </Link>
+                    
                 </Box>
             </Toolbar>
           </AppBar>

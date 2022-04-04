@@ -136,6 +136,10 @@ function FilterDropdowns() {
                 />
             </LocalizationProvider>
         </FormControl>*/}
+        <Box>
+            <Button variant="contained" color='secondary'>Filter</Button>
+            <Button variant="outlined" sx={{m:2}}>Reset</Button>
+        </Box>
       </>
   );
 }

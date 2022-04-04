@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ReportsTable from "../../components/reportsTable";
 import FilterDropdowns from "../../components/filterDropdowns";
+import Grid from '@mui/material/Grid';
 
 function DashHome() {
   return (
@@ -24,19 +25,26 @@ function DashHome() {
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <Card sx={{ mb: 2 }} width={'100%'}>
                 <CardContent style={{backgroundColor: theme.palette.white.main}}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Box>
-                      <ButtonGroup variant="outlined" aria-label="outlined button group">
+                <Grid
+                  container
+                  spacing={2}
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                    <Grid item container direction="column" xs={6} md={9}>
+                      <ButtonGroup variant="outlined" aria-label="outlined button group" sx={{mb:2}}>
                         <Button>Graphs</Button>
                         <Button>Map</Button>
                       </ButtonGroup>
-                    </Box>
-                    <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg" alt="map" width={'70%'} />
-                  </Box>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    
+                    <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg" alt="map" width={'100%'} />
+                    </Grid>
+                  <Grid item container direction="column" alignItems="center" xs={6} md={3}>
                     <Typography variant="h5" fontWeight="fontWeightBold" sx={{mb:1}}>Filter By:</Typography>
                     <FilterDropdowns />
-                  </Box>
+                  </Grid>
+                  </Grid>
                 </CardContent>
             </Card>
           </Box>

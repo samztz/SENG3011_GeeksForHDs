@@ -27,8 +27,18 @@ function About() {
     setShowError(true);
   };
 
+
+
+  const list = [ ]
   const [value, setValue] = useState(false);
-  const [value2, setValue2] = useState(false); 
+
+  const [value2, setValue2] = useState(false);
+
+  const [value3, setValue3] = useState(false);
+
+  const [value4, setValue4] = useState(false); 
+
+
 
   return (
   
@@ -84,7 +94,8 @@ function About() {
                     isOn={value2}
                     onColor="#EF476F"
                     handleToggle={() => setValue2(!value2)}
-                    style={{marginRight:40}}   
+                  
+                    
                   />
                   <p>Recieve weekly predictions via email</p>
                 </div>

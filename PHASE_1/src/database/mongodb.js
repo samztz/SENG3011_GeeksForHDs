@@ -10,5 +10,5 @@ export default async () => {
   } = process.env;
   
   let connectionString = DB_URL;
-
+  const client = new MongoClient(connectionString);
 }

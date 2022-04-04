@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Card from '@mui/material/Card';
 import ReportsTable from "../../components/reportsTable";
 
-function About() {
+function Home() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
@@ -18,7 +18,6 @@ function About() {
         >
           <Toolbar />
           <Box>
-
           </Box>
           <Box>
             <Card>
@@ -30,7 +29,7 @@ function About() {
       </Box>
       
     </ThemeProvider>
-  );
+  );-
 }
 
 export default Home

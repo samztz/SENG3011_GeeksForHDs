@@ -42,6 +42,15 @@ const names = [
   'Kelly Snyder',
 ];
 
+const countries = [
+  'Australia',
+  'United States',
+  'China',
+  'India',
+  'United Kingdom',
+  'Canada'
+]
+
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -53,6 +62,7 @@ function getStyles(name, personName, theme) {
 
 function FilterDropdowns() {
   const [personName, setPersonName] = React.useState([]);
+  const [country, setCountry] = React.useState([]);
 
   const handleChange = (event) => {
     const {
@@ -63,6 +73,21 @@ function FilterDropdowns() {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+
+  const handleCountryChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setCountry(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  const resetFilters = (event) => {
+    setPersonName([]);
+    setCountry([]);
+  }
 
   return (
       <>
@@ -101,8 +126,8 @@ function FilterDropdowns() {
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={personName}
-            onChange={handleChange}
+            value={country}
+            onChange={handleCountryChange}
             input={<OutlinedInput id="select-multiple-chip" label="Country" />}
             renderValue={(selected) => (
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -113,11 +138,11 @@ function FilterDropdowns() {
             )}
             MenuProps={MenuProps}
             >
-            {names.map((name) => (
+            {countries.map((name) => (
                 <MenuItem
                 key={name}
                 value={name}
-                style={getStyles(name, personName, theme)}
+                style={getStyles(name, country, theme)}
                 >
                 {name}
                 </MenuItem>
@@ -138,7 +163,7 @@ function FilterDropdowns() {
         </FormControl>*/}
         <Box>
             <Button variant="contained" color='secondary'>Filter</Button>
-            <Button variant="outlined" sx={{m:2}}>Reset</Button>
+            <Button variant="outlined" sx={{m:2}} onClick={resetFilters}>Reset</Button>
         </Box>
       </>
   );

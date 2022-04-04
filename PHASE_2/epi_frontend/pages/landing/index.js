@@ -1,11 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Navbar from '../components/navbar.js'
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from "../components/theme.js"
+import { theme } from "../../components/theme.js"
+import Navbar from "../../components/navbar"
+import Head from 'next/head'
 
-export default function Home() {
+function About() {
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.container}>
@@ -17,45 +15,41 @@ export default function Home() {
         </Head>
 
         <main className={styles.main}>
-          <div className={styles.title}>
-            <h1 className={styles.title}>
-              EPIDENCE 
-            </h1>
-            <p className={styles.description}>
-              All your viral questions, answered here. 
-            </p>
-          </div>
+          <h1 className={styles.title}>
+            Welcome to <a href="https://nextjs.org">Next.js!</a>
+          </h1>
 
           <p className={styles.description}>
-            Latest Events
+            Get started by editing{' '}
+            <code className={styles.code}>pages/index.js</code>
           </p>
 
           <div className={styles.grid}>
             <a href="https://nextjs.org/docs" className={styles.card}>
-              <h2>Coronavirus &rarr;</h2>
-              <p>Coronavirus outbreak in China</p>
+              <h2>Documentation &rarr;</h2>
+              <p>Find in-depth information about Next.js features and API.</p>
             </a>
 
             <a href="https://nextjs.org/learn" className={styles.card}>
-              <h2>Common Cold &rarr;</h2>
-              <p>Common Cold outbreak in Australia</p>
+              <h2>Learn &rarr;</h2>
+              <p>Learn about Next.js in an interactive course with quizzes!</p>
             </a>
 
             <a
               href="https://github.com/vercel/next.js/tree/canary/examples"
               className={styles.card}
             >
-              <h2>Influenza &rarr;</h2>
-              <p>Reports of spikes of Influenza near the Mekong Delta</p>
+              <h2>Examples &rarr;</h2>
+              <p>Discover and deploy boilerplate example Next.js projects.</p>
             </a>
 
             <a
               href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               className={styles.card}
             >
-              <h2>More &rarr;</h2>
+              <h2>Deploy &rarr;</h2>
               <p>
-                Click here to learn more about the outbreaks
+                Instantly deploy your Next.js site to a public URL with Vercel.
               </p>
             </a>
           </div>
@@ -78,3 +72,5 @@ export default function Home() {
     
   )
 }
+
+export default About 

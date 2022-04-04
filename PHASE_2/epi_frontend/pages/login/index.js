@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Link from 'next/link';
 
 function Login() {
     return (
@@ -44,8 +45,12 @@ function Login() {
                             sx={{mb:1}}
                         />
                         <Grid container justifyContent={'center'}>
-                            <Button variant="outlined" color='secondary' sx={{m:1, mb:0}}>Cancel</Button>
-                            <Button variant="contained" color='secondary' sx={{m:1, mb:0}}>Log In</Button>
+                            <Link href="/">
+                                <Button variant="outlined" color='secondary' sx={{m:1, mb:0}}>Cancel</Button>
+                            </Link>
+                            <Link href="/home">
+                                <Button variant="contained" color='secondary' sx={{m:1, mb:0}}>Log In</Button>
+                            </Link>
                         </Grid>
                     </CardContent>
                 </Card>

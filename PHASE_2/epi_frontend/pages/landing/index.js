@@ -1,9 +1,11 @@
-import { ThemeProvider } from '@mui/material/styles'
-import { theme } from "../../components/theme.js"
-import Navbar from "../../components/navbar"
 import Head from 'next/head'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+import Navbar from '../components/navbar.js'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from "../components/theme.js"
 
-function About() {
+export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.container}>
@@ -15,41 +17,45 @@ function About() {
         </Head>
 
         <main className={styles.main}>
-          <h1 className={styles.title}>
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
-          </h1>
+          <div className={styles.title}>
+            <h1 className={styles.title}>
+              EPIDENCE 
+            </h1>
+            <p className={styles.description}>
+              All your viral questions, answered here. 
+            </p>
+          </div>
 
           <p className={styles.description}>
-            Get started by editing{' '}
-            <code className={styles.code}>pages/index.js</code>
+            Latest Events
           </p>
 
           <div className={styles.grid}>
             <a href="https://nextjs.org/docs" className={styles.card}>
-              <h2>Documentation &rarr;</h2>
-              <p>Find in-depth information about Next.js features and API.</p>
+              <h2>Coronavirus &rarr;</h2>
+              <p>Coronavirus outbreak in China</p>
             </a>
 
             <a href="https://nextjs.org/learn" className={styles.card}>
-              <h2>Learn &rarr;</h2>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
+              <h2>Common Cold &rarr;</h2>
+              <p>Common Cold outbreak in Australia</p>
             </a>
 
             <a
               href="https://github.com/vercel/next.js/tree/canary/examples"
               className={styles.card}
             >
-              <h2>Examples &rarr;</h2>
-              <p>Discover and deploy boilerplate example Next.js projects.</p>
+              <h2>Influenza &rarr;</h2>
+              <p>Reports of spikes of Influenza near the Mekong Delta</p>
             </a>
 
             <a
               href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               className={styles.card}
             >
-              <h2>Deploy &rarr;</h2>
+              <h2>More &rarr;</h2>
               <p>
-                Instantly deploy your Next.js site to a public URL with Vercel.
+                Click here to learn more about the outbreaks
               </p>
             </a>
           </div>
@@ -72,5 +78,3 @@ function About() {
     
   )
 }
-
-export default About 

@@ -1,15 +1,16 @@
-import BookmarkNav from "../components/bookmarkNav";
+import BookmarkNav from "../../components/bookmarkNav";
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from "../components/theme.js"
+import { theme } from "../../components/theme.js"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Card from '@mui/material/Card';
-import ReportsTable from "../components/reportsTable";
+import ReportsTable from "../../components/reportsTable";
 import { TextField } from '@material-ui/core';
 import { useState } from "react";
 
-import Card_display from "../components/card.jsx"
+import Card_display from "../../components/card.jsx"
+import DashNav from '../../components/dashNav';
 
 function About() {
 
@@ -22,7 +23,7 @@ function About() {
     <ThemeProvider theme={theme}>
 
       <Box sx={{ display: 'flex' }}>
-        <Dashnav pageName={'Bookmarks'} />
+        <DashNav pageName={'Bookmarks'} />
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}

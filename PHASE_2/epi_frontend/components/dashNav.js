@@ -107,7 +107,7 @@ export default function DashNav({pageName}) {
                         <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                     </ListItemButton>
                 </Link>
-                <Link href="/bookmarks">
+                <Link href="/bookmark">
                     <ListItemButton {...buttonProps(5)}>
                         <ListItemText primary="Bookmarks" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                     </ListItemButton>
@@ -118,7 +118,7 @@ export default function DashNav({pageName}) {
                 <Grid item style={{position: 'absolute', bottom: 0, width: '100%', display:'flex', justifyContent:'center'}}>
                    <Divider />
                     <List>
-                        <Link href="/reports">
+                        <Link href="/profile">
                             <ListItemButton {...buttonProps(6)}>
                                 <ListItemIcon style={{minWidth:40}}>
                                     <AccountCircleIcon color="white" />

@@ -50,7 +50,6 @@ function DashHome() {
                   direction="row"
                   justifyContent="space-between"
                   alignItems="center"
-                  xs={12} md={12}
                 >
                     <Grid item container direction="column" xs={6} md={9}>
                       <ToggleButtonGroup

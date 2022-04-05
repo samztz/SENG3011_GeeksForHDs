@@ -24,7 +24,7 @@ import Link from 'next/link';
 
 const drawerWidth = 240;
 
-export default function DashNav() {
+export default function DashNav({pageName}) {
     const [open, setOpen] = React.useState(true);
 
     const handleClick = () => {
@@ -48,8 +48,8 @@ export default function DashNav() {
             color='white'
           >
             <Toolbar>
-              <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                {router.pathname}
+              <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+                {pageName}
               </Typography>
               <Link href="/">
                   <Button variant="contained" color='secondary'>Logout</Button>

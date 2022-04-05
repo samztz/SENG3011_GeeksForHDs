@@ -22,7 +22,7 @@ function About() {
     <ThemeProvider theme={theme}>
 
       <Box sx={{ display: 'flex' }}>
-        <BookmarkNav />
+        <Dashnav pageName={'Bookmarks'} />
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}

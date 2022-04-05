@@ -72,7 +72,7 @@ function Profile() {
     <ThemeProvider theme={theme}>
 
     <Box sx={{ display: 'flex' }}>
-      <AccountNav />
+      <Dashnav pageName={'Profile'} />
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}

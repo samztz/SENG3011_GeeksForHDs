@@ -35,7 +35,7 @@ function DashHome() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
-        <DashNav />
+        <DashNav pageName='Home' />
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}

@@ -1,0 +1,16 @@
+
+
+.card_css {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 20px; 
+  border: 1px solid black; 
+  width: 1200px; 
+}
+
+
+.CardProps {
+  margin: 10px; 
+  border: 1px solid red; 
+  height: 200px;
+}

@@ -39,6 +39,7 @@ function Profile() {
   const [original_password, new_password] = useState('Medium');
   const [original_new_password, set_new_password_again] = useState('Medium');
 
+  
   const handleInfo = (e) => {
     if (e.target.classList.contains('icon')) {
       const info = e.target.dataset.label

@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
+import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -45,7 +46,9 @@ export default function Navbar() {
             <Toolbar>
                 <img src="/Logo_dark.png" alt="logo" width='200' />
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, paddingLeft:'20px' }}>
-                    <Button variant="text" color='white'>Home</Button>
+                    <Link href="/" passHref>
+                        <Button variant="text" color='white'>Home</Button>
+                     </Link>
                     <Button variant="text" color='white'>Features</Button>
                     <Button variant="text" color='white'>Pricing</Button>
                     <Button variant="text" color='white'>About</Button>

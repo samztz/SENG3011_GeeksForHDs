@@ -29,7 +29,7 @@ function Home() {
       </Box>
       
     </ThemeProvider>
-  );-
+  );
 }
 
 export default Home

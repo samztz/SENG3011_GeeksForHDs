@@ -16,6 +16,9 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 function DashHome() {
+  // const data = getArticlesByQuery();
+  // unreachable by CORS
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
@@ -50,10 +53,9 @@ function DashHome() {
             <Card>
               <CardContent style={{backgroundColor: theme.palette.white.main}}>
                 <Typography variant="h4" fontWeight="fontWeightBold" sx={{mb:2}}>Reports</Typography>
-                <ReportsTable />
+                <ReportsTable />               
               </CardContent>
             </Card>
-            
           </Box>
         </Box>
       </Box>

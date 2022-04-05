@@ -41,6 +41,7 @@
     "express": "^4.17.3",
     "jsdom": "^19.0.0",
     "module-alias": "^2.2.2",
+    "mongoose": "^6.2.9",
     "morgan": "^1.10.0",
     "puppeteer": "^13.4.0",
     "puppeteer-cluster": "^0.23.0",

@@ -42,7 +42,7 @@ function DashHome() {
         >
           <Toolbar />
           <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-            <Card sx={{ mb: 2 }} width={'100%'}>
+            <Card sx={{ mb: 2, minWidth: '100%' }}>
                 <CardContent style={{backgroundColor: theme.palette.white.main}}>
                 <Grid
                   container
@@ -50,6 +50,7 @@ function DashHome() {
                   direction="row"
                   justifyContent="space-between"
                   alignItems="center"
+                  xs={12} md={12}
                 >
                     <Grid item container direction="column" xs={6} md={9}>
                       <ToggleButtonGroup

@@ -36,7 +36,7 @@ function DashHome() {
                   alignItems="center"
                 >
                     <Grid item container direction="column" xs={6} md={9}>
-                      <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg" alt="map" width={'100%'} />
+                      <img src="/world.png" alt="map" width={'100%'} />
                     </Grid>
                   <Grid item container direction="column" alignItems="center" xs={6} md={3}>
                     <Typography variant="h5" fontWeight="fontWeightBold" sx={{mb:1}}>Filter By:</Typography>

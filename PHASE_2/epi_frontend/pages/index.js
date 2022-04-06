@@ -32,21 +32,21 @@ export default function Home() {
 
           <div className={styles.grid}>
             <a href="https://nextjs.org/docs" className={styles.card}>
-              <h2>Coronavirus &rarr;</h2>
-              <p>Coronavirus outbreak in China</p>
+              <h2>Virus Tracker &rarr;</h2>
+              <p>Have a report of viruses at your fingertips</p>
             </a>
 
             <a href="https://nextjs.org/learn" className={styles.card}>
-              <h2>Common Cold &rarr;</h2>
-              <p>Common Cold outbreak in Australia</p>
+              <h2>Heat Maps&rarr;</h2>
+              <p>Display information in an easy-to-read fashion</p>
             </a>
 
             <a
               href="https://github.com/vercel/next.js/tree/canary/examples"
               className={styles.card}
             >
-              <h2>Influenza &rarr;</h2>
-              <p>Reports of spikes of Influenza near the Mekong Delta</p>
+              <h2>User Features &rarr;</h2>
+              <p>Easy to access bookmarks for the user</p>
             </a>
 
             <a
@@ -55,7 +55,7 @@ export default function Home() {
             >
               <h2>More &rarr;</h2>
               <p>
-                Click here to learn more about the outbreaks
+                Click here to learn more our services
               </p>
             </a>
           </div>

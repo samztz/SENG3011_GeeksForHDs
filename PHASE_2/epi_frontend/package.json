@@ -11,6 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@material-ui/core": "^4.12.3",
+    "@mobiscroll/react-lite": "^4.10.9",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
     "@mui/x-data-grid": "^5.8.0",

@@ -21,6 +21,7 @@ function DashHome() {
 
   return (
     <ThemeProvider theme={theme}>
+
       <Box sx={{ display: 'flex' }}>
         <DashNav pageName='Home' />
         <Box
@@ -60,6 +61,7 @@ function DashHome() {
         </Box>
       </Box>
       
+
     </ThemeProvider>
   );
 }

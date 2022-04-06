@@ -21,7 +21,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import Link from 'next/link';
 
 const drawerWidth = 240;
 

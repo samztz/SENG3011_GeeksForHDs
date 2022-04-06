@@ -1,223 +1,169 @@
-import AccountNav from "../../components/accountNav";
+import * as React from 'react';
+import DashNav from "../../components/dashNav";
 import { ThemeProvider } from '@mui/material/styles'
 import { theme } from "../../components/theme.js"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import ReportsTable from "../../components/reportsTable";
-import React, { useState, useEffect } from 'react'
-import Container from '@material-ui/core/Container';
-import { CardMedia } from "@mui/material";
-import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button';
-import { Input } from 'react-input-component';
-import {
-  FaEnvelopeOpen,
-  FaUser,
-  FaCalendarTimes,
-  FaMap,
-  FaPhone,
-  FaLock,
-} from 'react-icons/fa'
-import { SetIntegrityLevel } from "es-abstract";
-import DashNav from '../../components/dashNav';
+import FilterDropdowns from "../../components/filterDropdowns";
+import Grid from '@mui/material/Grid';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import CardHeader from '@mui/material/CardHeader';
+import Divider from '@mui/material/Divider';
+import Avatar from '@mui/material/Avatar';
+import TextField from '@mui/material/TextField';
 
+function UserProfile() {
+  return (
+    <Card sx={{mb:2, width: '50%'}}>
+      <CardHeader title="Personal Details" />
+      <CardContent>
+        <Grid container spacing={2} alignItems="flex-end">
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                gridRowGap: 10,
+              }}
+            >
+              <Avatar src={'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'} 
+              sx={{ height: 200, width: 200 }} />
+              <Grid container spacing={1} alignContent="center">
+                <Grid item xs={6}>
+                  <Button color="secondary" variant="contained" fullWidth>
+                    Upload
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button variant="outlined" color="secondary" fullWidth>
+                    Remove
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
 
-const url = 'https://randomuser.me/api/'
-const defaultImage = 'https://randomuser.me/api/portraits/men/75.jpg'
+          <Grid item xs={6}>
+              <Grid container justifyContent={'center'} spacing={1}>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="John Doe"
+                    name="firstName"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="hello@gmail.com"
+                    name="lastName"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Scientist"
+                    name="email"
+                    variant="outlined"
+                  />
+                </Grid>
+              
+              
+            </Grid>
+            <Grid container item xs={12} justifyContent="flex-end" sx={{mt:2}}>
+                <Button variant="contained" color="secondary">
+                  Edit
+                </Button>
+              </Grid>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+  );
+}
+
+function AccountSettings() {
+  return (
+    <Card sx={{mb:2, width: '50%', ml:2}}>
+      <CardHeader title="Account" />
+      <CardContent>
+        <Grid container justifyContent="space-between" spacing={3}>
+          <Grid item>
+            <Typography variant="h6">Reset Password</Typography>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="secondary" href="/verify">
+              Reset Password
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h6">Delete Account</Typography>
+                <Typography color="red" variant="subtitle2">
+                  WARNING: Account deletion is permanent and cannot be undone.
+                  All data, including bookmarks, will be deleted.
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
+                  <Grid item xs={7}>
+                    <TextField
+                      id="pwd_confirmation"
+                      label="Please Confirm Password"
+                      size="small"
+                      type="password"
+                      fullWidth
+                    ></TextField>
+                  </Grid>
+                  <Grid item justifyContent="left">
+                    <Button variant="contained" color="secondary">
+                      Delete Account
+                    </Button>
+                    
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+  );
+}
 
 function Profile() {
-  //const [loading, setLoading] = useState(false)
-  const [person, setPerson] = useState(null)
-  const [subtitle, setSubtitle] = useState('random person')
-  const [title, setTitle] = useState('name')
-
-  const [name, setName] = useState('...') 
-
-
-  const [password, old_password] = useState('Medium');
-  const [original_password, new_password] = useState('Medium');
-  const [original_new_password, set_new_password_again] = useState('Medium');
-
-  
-  const handleInfo = (e) => {
-    if (e.target.classList.contains('icon')) {
-      const info = e.target.dataset.label
-      setSubtitle(info)
-      // Hard coding for now ....................
-      if (info == 'name') {
-        setTitle("Jim Ray")
-      }
-      if (info == 'email') {
-        setTitle('214830042@google.mail')
-      }
-      if (info == 'age') {
-        setTitle('40')
-      }
-      if (info == 'address') {
-        setTitle('the seventh avenue')
-      }
-      if (info == 'phone') {
-        setTitle('283249245-324')
-      }
-      if (info == 'password') {
-        setTitle('1489493i539qvv2543')
-      }
-      
-    }
-  }
-
-  
   return (
     <ThemeProvider theme={theme}>
 
-    <Box sx={{ display: 'flex' }}>
-      <DashNav pageName='Profile' />
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
-        <Toolbar />
-          <section className='profileCard'>
-                <h1>Personal Detail</h1>
-                <div className='blue-bg'></div>
-                <div className='profile-img'>
-                  <img
-                    src={(person && person.photo) || Profile.defaultProps.image}
-                    alt='Random user'
-                    className='profile-photo'
-                  />
-                </div>
-                <br/>
-                <br/>
-                <label htmlFor="contained-button-file">
-                  <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                  <Button variant="contained" component="span">
-                    Upload
-                  </Button>
-                </label>
-                <div className='profile-info'>
-                  <div className='person-info text-center'>
-                    <p>My {subtitle || ProfileCard.defaultProps.subtitle} is</p>
-                    <h3>{title || ProfileCard.defaultProps.title}</h3>
-                  </div>
-                  <div className='icons'>
-                    <button className='icon' data-label='name' onMouseOver={handleInfo}>
-                      <FaUser />
-                    </button>
-                    <button className='icon' data-label='email' onMouseOver={handleInfo}>
-                      <FaEnvelopeOpen />
-                    </button>
-                    <button className='icon' data-label='age' onMouseOver={handleInfo}>
-                      <FaCalendarTimes />
-                    </button>
-                    <button
-                      className='icon'
-                      data-label='address'
-                      onMouseOver={handleInfo}
-                    >
-                      <FaMap />
-                    </button>
-                    <button className='icon' data-label='phone' onMouseOver={handleInfo}>
-                      <FaPhone />
-                    </button>
-                    <button
-                      className='icon'
-                      data-label='password'
-                      onMouseOver={handleInfo}
-                    >
-                      <FaLock />
-                    </button>
-                  </div>
-                  
-
-                </div>
-                <div className="Delete_button">
-
-                <Button style={{marginRight: 20}} variant="outlined" color="error">
-                  Edit Profile
-                </Button>
-                </div>
-
-                <br/>
-
-              </section>
-              <br/>
-              <section className='profileCard'>
-              <box style={{display:"flex", justifyContent: "center",
-              alignItems: "center",}}>
-              <div>
-                  <h1>Account Setting</h1>
-
-                  <h5>Change password</h5>
-                  <form onSubmit={event =>{
-                    alert("This person's password now is now updated!");
-                  }}>
-                      <label>
-                          <div>
-                              <p >Enter old password:</p>
-                              <input type="password" value={password} onChange={event => old_password(event.target.value)} />
-                          </div>
-                          <div>
-                              <p>Enter new password:</p>
-                              <input type="password" value={original_password} onChange={event => new_password(event.target.value)} />
-                          </div>
-                          <div>
-                              <p>Enter new password again:</p>
-                              <input type="password" value={original_new_password} onChange={event => set_new_password_again(event.target.value)} />
-                          </div>
-
-                      </label>
-                      <input type="submit" value="Change password"/>
-                  </form>
-              </div>
-              
-              </box>
-
-              <br/>
-
-              <div className="Delete_button">
-                <h2 style={{marginRight: 750}}>Delete account</h2>  
-
-            
-                <Button style={{marginRight: 20}} variant="outlined" color="error">
-                  Delete
-                </Button>
-              </div>
-
-              </section>
+      <Box sx={{ display: 'flex' }}>
+        <DashNav pageName='Home' />
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        >
+          <Toolbar />
+          <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+            <UserProfile />
+            <AccountSettings />
+          </Box>
+        </Box>
       </Box>
-    </Box>
-    
+      
 
-    
     </ThemeProvider>
-
-  )
- 
+  );
 }
-
-Profile.propTypes = {
-  image: PropTypes.object.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-}
-
-Profile.defaultProps = {
-  image: defaultImage,
-  subtitle: 'default info',
-  title: 'default value',
-}
-
 
 export default Profile 
-
-
-
-
-
-
-
-
-

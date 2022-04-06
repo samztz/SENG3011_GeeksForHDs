@@ -38,7 +38,8 @@ export default function report() {
         >
           <Toolbar />
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            <TextField
+            <Grid container item justifyContent={'space-between'}>
+              <TextField
                 variant="outlined"
                 color="primary"
                 id="search-bar"
@@ -52,7 +53,10 @@ export default function report() {
                 ),
                 }}
                 sx={{mb:2, width: 300}}
-            />
+              /> 
+              <Button variant="contained" color='secondary'>Download as CSV</Button>
+            </Grid>
+            
             <TableContainer>
               <Table sx={{minWidth: 650}}>
                 <TableHead>

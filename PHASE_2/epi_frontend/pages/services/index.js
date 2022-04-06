@@ -79,12 +79,13 @@ function Vis() {
                 >
                     <Grid item container direction="column" xs={6} md={2}>
                     <Button variant='contained'>
-                Get Visualisations
+                Request Charts
             </Button>
                     </Grid>
                   <Grid item container direction="column" alignItems="center" xs={6} md={9}>
                     <Typography variant="h9" fontWeight="fontWeightBold" sx={{mb:1}}>
-                    Epidence is ready to help you visualize data and capture real value from it to improve your models. You can look into the example visualisation and reach out to our service to get yours done.
+                    Epidence is ready to help you visualize data and capture real value from it and gain insights. Your organisation can reach to us to deliver you various visualisations in forms of charts with different requirements for better understanding of outbreak trends. You can look for examples 
+                    <Button variant="text">here</Button>
                     </Typography>
             
                   </Grid>

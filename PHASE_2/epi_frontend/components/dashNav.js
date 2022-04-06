@@ -102,9 +102,9 @@ export default function DashNav({pageName}) {
                         </Link>
                     </List>
                 </Collapse>
-                <Link href="/predictions">
+                <Link href="/services">
                     <ListItemButton {...buttonProps(4)}>
-                        <ListItemText primary="Predictions" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
+                        <ListItemText primary="Services" style={{display:'flex', justifyContent:'center'}} primaryTypographyProps={{ color: 'white.main' }} />
                     </ListItemButton>
                 </Link>
                 <Link href="/bookmarks">

@@ -15,7 +15,7 @@ const data = [
 ];
 
 const options = {
-    title: "Australia",
+    title: "Article frequency by Month",
     legend: { position: "bottom" },
     hAxis: {
         title: 'Month'

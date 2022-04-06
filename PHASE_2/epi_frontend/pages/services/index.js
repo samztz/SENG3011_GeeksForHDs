@@ -9,6 +9,8 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Carousel from 'react-material-ui-carousel'
 import Typography from '@mui/material/Typography';
+import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid';
 
 
 function Vis() {
@@ -40,15 +42,19 @@ function Vis() {
     return (
         <ThemeProvider theme={theme}>
         <Box sx={{ display: 'flex' }}>
-          <DashNav />
+          <DashNav pageName = "Services"/>
           <Box
             component="main"
             sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
           >
+
               <Box>
-            <Card>
+              <Toolbar />
+            <Card sx={{ mb: 2, minWidth: '100%' }}>
               <CardContent style={{backgroundColor: theme.palette.white.main}}>
-                <Typography variant="h4" fontWeight="fontWeightBold" sx={{mb:2}}>Reports</Typography>
+                <Typography variant="h4" fontWeight="fontWeightBold" sx={{mb:2}}>
+                    Visualisations
+                </Typography>
                 <Carousel >
             {
                 
@@ -58,11 +64,44 @@ function Vis() {
               </CardContent>
             </Card>
             
-          </Box>
-           
-           
+            <Box>
+            <Card sx={{ mb: 2, minWidth: '100%' }}>
+                <CardContent style={{backgroundColor: theme.palette.primary.contrastText}}>
+                <Grid
+                  container
+                  spacing={2}
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                    <Grid item container direction="column" xs={6} md={2}>
+                    <Button variant='contained'>
+                Get Visualisations
+            </Button>
+                    </Grid>
+                  <Grid item container direction="column" alignItems="center" xs={6} md={9}>
+                    <Typography variant="h9" fontWeight="fontWeightBold" sx={{mb:1}}>
+                    Epidence is ready to help you visualize data and capture real value from it to improve your models. You can look into the example visualisation and reach out to our service to get yours done.
+                    </Typography>
             
+                  </Grid>
+                  </Grid>
+                </CardContent>
+            </Card>
+            </Box>
+            <Box>
+            <Card sx={{ mb: 2, minWidth: '100%' }}>
+              <CardContent style={{backgroundColor: theme.palette.white.main}}>
+                <Typography variant="h4" fontWeight="fontWeightBold" sx={{mb:2}}>
+                    Predictions
+                </Typography>
+               
+              </CardContent>
+            </Card>
+            </Box>
           </Box>
+          </Box>
+          
         </Box>
         
       </ThemeProvider>

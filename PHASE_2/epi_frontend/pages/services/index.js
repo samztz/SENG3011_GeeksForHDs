@@ -19,22 +19,22 @@ function Vis() {
 
     var items = [
         {
-            name: "Heat Map",
-            description: "des",
-            image: "https://www.scnsoft.com/data-analytics/types-of-charts/heat-map.svg",
-            route: "/heatmap"
+            name: "Alerts",
+            description: "Epidence enables user to alert them when certain thershold are hit.",
+            image: "https://www.svgrepo.com/show/177804/notification-ring.svg",
+            route: "/bookmarks"
         },
         {
-            name: "Line Charts",
-            description: "des",
+            name: "Charts",
+            description: "Different kinds of charting is done for data analysts to get useful insights and trends.",
             image : "https://www.scnsoft.com/data-analytics/types-of-charts/line-chart.svg",
             route: "/linechart"
         
         },
         {
-            name: "Symbol Map",
-            description: "des",
-            image: "https://www.scnsoft.com/data-analytics/types-of-charts/symbol-map.svg",
+            name: "Predictions",
+            description: "Prediction models of used to give predictions on outbreaks.",
+            image: "https://www.epiwatch.org/home/services/magnify-epidemic.svg",
             route: "/symbol-map"
         }
     ]
@@ -53,7 +53,10 @@ function Vis() {
             <Card sx={{ mb: 2, minWidth: '100%' }}>
               <CardContent style={{backgroundColor: theme.palette.white.main}}>
                 <Typography variant="h4" fontWeight="fontWeightBold" sx={{mb:2}}>
-                    Visualisations
+                    
+                </Typography>
+                <Typography variant="h6" fontWeight="fontWeightBold" sx={{mb:2}}>
+                   We provide different services for users to interact with our data.
                 </Typography>
                 <Carousel >
             {
@@ -89,16 +92,7 @@ function Vis() {
                 </CardContent>
             </Card>
             </Box>
-            <Box>
-            <Card sx={{ mb: 2, minWidth: '100%' }}>
-              <CardContent style={{backgroundColor: theme.palette.white.main}}>
-                <Typography variant="h4" fontWeight="fontWeightBold" sx={{mb:2}}>
-                    Predictions
-                </Typography>
-               
-              </CardContent>
-            </Card>
-            </Box>
+
           </Box>
           </Box>
           
@@ -124,7 +118,7 @@ function Item(props)
         <Box
         component="img"
         sx={{
-          height: 466,
+          height: 200,
           maxHeight: { xs: 466, md: 1000 },
         }}
         alt="The house from the offer."

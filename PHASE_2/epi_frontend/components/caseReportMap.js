@@ -3,7 +3,8 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { scaleQuantile } from "d3-scale";
 import { csv } from "d3-fetch";
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
+const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
+const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
 const CaseReportMap = () => {
   const [data, setData] = useState([]);
@@ -31,20 +32,25 @@ const CaseReportMap = () => {
 
   return (
     <ComposableMap projection="geoAlbersUsa">
-      <Geographies geography={geoUrl}>
-        {({ geographies }) =>
-          geographies.map(geo => {
-            const cur = data.find(s => s.fips === geo.id);
-            return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={cur ? colorScale(cur.cases) : "#EEE"}
-              />
-            );
-          })
-        }
-      </Geographies>
+        <Geographies geography={geoURL}>
+            {({ geographies }) =>
+            geographies.map(geo => {
+                const cur = data.find(s => s.fips === geo.id);
+                return (
+                <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={cur ? colorScale(cur.cases) : "#EEE"}
+                />
+                );
+            })
+            }
+        </Geographies>
+        <Geographies geography={stateURL}>
+            {({geographies}) => geographies.map(geo => {
+                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} />);
+            })}
+        </Geographies>
     </ComposableMap>
   );
 };

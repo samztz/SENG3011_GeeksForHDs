@@ -21,7 +21,7 @@ const COLOR_RANGE = [
 const LinearGradient = props => {
     const { data } = props;
     const boxStyle = {
-      width: 180,
+      width: 500,
       margin: 'auto'
     };
     const gradientStyle = {
@@ -74,8 +74,7 @@ const CaseReportMap = () => {
     return (
         <>
         <LinearGradient data={gradientData} />
-        <ReactTooltip>{tooltipContent}</ReactTooltip>
-        <ComposableMap projection="geoAlbersUsa" data-tip="">
+        <ComposableMap data-tip="" projection="geoAlbersUsa">
             <Geographies geography={geoURL}>
                 {({ geographies }) =>
                 geographies.map(geo => {
@@ -98,6 +97,7 @@ const CaseReportMap = () => {
                 })}
             </Geographies>
         </ComposableMap>
+        <ReactTooltip>{tooltipContent}</ReactTooltip>
         </>
     );
 };

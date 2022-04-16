@@ -1,25 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Marker, Annotation, ZoomableGroup } from "react-simple-maps";
 import { scaleQuantile } from "d3-scale";
 import { csv } from "d3-fetch";
 import ReactTooltip from "react-tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import * as d3 from 'd3';
+import { PatternLines } from "@vx/pattern";
+import { geoCentroid } from "d3-geo";
+import allStates from "./allStates.json";
 
 const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 const COLOR_RANGE = [
-    "#ffedea",
-    "#ffcec5",
-    "#ffad9f",
-    "#ff8a75",
-    "#ff5533",
-    "#e2492d",
-    "#be3d26",
-    "#9a311f",
-    "#782618"
+    "#F3F3F3",
+    "#D2DED8",
+    "#9ECCC3",
+    "#79BFB4",
+    "#44AD9E",
+    "#3A8C83",
+    "#316F6C",
+    "#275053",
+    "#1F363D"
 ];
+
+const offsets = {
+    VT: [50, -8],
+    NH: [34, 2],
+    MA: [30, -1],
+    RI: [28, 2],
+    CT: [35, 10],
+    NJ: [34, 1],
+    DE: [33, 0],
+    MD: [47, 10],
+    DC: [49, 21]
+};
 
 const LinearGradient = props => {
     const { data } = props;
@@ -52,21 +67,29 @@ const LinearGradient = props => {
     );
   };
 
-const CaseReportMap = () => {
+const CaseReportMap = ({dataSource}) => {
     const [data, setData] = useState([]);
     const [isMounted,setIsMounted] = useState(false); // Need this for the react-tooltip
 
     useEffect(() => {
         // https://www.bls.gov/lau/
-        csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv", function(d) {
-            d.cases = +d.cases;
-            return d;
+        csv(dataSource, function(d) {
+            let a = {};
+            a.cases = +d.cases;
+            if (d.geoid) {
+                a.fips = d.geoid.replace("USA-", "")
+            } else {
+                a.fips = d.fips
+            }
+            //a.fips = d.fips
+            //a.fips = d.fips ? d.fips : d.geoid.replace("USA-", "");
+            return a;
         })
         .then(counties => {
             setData(counties);
         });
         setIsMounted(true);
-    }, []);
+    }, [dataSource]);
 
     const colorScale = scaleQuantile()
     .domain(data.map(d => d.cases))
@@ -94,27 +117,70 @@ const CaseReportMap = () => {
         <>
         <LinearGradient data={gradientData} />
         <ComposableMap data-tip="" projection="geoAlbersUsa">
-            <Geographies geography={geoURL}>
-                {({ geographies }) =>
-                geographies.map(geo => {
-                    const cur = data.find(s => s.fips === geo.id);
-                    return (
-                    <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={cur ? colorScale(cur.cases) : "#EEE"}
-                        onMouseEnter={onMouseEnter(geo, cur)}
-                        onMouseLeave={onMouseLeave}
-                    />
-                    );
-                })
-                }
-            </Geographies>
-            <Geographies geography={stateURL}>
-                {({geographies}) => geographies.map(geo => {
-                    return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} />);
-                })}
-            </Geographies>
+            <ZoomableGroup>
+                <PatternLines
+                    id="lines"
+                    height={6}
+                    width={6}
+                    stroke="red"
+                    strokeWidth={1}
+                    background="#F6F0E9"
+                    orientation={["diagonal"]}
+                />
+                <Geographies geography={geoURL}>
+                    {({ geographies }) =>
+                    geographies.map(geo => {
+                        const cur = data.find(s => s.fips === geo.id);
+                        return (
+                        <Geography
+                            key={geo.rsmKey}
+                            geography={geo}
+                            fill={cur ? colorScale(cur.cases) : "url('#lines')"}
+                            onMouseEnter={onMouseEnter(geo, cur)}
+                            onMouseLeave={onMouseLeave}
+                        />
+                        );
+                    })
+                    }
+                </Geographies>
+                <Geographies geography={stateURL}>
+                    {({geographies}) => (
+                        <>
+                            {geographies.map(geo => {
+                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} />);
+                            })}
+                            {geographies.map(geo => {
+                                const centroid = geoCentroid(geo);
+                                const cur = allStates.find(s => s.val === geo.id);
+                                return (
+                                    <g key={geo.rsmKey + "-name"}>
+                                    {cur &&
+                                        centroid[0] > -160 &&
+                                        centroid[0] < -67 &&
+                                        (Object.keys(offsets).indexOf(cur.id) === -1 ? (
+                                        <Marker coordinates={centroid}>
+                                            <text y="2" fontSize={14} textAnchor="middle">
+                                                {cur.id}
+                                            </text>
+                                        </Marker>
+                                        ) : (
+                                        <Annotation
+                                            subject={centroid}
+                                            dx={offsets[cur.id][0]}
+                                            dy={offsets[cur.id][1]}
+                                        >
+                                            <text x={4} fontSize={14} alignmentBaseline="middle">
+                                                {cur.id}
+                                            </text>
+                                        </Annotation>
+                                        ))}
+                                    </g>
+                                );
+                            })}
+                        </>
+                    )}
+                </Geographies>
+            </ZoomableGroup>
         </ComposableMap>
         {isMounted && <ReactTooltip>{tooltipContent}</ReactTooltip>}
         </>

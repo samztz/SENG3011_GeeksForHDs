@@ -116,7 +116,7 @@ const CaseReportMap = ({dataSource}) => {
     return (
         <>
         <LinearGradient data={gradientData} />
-        <ComposableMap data-tip="" projection="geoAlbersUsa">
+        <ComposableMap data-tip="" projection="geoAlbersUsa" style={{ height: '100%' }}>
             <ZoomableGroup>
                 <PatternLines
                     id="lines"

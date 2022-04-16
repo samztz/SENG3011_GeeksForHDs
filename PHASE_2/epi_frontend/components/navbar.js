@@ -45,32 +45,6 @@ export default function Navbar() {
           <AppBar position="fixed">
             <Toolbar>
                 <img src="/Logo_dark.png" alt="logo" width='200' />
-                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, paddingLeft:'20px' }}>
-                    <Link href="/#Home">
-                        <Button variant="text" color='white'>Home</Button>
-                    </Link>
-                    <Link href="/#Features">
-                        <Button variant="text" color='white'>Features</Button>
-                    </Link>
-                    <Link href="/#Pricing">
-                        <Button variant="text" color='white'>Pricing</Button>
-                    </Link>
-                    <Link href="/#About">
-                        <Button variant="text" color='white'>About</Button>
-                    </Link>
-                    <Link href="/#ContactUs">
-                        <Button variant="text" color='white'>Contact Us</Button>
-                    </Link>
-                </Box>
-                <Box>
-                    <Link href="/signup">
-                        <Button variant="outlined" color='white' sx={{m:2}}>Sign Up</Button>
-                    </Link>
-                    <Link href="/login">
-                        <Button variant="contained" color='secondary'>Log In</Button>
-                    </Link>
-                    
-                </Box>
             </Toolbar>
           </AppBar>
         </Box>

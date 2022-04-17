@@ -113,11 +113,21 @@ const CaseReportMap = ({dataSource}) => {
         setTooltipContent('');
     };
 
+    // handle clicking on county
+    const [county, setCounty] = useState('');
+    const [zoom, setZoom] = useState(1);
+    const [center, setCenter] = useState([0, 0]);
+
+    const handleCountyClick = (geography, projection, path) => event => {
+        const centroid = projection.invert(path.centroid(geography));
+        setCenter(centroid);
+        setZoom(4);
+    };
+
     return (
         <>
-        <LinearGradient data={gradientData} />
-        <ComposableMap data-tip="" projection="geoAlbersUsa" style={{ height: '100%' }}>
-            <ZoomableGroup>
+        <ComposableMap projection="geoAlbersUsa" style={{ height: '100%' }}>
+            <ZoomableGroup center={center} zoom={zoom}>
                 <PatternLines
                     id="lines"
                     height={6}
@@ -128,7 +138,7 @@ const CaseReportMap = ({dataSource}) => {
                     orientation={["diagonal"]}
                 />
                 <Geographies geography={geoURL}>
-                    {({ geographies }) =>
+                    {({ geographies, projection, path }) =>
                     geographies.map(geo => {
                         const cur = data.find(s => s.fips === geo.id);
                         return (
@@ -138,6 +148,8 @@ const CaseReportMap = ({dataSource}) => {
                             fill={cur ? colorScale(cur.cases) : "url('#lines')"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
+                            onClick={handleCountyClick(geo, projection, path)}
+                            strokeWidth={100}
                         />
                         );
                     })
@@ -147,7 +159,7 @@ const CaseReportMap = ({dataSource}) => {
                     {({geographies}) => (
                         <>
                             {geographies.map(geo => {
-                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} />);
+                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} strokeWidth={2} />);
                             })}
                             {geographies.map(geo => {
                                 const centroid = geoCentroid(geo);
@@ -182,6 +194,7 @@ const CaseReportMap = ({dataSource}) => {
                 </Geographies>
             </ZoomableGroup>
         </ComposableMap>
+        <LinearGradient data={gradientData} />
         {isMounted && <ReactTooltip>{tooltipContent}</ReactTooltip>}
         </>
     );

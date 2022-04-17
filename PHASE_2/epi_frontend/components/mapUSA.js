@@ -59,7 +59,8 @@ export default function MapUSA() {
 
     return (
         <>
-            <Slider
+            <CaseReportMap dataSource={dataSource} />
+            {/*<Slider
                 aria-label="Custom marks"
                 defaultValue={20}
                 getAriaValueText={valuetext}
@@ -67,8 +68,7 @@ export default function MapUSA() {
                 valueLabelDisplay="auto"
                 marks={marks}
                 onChangeCommitted={handleChange}
-            />
-            <CaseReportMap dataSource={dataSource} />
+            />*/}
         </>
     )
 }

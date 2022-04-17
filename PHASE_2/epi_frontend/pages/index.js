@@ -1,3 +1,5 @@
+import * as React from 'react';
+import Link from '@mui/material/Link'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -13,6 +15,9 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import IconButton from '@mui/material/IconButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,12 +27,47 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function Home() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
+        <Modal
+          open={open}
+          onClose={handleClose}
+        >
+          <Box sx={style}>
+            <Typography variant="h6" component="h2">
+              Welcome to EPIDENCE
+            </Typography>
+            <Typography sx={{ mt: 2, mb: 2 }}>
+              Take a look at our services.
+            </Typography>
+            <Link 
+              href="https://unswseng.atlassian.net/wiki/spaces/SE3Y22G14/overview?homepageId=1382672" 
+              target='_blank'
+              rel="noopener"
+            >
+              Confluence Link
+            </Link>
+          </Box>
+        </Modal>
         <Navbar />
         <Box
           component="main"
@@ -45,6 +85,14 @@ export default function Home() {
                   INFO ABOUT HOW TO USE WEBSITE GOES HERE
                   ALSO CHARTS DISPLAYED HERE???
                 </Typography>
+                <IconButton 
+                  aria-label="delete"
+                  onClick={() =>{
+                    handleOpen();
+                  }}
+                >
+                  <HelpOutlineIcon />
+                </IconButton>
               </CardContent>
             </Card>
             </Box>

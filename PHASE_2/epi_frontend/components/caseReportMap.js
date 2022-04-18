@@ -67,7 +67,7 @@ const LinearGradient = props => {
                 {data.min}
             </Grid>
             <Grid item>
-                {d3.max(data.results, function(d) {return d.cases})}
+                {d3.max(data.results, function(d) {return d.risk})}
             </Grid>
             
         </Grid>
@@ -111,13 +111,13 @@ const CaseReportMap = () => {
         colourRange: RISK_COLOR,
         results: data,
         min: 0,
-        max: data.reduce((max, item) => (item.riskLevels.overall > max ? item.riskLevels.overall : max), 0)
+        max: data.reduce((max, item) => (item.risk > max ? item.risk : max), 0)
     };
 
     const [tooltipContent, setTooltipContent] = useState('');
     const onMouseEnter = (geo, cur = { risk: 'NA' }) => {
         return () => {
-            setTooltipContent(`${geo.properties.name}: ${cur.riskLevels.overall} risk`);
+            setTooltipContent(`${geo.properties.name}: ${cur.risk} risk, fips: ${cur.fips}`);
         };
     };
 
@@ -157,7 +157,7 @@ const CaseReportMap = () => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={cur ? colorScale(cur.riskLevels.overall) : "url('#lines')"}
+                            fill={cur ? colorScale(cur.risk) : "url('#lines')"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Link from '@mui/material/Link'
 import Head from 'next/head'
 import Image from 'next/image'

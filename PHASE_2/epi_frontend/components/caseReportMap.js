@@ -136,6 +136,14 @@ const CaseReportMap = () => {
         setZoom(4);
     };
 
+    function checkRisk(cur) {
+        if ("risk" in cur) {
+        return colorScale(cur.risk)
+        } else {
+            return "url('#lines')";
+        }
+    }
+
     return (
         <>
         <ComposableMap projection="geoAlbersUsa" style={{ height: '100%' }}>
@@ -157,7 +165,7 @@ const CaseReportMap = () => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={cur ? colorScale(cur.risk) : "url('#lines')"}
+                            fill={cur ? checkRisk(cur) : "blue"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}

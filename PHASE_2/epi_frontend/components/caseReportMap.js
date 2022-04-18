@@ -10,6 +10,12 @@ import { PatternLines } from "@vx/pattern";
 import { geoCentroid } from "d3-geo";
 import allStates from "./allStates.json";
 import hospital from '../data/hospitalandrisk.json';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Typography } from "@mui/material";
 
 const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
@@ -48,15 +54,14 @@ const offsets = {
 const LinearGradient = props => {
     const { data } = props;
     const boxStyle = {
-      width: 500,
-      margin: 'auto'
+      width: '100%',
     };
     const gradientStyle = {
       backgroundImage: `linear-gradient(to right, ${data.colourRange.join(',')})`,
       height: 20
     };
     return (
-      <Box width={500}>
+      <Box width={'50%'}>
         <Grid
             container
             direction="row"
@@ -72,6 +77,7 @@ const LinearGradient = props => {
             
         </Grid>
         <div style={{ ...boxStyle, ...gradientStyle }} className="mt8"></div>
+        <Typography>Colour scale</Typography>
       </Box>
     );
   };
@@ -79,6 +85,7 @@ const LinearGradient = props => {
 const CaseReportMap = () => {
     const [data, setData] = useState([]);
     const [isMounted,setIsMounted] = useState(false); // Need this for the react-tooltip
+    const [mapType, setMapType] = useState('');
 
     // NOTE: maybe have array to map keyword to data e.g. if word is risk, map risk data, if hospital beds, map hospital beds
 
@@ -143,6 +150,10 @@ const CaseReportMap = () => {
             return "url('#lines')";
         }
     }
+
+    const handleMapChange = (event) => {
+        setMapType(event.target.value);
+    };
 
     return (
         <>
@@ -214,7 +225,31 @@ const CaseReportMap = () => {
                 </Geographies>
             </ZoomableGroup>
         </ComposableMap>
-        <LinearGradient data={gradientData} />
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <LinearGradient data={gradientData} />
+            <Box sx={{ flexGrow: 1 }}>
+                <FormControl sx={{ m: 1, width: '100%' }}>
+                    <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={mapType}
+                    label="Age"
+                    onChange={handleMapChange}
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                    <FormHelperText>With label + helper text</FormHelperText>
+                </FormControl>
+            </Box>
+            
+        </Box>
+        
         {isMounted && <ReactTooltip>{tooltipContent}</ReactTooltip>}
         </>
     );

@@ -1,7 +1,6 @@
 import CaseReportMap from "./caseReportMap"
 import React, { useState, useEffect } from "react";
 import Slider from '@mui/material/Slider';
-import risk from '../data/risk.json';
 
 const marks = [
     {

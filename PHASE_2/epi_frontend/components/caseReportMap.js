@@ -72,12 +72,12 @@ const LinearGradient = props => {
                 {data.min}
             </Grid>
             <Grid item>
-                {d3.max(data.results, function(d) {return d.risk})}
+                {d3.max(data.results, function(d) {return d[data.mapType]})}
             </Grid>
             
         </Grid>
         <div style={{ ...boxStyle, ...gradientStyle }} className="mt8"></div>
-        <Typography>Colour scale</Typography>
+        <Typography>{data.mapType} scale</Typography>
       </Box>
     );
   };
@@ -85,7 +85,7 @@ const LinearGradient = props => {
 const CaseReportMap = () => {
     const [data, setData] = useState([]);
     const [isMounted,setIsMounted] = useState(false); // Need this for the react-tooltip
-    const [mapType, setMapType] = useState('');
+    const [mapType, setMapType] = useState('risk');
 
     // NOTE: maybe have array to map keyword to data e.g. if word is risk, map risk data, if hospital beds, map hospital beds
 
@@ -110,21 +110,26 @@ const CaseReportMap = () => {
         setIsMounted(true);
     }, [hospital]);
 
-    const colorScale = d3.scaleQuantile()
+    const riskColorScale = d3.scaleQuantile()
     .domain([0, 5])
     .range(RISK_COLOR);
 
+    const colorScale = d3.scaleQuantile()
+    .domain(data.map(d => d.mapType))
+    .range(COLOR_RANGE);
+
     const gradientData = {
-        colourRange: RISK_COLOR,
+        colourRange: mapType == 'risk' ? RISK_COLOR : COLOR_RANGE,
         results: data,
         min: 0,
-        max: data.reduce((max, item) => (item.risk > max ? item.risk : max), 0)
+        max: data.reduce((max, item) => (item[mapType] > max ? item[mapType] : max), 0),
+        mapType: mapType
     };
 
     const [tooltipContent, setTooltipContent] = useState('');
     const onMouseEnter = (geo, cur = { risk: 'NA' }) => {
         return () => {
-            setTooltipContent(`${geo.properties.name}: ${cur.risk} risk, fips: ${cur.fips}`);
+            setTooltipContent(`${geo.properties.name}: ${cur[mapType]} ${mapType}, fips: ${cur.fips}`);
         };
     };
 
@@ -143,9 +148,13 @@ const CaseReportMap = () => {
         setZoom(4);
     };
 
-    function checkRisk(cur) {
-        if ("risk" in cur) {
-        return colorScale(cur.risk)
+    function countyColour(cur, mapType) {
+        if (mapType == 'risk') {
+            console.log("colouring")
+            return riskColorScale(cur[mapType])
+        } else if (mapType in cur) {
+            console.log(mapType)
+            return colorScale(cur[mapType])
         } else {
             return "url('#lines')";
         }
@@ -153,6 +162,7 @@ const CaseReportMap = () => {
 
     const handleMapChange = (event) => {
         setMapType(event.target.value);
+        //console.log(mapType)
     };
 
     return (
@@ -176,7 +186,7 @@ const CaseReportMap = () => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={cur ? checkRisk(cur) : "blue"}
+                            fill={cur ? countyColour(cur, mapType) : "blue"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}
@@ -229,22 +239,21 @@ const CaseReportMap = () => {
             <LinearGradient data={gradientData} />
             <Box sx={{ flexGrow: 1 }}>
                 <FormControl sx={{ m: 1, width: '100%' }}>
-                    <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
+                    <InputLabel id="demo-simple-select-helper-label">Map Type</InputLabel>
                     <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
                     value={mapType}
-                    label="Age"
+                    label="Map Type"
                     onChange={handleMapChange}
                     >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={'risk'}>Risk Level</MenuItem>
+                        <MenuItem value={'vaccinationsInitiatedRatio'}>Vaccinations</MenuItem>
+                        <MenuItem value={'Staffed All Beds [Per 1000 Adults (20+)]'}>Staffed All Beds [Per 1000 Adults (20+)]</MenuItem>
+                        <MenuItem value={'Staffed ICU Beds [Per 1000 Adults (20+)]'}>Staffed ICU Beds [Per 1000 Adults (20+)]</MenuItem>
+                        <MenuItem value={'Licensed All Beds [Per 1000 Adults (20+)]'}>Licensed All Beds [Per 1000 Adults (20+)]</MenuItem>
                     </Select>
-                    <FormHelperText>With label + helper text</FormHelperText>
+                    <FormHelperText>Select the type of map you want to view</FormHelperText>
                 </FormControl>
             </Box>
             

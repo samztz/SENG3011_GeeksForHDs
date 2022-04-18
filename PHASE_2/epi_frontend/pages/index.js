@@ -2,11 +2,13 @@ import * as React from 'react';
 import Link from '@mui/material/Link'
 import Head from 'next/head'
 import Image from 'next/image'
+import React, { useState } from 'react';
 import styles from '../styles/Home.module.css'
 import Navbar from '../components/navbar.js'
 import { ThemeProvider } from '@mui/material/styles'
 import { theme } from "../components/theme.js"
 import MapUSA from '../components/mapUSA'
+import CountyCaseChart from '../components/CountyCaseChart'
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { makeStyles } from "@material-ui/core/styles";
@@ -93,10 +95,10 @@ export default function Home() {
                 >
                   <HelpOutlineIcon />
                 </IconButton>
+                <CountyCaseChart selectedFIPS={"17031"}/>
               </CardContent>
             </Card>
             </Box>
-            
           </Box>
         </Box>
       </Box>

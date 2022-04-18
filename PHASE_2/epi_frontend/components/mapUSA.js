@@ -1,6 +1,7 @@
 import CaseReportMap from "./caseReportMap"
 import React, { useState, useEffect } from "react";
 import Slider from '@mui/material/Slider';
+import risk from '../data/risk.json';
 
 const marks = [
     {
@@ -45,7 +46,7 @@ function valuetext(value) {
 }
 
 export default function MapUSA() {
-    const [dataSource, setDataSource] = useState("https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv");
+    const [dataSource, setDataSource] = useState();
     const handleChange = (event, newValue) => {
         for (let item of dataSources) {
             console.log(item)

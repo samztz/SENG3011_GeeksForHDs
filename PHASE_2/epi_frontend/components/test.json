@@ -1,0 +1,197 @@
+{
+    "fips_code": "01001", 
+    "Staffed All Beds": 55.0, 
+    "Staffed ICU Beds": 6.0, 
+    "Licensed All Beds": 85.0, 
+    "All Bed Occupancy Rate": 0.62, 
+    "ICU Bed Occupancy Rate": 0.53, 
+    "Population": 55601.0, 
+    "Population (20+)": 41177.0, 
+    "Population (65+)": 8653.0, 
+    "Staffed All Beds [Per 1000 People]": 0.989, 
+    "Staffed All Beds [Per 1000 Adults (20+)]": 1.336, 
+    "Staffed All Beds [Per 1000 Elderly (65+)]": 6.356, 
+    "Staffed ICU Beds [Per 1000 People]": 0.108, 
+    "Staffed ICU Beds [Per 1000 Adults (20+)]": 0.146, 
+    "Staffed ICU Beds [Per 1000 Elderly (65+)]": 0.693, 
+    "Licensed All Beds [Per 1000 People]": 1.529, 
+    "Licensed All Beds [Per 1000 Adults (20+)]": 2.064, 
+    "Licensed All Beds [Per 1000 Elderly (65+)]": 9.823
+}
+
+
+
+{
+    "fips": "02013", 
+    "country": "US", 
+    "state": "AK", 
+    "county": "Aleutians East Borough", 
+    "hsa": "820", 
+    "hsaName": "Anchorage (Anchorage), AK - Matanuska-Susitna Borough, AK", 
+    "level": "county", 
+    "lat": null, 
+    "locationId": "iso1:us#iso2:us-ak#fips:02013", 
+    "long": null, 
+    "population": 3337, 
+    "hsaPopulation": 547697, 
+    "metrics": {
+        "testPositivityRatio": null, 
+        "testPositivityRatioDetails": {"source": "other"}, 
+        "caseDensity": 17.1, 
+        "weeklyNewCasesPer100k": 119.9, 
+        "contactTracerCapacityRatio": null, 
+        "infectionRate": 1.06, 
+        "infectionRateCI90": 0.95, 
+        "icuCapacityRatio": null, 
+        "bedsWithCovidPatientsRatio": 0.02, 
+        "weeklyCovidAdmissionsPer100k": 3.3, 
+        "vaccinationsInitiatedRatio": 0.851, 
+        "vaccinationsCompletedRatio": 0.752, 
+        "vaccinationsAdditionalDoseRatio": 0.271
+    }, 
+    "riskLevels": {
+        "overall": 2, 
+        "testPositivityRatio": 4, 
+        "caseDensity": 2, 
+        "contactTracerCapacityRatio": 4, 
+        "infectionRate": 1, 
+        "icuCapacityRatio": 4
+    }, 
+    "cdcTransmissionLevel": 3, 
+    "communityLevels": {
+        "cdcCommunityLevel": 0, 
+        "canCommunityLevel": 0
+    }, 
+    "actuals": {
+        "cases": 1073, 
+        "deaths": 3, 
+        "positiveTests": null, 
+        "negativeTests": null, 
+        "contactTracers": null, 
+        "hospitalBeds": {
+            "capacity": null, 
+            "currentUsageTotal": null, 
+            "currentUsageCovid": null, 
+            "weeklyCovidAdmissions": null
+        }, 
+        "hsaHospitalBeds": {
+            "capacity": 1162, 
+            "currentUsageTotal": 938, 
+            "currentUsageCovid": 16, 
+            "weeklyCovidAdmissions": 10
+        }, 
+        "icuBeds": {
+            "capacity": null, 
+            "currentUsageTotal": null, 
+            "currentUsageCovid": null
+        }, 
+        "hsaIcuBeds": {
+            "capacity": 102, 
+            "currentUsageTotal": 88, 
+            "currentUsageCovid": 4
+        }, 
+        "newCases": 0, 
+        "newDeaths": 0, 
+        "vaccinesDistributed": null, 
+        "vaccinationsInitiated": 2840, 
+        "vaccinationsCompleted": 2510, 
+        "vaccinationsAdditionalDose": 903, 
+        "vaccinesAdministered": null, 
+        "vaccinesAdministeredDemographics": null, 
+        "vaccinationsInitiatedDemographics": null
+    }, 
+    "annotations": {
+        "cases": {
+            "sources": [{
+                    "type": "NYTimes", 
+                    "url": "https://github.com/nytimes/covid-19-data", 
+                    "name": "The New York Times"
+            }], 
+            "anomalies": []
+        }, 
+        "deaths": {
+            "sources": [{
+                "type": "NYTimes", 
+                "url": "https://github.com/nytimes/covid-19-data", 
+                "name": "The New York Times"
+            }], 
+            "anomalies": []
+        }, 
+        "positiveTests": null, 
+        "negativeTests": null, 
+        "contactTracers": null, 
+        "hospitalBeds": null, 
+        "hsaHospitalBeds": null, 
+        "icuBeds": null, 
+        "hsaIcuBeds": null, 
+        "newCases": null, 
+        "newDeaths": null, 
+        "vaccinesDistributed": null, 
+        "vaccinationsInitiated": {
+            "sources": [{
+                "type": "other", 
+                "url": "https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh", 
+                "name": "Centers for Disease Control and Prevention"
+            }], 
+            "anomalies": []
+        }, 
+        "vaccinationsCompleted": {
+            "sources": [{
+                "type": "other", 
+                "url": "https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh", 
+                "name": "Centers for Disease Control and Prevention"
+            }], 
+            "anomalies": []
+        }, 
+        "vaccinationsAdditionalDose": {
+            "sources": [{
+                "type": "other", 
+                "url": "https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh", 
+                "name": "Centers for Disease Control and Prevention"
+            }], 
+            "anomalies": []
+        }, 
+        "vaccinesAdministered": null, 
+        "testPositivityRatio": null, 
+        "caseDensity": {
+            "sources": [{
+                "type": "NYTimes", 
+                "url": "https://github.com/nytimes/covid-19-data", 
+                "name": "The New York Times"
+            }], 
+            "anomalies": []
+        }, 
+        "weeklyNewCasesPer100k": {
+            "sources": [{
+                "type": "NYTimes", 
+                "url": "https://github.com/nytimes/covid-19-data", 
+                "name": "The New York Times"
+            }], 
+            "anomalies": []
+        }, 
+        "contactTracerCapacityRatio": null, 
+        "infectionRate": {
+            "sources": [{
+                "type": "NYTimes", 
+                "url": "https://github.com/nytimes/covid-19-data", 
+                "name": "The New York Times"
+            }], 
+            "anomalies": []
+        }, 
+        "infectionRateCI90": {
+            "sources": [{
+                "type": "NYTimes", 
+                "url": "https://github.com/nytimes/covid-19-data", 
+                "name": "The New York Times"
+            }], "anomalies": []
+        }, 
+        "icuCapacityRatio": null, 
+        "bedsWithCovidPatientsRatio": null, 
+        "weeklyCovidAdmissionsPer100k": null, 
+        "vaccinationsInitiatedRatio": null, 
+        "vaccinationsCompletedRatio": null, 
+        "vaccinationsAdditionalDoseRatio": null
+    }, 
+    "lastUpdatedDate": "2022-04-17", 
+    "url": "https://covidactnow.org/us/alaska-ak/county/aleutians_east_borough"
+}

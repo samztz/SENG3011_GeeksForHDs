@@ -9,6 +9,7 @@ import * as d3 from 'd3';
 import { PatternLines } from "@vx/pattern";
 import { geoCentroid } from "d3-geo";
 import allStates from "./allStates.json";
+import hospital from '../data/hospitalandrisk.json';
 
 const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
@@ -23,6 +24,14 @@ const COLOR_RANGE = [
     "#275053",
     "#1F363D"
 ];
+const RISK_COLOR = [
+    "#00c940",
+    "#ffda00",
+    "#ff9a00",
+    "#ff2200",
+    "#be1900",
+    "#630000"
+]
 
 const offsets = {
     VT: [50, -8],
@@ -67,13 +76,15 @@ const LinearGradient = props => {
     );
   };
 
-const CaseReportMap = ({dataSource}) => {
+const CaseReportMap = () => {
     const [data, setData] = useState([]);
     const [isMounted,setIsMounted] = useState(false); // Need this for the react-tooltip
 
+    // NOTE: maybe have array to map keyword to data e.g. if word is risk, map risk data, if hospital beds, map hospital beds
+
     useEffect(() => {
         // https://www.bls.gov/lau/
-        csv(dataSource, function(d) {
+        /*csv(dataSource, function(d) {
             let a = {};
             a.cases = +d.cases;
             if (d.geoid) {
@@ -87,25 +98,26 @@ const CaseReportMap = ({dataSource}) => {
         })
         .then(counties => {
             setData(counties);
-        });
+        });*/
+        setData(hospital);
         setIsMounted(true);
-    }, [dataSource]);
+    }, [hospital]);
 
-    const colorScale = scaleQuantile()
-    .domain(data.map(d => d.cases))
-    .range(COLOR_RANGE);
+    const colorScale = d3.scaleQuantile()
+    .domain([0, 5])
+    .range(RISK_COLOR);
 
     const gradientData = {
-        colourRange: COLOR_RANGE,
+        colourRange: RISK_COLOR,
         results: data,
         min: 0,
-        max: data.reduce((max, item) => (item.cases > max ? item.cases : max), 0)
+        max: data.reduce((max, item) => (item.riskLevels.overall > max ? item.riskLevels.overall : max), 0)
     };
 
     const [tooltipContent, setTooltipContent] = useState('');
-    const onMouseEnter = (geo, cur = { cases: 'NA' }) => {
+    const onMouseEnter = (geo, cur = { risk: 'NA' }) => {
         return () => {
-            setTooltipContent(`${geo.properties.name}: ${cur.cases} cases`);
+            setTooltipContent(`${geo.properties.name}: ${cur.riskLevels.overall} risk`);
         };
     };
 
@@ -145,7 +157,7 @@ const CaseReportMap = ({dataSource}) => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={cur ? colorScale(cur.cases) : "url('#lines')"}
+                            fill={cur ? colorScale(cur.riskLevels.overall) : "url('#lines')"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}

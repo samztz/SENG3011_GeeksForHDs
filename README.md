@@ -45,7 +45,7 @@ Documentation through **Swagger**
 git clone https://github.com/samztz/SENG3011_GeeksForHDs.git
 cd SENG3011_GeeksForHDs
 npm init
-npm start
+npm run dev
 ```
 
 

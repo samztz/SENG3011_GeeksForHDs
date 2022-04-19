@@ -20,8 +20,8 @@ import { Typography } from "@mui/material";
 const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 const COLOR_RANGE = [
-    "#F3F3F3",
-    "#D2DED8",
+    "#c7f0e7",
+    "#bbe3db",
     "#9ECCC3",
     "#79BFB4",
     "#44AD9E",
@@ -126,12 +126,12 @@ const CaseReportMap = () => {
     }*/
 
     const riskColorScale = d3.scaleQuantize()
-    .domain([getMinValue(), getMaxValue()])
-    .range(RISK_COLOR);
+        .domain([getMinValue(), getMaxValue()])
+        .range(RISK_COLOR);
 
-    const colorScale = d3.scaleQuantize()
-    .domain([getMinValue(), getMaxValue()])
-    .range(COLOR_RANGE);
+    const colorScale = d3.scaleQuantile()
+        .domain([getMinValue(), d3.quantile(data, 0.25, item => item[mapType]), d3.median(data, item => item[mapType]), d3.quantile(data, 0.75, item => item[mapType]), getMaxValue()])
+        .range(COLOR_RANGE);
 
     const gradientData = {
         colourRange: mapType == 'risk' ? RISK_COLOR : COLOR_RANGE,
@@ -160,7 +160,7 @@ const CaseReportMap = () => {
     const handleCountyClick = (geography, projection, path) => event => {
         const centroid = projection.invert(path.centroid(geography));
         setCenter(centroid);
-        setZoom(4);
+        setZoom(8);
     };
 
     function countyColour(cur, mapType) {
@@ -171,7 +171,7 @@ const CaseReportMap = () => {
             console.log(mapType)
             return colorScale(cur[mapType])
         } else {
-            return "url('#lines')";
+            return "#f3f3f3";
         }
     }
 
@@ -201,11 +201,12 @@ const CaseReportMap = () => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
+                            stroke={"#FFFFFF"} 
+                            strokeWidth={0.5}
                             fill={cur ? countyColour(cur, mapType) : "blue"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}
-                            strokeWidth={100}
                         />
                         );
                     })
@@ -250,10 +251,10 @@ const CaseReportMap = () => {
                 </Geographies>
             </ZoomableGroup>
         </ComposableMap>
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', mt:1 }}>
             <LinearGradient data={gradientData} />
             <Box sx={{ flexGrow: 1 }}>
-                <FormControl sx={{ m: 1, width: '100%' }}>
+                <FormControl sx={{ m: 1, mb: 0, width: '100%' }}>
                     <InputLabel id="demo-simple-select-helper-label">Map Type</InputLabel>
                     <Select
                     labelId="demo-simple-select-helper-label"
@@ -268,7 +269,6 @@ const CaseReportMap = () => {
                         <MenuItem value={'Staffed ICU Beds [Per 1000 Adults (20+)]'}>Staffed ICU Beds [Per 1000 Adults (20+)]</MenuItem>
                         <MenuItem value={'Licensed All Beds [Per 1000 Adults (20+)]'}>Licensed All Beds [Per 1000 Adults (20+)]</MenuItem>
                     </Select>
-                    <FormHelperText>Select the type of map you want to view</FormHelperText>
                 </FormControl>
             </Box>
             

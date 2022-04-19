@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { csv } from "d3-fetch";
+import Box from "@mui/material/Box";
 import {
     LineChart,
     Line,
@@ -8,11 +9,11 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
 } from "recharts";
 
 const CountyCaseChart = (props) => {
-    const { selectedFIPS } = props;
+    const { currentCounty } = props;
     const [rawCase2022, setRawCase2022] = useState([]);
     const rawCaseURL =
         "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties-recent.csv";
@@ -29,38 +30,40 @@ const CountyCaseChart = (props) => {
         }).then((result) => {
             setRawCase2022(
                 result.filter((data) => {
-                    return data.fips === `${selectedFIPS}`;
+                    return data.fips === `${currentCounty.id}`;
                 })
             );
         });
-    }, []);
-    
+    }, [currentCounty]);
+
     const roundDown = (data) => {
         let result = data;
-        result = result/100;
+        result = result / 100;
         result = Math.floor(result);
-        result = result * 100
+        result = result * 100;
         return result;
-    }
+    };
     const roundUP = (data) => {
         let result = data;
-        result = result/100;
+        result = result / 100;
         result = Math.ceil(result);
-        result = result * 100
+        result = result * 100;
         return result;
-    }
-    const dateFormatter = date => {
+    };
+    const dateFormatter = (date) => {
         const formateDate = new Date(date);
-        
-        return `${formateDate.getUTCDate()}/${formateDate.getUTCMonth()+1}`;
+
+        return `${formateDate.getUTCDate()}/${formateDate.getUTCMonth() + 1}`;
     };
 
     return (
-        <div >
-            <p>title</p>
+        <div>
+            <div style={{ display: "flex", "justify-content": "center", }}>
+                <p>Recent Case At {currentCounty.properties.name}</p>
+            </div>
             <LineChart
-                width={650}
-                height={400}
+                width={520}
+                height={370}
                 data={rawCase2022}
                 margin={{
                     top: 5,
@@ -70,14 +73,21 @@ const CountyCaseChart = (props) => {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                    dataKey="date" 
-                    domain={['dataMin', 'dataMax']}
+                <XAxis
+                    dataKey="date"
+                    domain={["dataMin", "dataMax"]}
                     tickFormatter={dateFormatter}
                     tickCount={5}
                     hasTick
                 />
-                <YAxis hasTick tickCount={10} domain={[(dataMin) => roundDown(dataMin), (dataMax) => roundUP(dataMax)]} />
+                <YAxis
+                    hasTick
+                    tickCount={10}
+                    domain={[
+                        (dataMin) => roundDown(dataMin),
+                        (dataMax) => roundUP(dataMax),
+                    ]}
+                />
                 <Tooltip />
                 <Legend />
                 <Line

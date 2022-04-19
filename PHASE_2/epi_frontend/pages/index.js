@@ -60,10 +60,11 @@ export default function Home() {
               About
             </Typography>
             <Typography sx={{ mt: 2, mb: 2 }}>
-              
+              We are a service which collects information about the Covid-19 Pandemic in the United States, and displays it in an quick-and-easy-to-access web-application. 
+              We map cases, hospital capacity, potential risk and other resources needed to care for Covid-19 patients.
             </Typography>
             <Typography sx={{ mt: 2, mb: 2 }}>
-              Take a look at our services.
+              Take a look at our services. Hover over each county to learn more. Click on them to get more information. 
             </Typography>
             <Link 
               href="https://unswseng.atlassian.net/wiki/spaces/SE3Y22G14/overview?homepageId=1382672" 

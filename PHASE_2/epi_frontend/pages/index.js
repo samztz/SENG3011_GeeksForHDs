@@ -33,7 +33,6 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -54,8 +53,14 @@ export default function Home() {
           onClose={handleClose}
         >
           <Box sx={style}>
-            <Typography variant="h6" component="h2">
+            <Typography variant="h3" component="h1">
               Welcome to EPIDENCE
+            </Typography>
+            <Typography variant="h5" component="h2" sx={{ mt: 2, mb: 2 }}>
+              About
+            </Typography>
+            <Typography sx={{ mt: 2, mb: 2 }}>
+              
             </Typography>
             <Typography sx={{ mt: 2, mb: 2 }}>
               Take a look at our services.
@@ -87,7 +92,6 @@ export default function Home() {
                   ALSO CHARTS DISPLAYED HERE???
                 </Typography>
                 <IconButton 
-                  aria-label="delete"
                   onClick={() =>{
                     handleOpen();
                   }}

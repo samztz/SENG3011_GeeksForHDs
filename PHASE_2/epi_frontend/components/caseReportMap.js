@@ -60,6 +60,7 @@ const LinearGradient = props => {
       backgroundImage: `linear-gradient(to right, ${data.colourRange.join(',')})`,
       height: 20
     };
+    console.log(`minval: ${data.min}`)
     return (
       <Box width={'50%'}>
         <Grid
@@ -72,7 +73,7 @@ const LinearGradient = props => {
                 {data.min}
             </Grid>
             <Grid item>
-                {d3.max(data.results, function(d) {return d[data.mapType]})}
+                {data.max}
             </Grid>
             
         </Grid>
@@ -110,19 +111,33 @@ const CaseReportMap = () => {
         setIsMounted(true);
     }, [hospital]);
 
-    const riskColorScale = d3.scaleQuantile()
-    .domain([0, 5])
+    function getMaxValue() {
+        return d3.max(data, item => item[mapType])
+        //return data.reduce((max, item) => (item[mapType] > max ? item[mapType] : max), 0);
+    }
+
+    function getMinValue() {
+        return d3.min(data, item => item[mapType])
+        //return data.reduce((min, item) => (item[mapType] < min ? item[mapType] : min), 0);
+    }
+
+    /*function getMinMaxValue() {
+        return data.reduce((min, item) => (item[mapType] < min ? item[mapType] : min), min);
+    }*/
+
+    const riskColorScale = d3.scaleQuantize()
+    .domain([getMinValue(), getMaxValue()])
     .range(RISK_COLOR);
 
-    const colorScale = d3.scaleQuantile()
-    .domain(data.map(d => d.mapType))
+    const colorScale = d3.scaleQuantize()
+    .domain([getMinValue(), getMaxValue()])
     .range(COLOR_RANGE);
 
     const gradientData = {
         colourRange: mapType == 'risk' ? RISK_COLOR : COLOR_RANGE,
         results: data,
-        min: 0,
-        max: data.reduce((max, item) => (item[mapType] > max ? item[mapType] : max), 0),
+        min: getMinValue(),
+        max: getMaxValue(),
         mapType: mapType
     };
 
@@ -152,7 +167,7 @@ const CaseReportMap = () => {
         if (mapType == 'risk') {
             console.log("colouring")
             return riskColorScale(cur[mapType])
-        } else if (mapType in cur) {
+        } else if (mapType in cur && cur[mapType] != null) {
             console.log(mapType)
             return colorScale(cur[mapType])
         } else {

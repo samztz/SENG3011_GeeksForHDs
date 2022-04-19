@@ -16,6 +16,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from "@mui/material";
+import { legendColor } from 'd3-svg-legend';
 
 const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
@@ -81,7 +82,7 @@ const LinearGradient = props => {
         <Typography>{data.mapType} scale</Typography>
       </Box>
     );
-  };
+};
 
 const CaseReportMap = () => {
     const [data, setData] = useState([]);
@@ -182,17 +183,8 @@ const CaseReportMap = () => {
 
     return (
         <>
-        <ComposableMap projection="geoAlbersUsa" style={{ height: '100%' }}>
+        <ComposableMap projection="geoAlbersUsa" style={{ height: '100%', backgroundColor: '#30bfe3' }}>
             <ZoomableGroup center={center} zoom={zoom}>
-                <PatternLines
-                    id="lines"
-                    height={6}
-                    width={6}
-                    stroke="red"
-                    strokeWidth={1}
-                    background="#F6F0E9"
-                    orientation={["diagonal"]}
-                />
                 <Geographies geography={geoURL}>
                     {({ geographies, projection, path }) =>
                     geographies.map(geo => {
@@ -202,7 +194,7 @@ const CaseReportMap = () => {
                             key={geo.rsmKey}
                             geography={geo}
                             stroke={"#FFFFFF"} 
-                            strokeWidth={0.5}
+                            strokeWidth={0.4}
                             fill={cur ? countyColour(cur, mapType) : "blue"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
@@ -216,7 +208,7 @@ const CaseReportMap = () => {
                     {({geographies}) => (
                         <>
                             {geographies.map(geo => {
-                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} strokeWidth={2} />);
+                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} strokeWidth={0.7} />);
                             })}
                             {geographies.map(geo => {
                                 const centroid = geoCentroid(geo);

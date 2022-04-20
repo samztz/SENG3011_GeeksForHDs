@@ -61,7 +61,26 @@ const LinearGradient = props => {
       backgroundImage: `linear-gradient(to right, ${data.colourRange.join(',')})`,
       height: 20
     };
-    console.log(`minval: ${data.min}`)
+
+    // map maptype to name
+    let names = [
+        {
+            mapType: 'risk',
+            label: 'Risk Level'
+        },
+        {
+            mapType: 'vaccinationsInitiatedRatio',
+            label: 'Ratio of population with 1st vaccine dose'
+        }
+    ]
+
+    let label = data.mapType
+    for (let item of names) {
+        if (item.mapType == data.mapType) {
+            label = item.label;
+        }
+    }
+
     return (
       <Box width={'50%'}>
         <Grid
@@ -79,7 +98,7 @@ const LinearGradient = props => {
             
         </Grid>
         <div style={{ ...boxStyle, ...gradientStyle }} className="mt8"></div>
-        <Typography>{data.mapType} scale</Typography>
+        <Typography>{label}</Typography>
       </Box>
     );
 };
@@ -92,39 +111,17 @@ const CaseReportMap = () => {
     // NOTE: maybe have array to map keyword to data e.g. if word is risk, map risk data, if hospital beds, map hospital beds
 
     useEffect(() => {
-        // https://www.bls.gov/lau/
-        /*csv(dataSource, function(d) {
-            let a = {};
-            a.cases = +d.cases;
-            if (d.geoid) {
-                a.fips = d.geoid.replace("USA-", "")
-            } else {
-                a.fips = d.fips
-            }
-            //a.fips = d.fips
-            //a.fips = d.fips ? d.fips : d.geoid.replace("USA-", "");
-            return a;
-        })
-        .then(counties => {
-            setData(counties);
-        });*/
         setData(hospital);
         setIsMounted(true);
     }, [hospital]);
 
     function getMaxValue() {
         return d3.max(data, item => item[mapType])
-        //return data.reduce((max, item) => (item[mapType] > max ? item[mapType] : max), 0);
     }
 
     function getMinValue() {
         return d3.min(data, item => item[mapType])
-        //return data.reduce((min, item) => (item[mapType] < min ? item[mapType] : min), 0);
     }
-
-    /*function getMinMaxValue() {
-        return data.reduce((min, item) => (item[mapType] < min ? item[mapType] : min), min);
-    }*/
 
     const riskColorScale = d3.scaleQuantize()
         .domain([getMinValue(), getMaxValue()])
@@ -143,9 +140,9 @@ const CaseReportMap = () => {
     };
 
     const [tooltipContent, setTooltipContent] = useState('');
-    const onMouseEnter = (geo, cur = { risk: 'NA' }) => {
+    const onMouseEnter = (geo, cur) => {
         return () => {
-            setTooltipContent(`${geo.properties.name}: ${cur[mapType]} ${mapType}, fips: ${cur.fips}`);
+            setTooltipContent(`${geo.properties.name}: ${cur[mapType] || 'unknown'}`);
         };
     };
 
@@ -162,14 +159,13 @@ const CaseReportMap = () => {
         const centroid = projection.invert(path.centroid(geography));
         setCenter(centroid);
         setZoom(8);
+        county == geography ? setCounty('') : setCounty(geography);
     };
 
     function countyColour(cur, mapType) {
         if (mapType == 'risk') {
-            console.log("colouring")
             return riskColorScale(cur[mapType])
         } else if (mapType in cur && cur[mapType] != null) {
-            console.log(mapType)
             return colorScale(cur[mapType])
         } else {
             return "#f3f3f3";
@@ -193,12 +189,17 @@ const CaseReportMap = () => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            stroke={"#FFFFFF"} 
+                            stroke={county == geo ? "black" : "#FFFFFF"} 
                             strokeWidth={0.4}
                             fill={cur ? countyColour(cur, mapType) : "blue"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}
+                            style={{
+                                default: { outline: "none" },
+                                hover: { outline: "none" },
+                                pressed: { outline: "none" },
+                            }}
                         />
                         );
                     })

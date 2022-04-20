@@ -62,9 +62,9 @@ const InformationCard = (props) => {
                         <div
                             style={{
                                 width: "100%",
-                                "background-color": "white",
-                                "border-radius": "5px",
-                                "box-shadow": "2px 2px 5px #888888",
+                                "backgroundColor": "white",
+                                "borderRadius": "5px",
+                                "boxShadow": "2px 2px 5px #888888",
                             }}
                         >
                             <CountyCaseChart currentCounty={currentCounty} />

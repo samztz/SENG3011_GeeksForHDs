@@ -37,10 +37,12 @@ const InformationCard = (props) => {
                 {currentCounty === null ? (
                     <div>
                         <Typography variant="h5" component="div">
-                            INFO ABOUT HOW TO USE WEBSITE GOES HERE ALSO CHARTS
-                            DISPLAYED HERE???
+                            Click on a county to get more information.
                         </Typography>
-                        <p>Default card</p>
+                        <Typography variant="h5" component="div">
+                            You can also change the type of data 
+                            being displayed on the map using the dropdown menu.
+                        </Typography>
                     </div>
                 ) : (
                     <div>

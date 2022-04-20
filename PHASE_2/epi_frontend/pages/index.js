@@ -19,6 +19,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import IconButton from '@mui/material/IconButton';
+import InformationCard from '../components/InformationCard';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,6 +45,7 @@ export default function Home() {
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [currentCounty, setCurrentCounty] = useState(null);
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,7 +77,7 @@ export default function Home() {
             </Link>
           </Box>
         </Modal>
-        <Navbar />
+        <Navbar handleOpen={handleOpen}/>
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default' }}
@@ -83,25 +85,10 @@ export default function Home() {
           <Toolbar />
           <Box sx={{ display: 'flex', flexDirection: 'row', height: "calc(100vh - 64px)", p:2}}>
             <Box data-tip="" sx={{ display: 'flex', flexDirection: 'column', width:'70%' }}>
-              <MapUSA />
+              <MapUSA setCurrentCounty={setCurrentCounty}/>
             </Box>
             <Box sx={{ width:'30%', pl:2 }}>
-            <Card sx={{ minWidth: '100%', minHeight: '100%' }} style={{backgroundColor: theme.palette.white.main}}>
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  INFO ABOUT HOW TO USE WEBSITE GOES HERE
-                  ALSO CHARTS DISPLAYED HERE???
-                </Typography>
-                <IconButton 
-                  onClick={() =>{
-                    handleOpen();
-                  }}
-                >
-                  <HelpOutlineIcon />
-                </IconButton>
-                <CountyCaseChart selectedFIPS={"17031"}/>
-              </CardContent>
-            </Card>
+            <InformationCard currentCounty={currentCounty} handleOpen={handleOpen}/>
             </Box>
           </Box>
         </Box>

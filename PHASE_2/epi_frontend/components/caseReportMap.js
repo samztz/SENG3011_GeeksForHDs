@@ -103,7 +103,7 @@ const LinearGradient = props => {
     );
 };
 
-const CaseReportMap = () => {
+const CaseReportMap = ({dataSource, setCurrentCounty}) => {
     const [data, setData] = useState([]);
     const [isMounted,setIsMounted] = useState(false); // Need this for the react-tooltip
     const [mapType, setMapType] = useState('risk');
@@ -157,6 +157,7 @@ const CaseReportMap = () => {
 
     const handleCountyClick = (geography, projection, path) => event => {
         const centroid = projection.invert(path.centroid(geography));
+        setCurrentCounty(geography);
         setCenter(centroid);
         setZoom(8);
         county == geography ? setCounty('') : setCounty(geography);

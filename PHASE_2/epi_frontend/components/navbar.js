@@ -19,13 +19,18 @@ import { Grid, ListItemButton } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
+import IconButton from "@mui/material/IconButton";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+
+
 import { useRouter } from 'next/router';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 
 const drawerWidth = 240;
 
-export default function Navbar() {
+export default function Navbar(props) {
     const [open, setOpen] = React.useState(true);
+    const { handleOpen } = props;
 
     const handleClick = () => {
         setOpen(!open);
@@ -43,8 +48,16 @@ export default function Navbar() {
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <AppBar position="fixed">
-            <Toolbar>
+            <Toolbar sx={{ display: 'flex', 'justifyContent':'space-between'}}>
                 <img src="/Logo_dark.png" alt="logo" width='200' />
+                <IconButton
+                    color="white"
+                    onClick={() => {
+                        handleOpen();
+                    }}
+                >
+                    <HelpOutlineIcon />
+                </IconButton>
             </Toolbar>
           </AppBar>
         </Box>

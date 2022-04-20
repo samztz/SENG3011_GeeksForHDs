@@ -44,7 +44,8 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
-export default function MapUSA() {
+export default function MapUSA(props) {
+    const { setCurrentCounty } = props;
     const [dataSource, setDataSource] = useState();
     const handleChange = (event, newValue) => {
         for (let item of dataSources) {
@@ -59,7 +60,7 @@ export default function MapUSA() {
 
     return (
         <>
-            <CaseReportMap dataSource={dataSource} />
+            <CaseReportMap dataSource={dataSource} setCurrentCounty={setCurrentCounty} />
             {/*<Slider
                 aria-label="Custom marks"
                 defaultValue={20}

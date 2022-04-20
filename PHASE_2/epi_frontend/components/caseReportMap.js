@@ -143,7 +143,7 @@ const CaseReportMap = ({dataSource, setCurrentCounty}) => {
     const onMouseEnter = (geo, cur) => {
         //console.log(cur[mapType].toString())
         return () => {
-            setTooltipContent(`${geo.properties.name}: ${cur[mapType]} ${cur.fips}`);
+            setTooltipContent(`${geo.properties.name}: ${cur[mapType]}`);
         };
     };
 

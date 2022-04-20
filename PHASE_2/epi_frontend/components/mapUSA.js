@@ -46,7 +46,7 @@ function valuetext(value) {
 
 export default function MapUSA(props) {
     const { setCurrentCounty } = props;
-    const [dataSource, setDataSource] = useState("https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv");
+    const [dataSource, setDataSource] = useState();
     const handleChange = (event, newValue) => {
         for (let item of dataSources) {
             console.log(item)

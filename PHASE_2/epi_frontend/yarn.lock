@@ -179,11 +179,7 @@
     "core-js-pure" "^3.20.2"
     "regenerator-runtime" "^0.13.4"
 
-<<<<<<< HEAD
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.13.10", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7":
-=======
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.13.10", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7":
->>>>>>> main
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.13.10", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7":
   "integrity" "sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA=="
   "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.17.8.tgz"
   "version" "7.17.8"
@@ -580,6 +576,11 @@
   "version" "12.1.1"
   dependencies:
     "glob" "7.1.7"
+
+"@next/swc-darwin-x64@12.1.1":
+  "integrity" "sha512-2VOsA6WLDuDBA6935djohWGGeUIKeQhXwDwu1CKx1b8+6YMMIvFr/y2dpPWoct+5/IjFz84a2MnbABwpoNB9YA=="
+  "resolved" "https://registry.npmjs.org/@next/swc-darwin-x64/-/swc-darwin-x64-12.1.1.tgz"
+  "version" "12.1.1"
 
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
@@ -2409,6 +2410,11 @@
   "resolved" "https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz"
   "version" "0.0.1-security"
 
+"fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
+
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -3366,9 +3372,6 @@
   "resolved" "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   "version" "1.2.3"
 
-<<<<<<< HEAD
-"react-dom@^16.8.0 || ^17.0.0", "react-dom@^16.8.0 || 17.x", "react-dom@^17.0.0", "react-dom@^17.0.2", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=15.3.0", "react-dom@>=16.0.0", "react-dom@>=16.3.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8 || ^17.0.0", "react-dom@17.0.2":
-=======
 "raf@^3.4.0":
   "integrity" "sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA=="
   "resolved" "https://registry.npmjs.org/raf/-/raf-3.4.1.tgz"
@@ -3376,8 +3379,7 @@
   dependencies:
     "performance-now" "^2.1.0"
 
-"react-dom@^15.0.0 || ^16.0.0 || ^17.0.0", "react-dom@^16.0.0 || ^17.0.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^16.8.0 || 17.x", "react-dom@^17.0.0", "react-dom@^17.0.2", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=15.0.0", "react-dom@>=15.3.0", "react-dom@>=16.0.0", "react-dom@>=16.3.0", "react-dom@>=16.6.0", "react-dom@>=16.8 || ^17.0.0", "react-dom@17.0.2":
->>>>>>> main
+"react-dom@^15.0.0 || ^16.0.0 || ^17.0.0", "react-dom@^16.0.0 || ^17.0.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^16.8.0 || 17.x", "react-dom@^17.0.0", "react-dom@^17.0.2", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=15.0.0", "react-dom@>=15.3.0", "react-dom@>=16.0.0", "react-dom@>=16.3.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8 || ^17.0.0", "react-dom@17.0.2":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -3420,7 +3422,15 @@
     "react" "^17.0.2"
     "react-dom" "^17.0.2"
 
-<<<<<<< HEAD
+"react-resize-detector@^6.6.3":
+  "integrity" "sha512-0FaEcUBAbn+pq3PT5a9hHRebUfuS1SRLGLpIw8LydU7zX429I6XJgKerKAMPsJH0qWAl6o5bVKNqFJqr6tGPYw=="
+  "resolved" "https://registry.npmjs.org/react-resize-detector/-/react-resize-detector-6.7.8.tgz"
+  "version" "6.7.8"
+  dependencies:
+    "@types/resize-observer-browser" "^0.1.6"
+    "lodash" "^4.17.21"
+    "resize-observer-polyfill" "^1.5.1"
+
 "react-router-dom@^6.3.0":
   "integrity" "sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.3.0.tgz"
@@ -3435,16 +3445,6 @@
   "version" "6.3.0"
   dependencies:
     "history" "^5.2.0"
-=======
-"react-resize-detector@^6.6.3":
-  "integrity" "sha512-0FaEcUBAbn+pq3PT5a9hHRebUfuS1SRLGLpIw8LydU7zX429I6XJgKerKAMPsJH0qWAl6o5bVKNqFJqr6tGPYw=="
-  "resolved" "https://registry.npmjs.org/react-resize-detector/-/react-resize-detector-6.7.8.tgz"
-  "version" "6.7.8"
-  dependencies:
-    "@types/resize-observer-browser" "^0.1.6"
-    "lodash" "^4.17.21"
-    "resize-observer-polyfill" "^1.5.1"
->>>>>>> main
 
 "react-simple-maps@^2.3.0":
   "integrity" "sha512-IZVeiPSRZKwD6I/2NvXpQ2uENYGDGZp8DvZjkapcxuJ/LQHTfl+Byb+KNgY7s+iatRA2ad8LnZ3AgqcjziCCsw=="
@@ -3483,9 +3483,6 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-<<<<<<< HEAD
-"react@^15.0.0-0 || ^16.0.0-0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=15.3.0", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@17.0.2":
-=======
 "react-transition-group@2.9.0":
   "integrity" "sha512-+HzNTCHpeQyl4MJ/bdE0u6XRMe9+XG/+aL4mCxVN4DnPBQ0/5bfHWPDuOZUzYdMj94daZaZdCCc1Dzt9R/xSSg=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-2.9.0.tgz"
@@ -3496,8 +3493,7 @@
     "prop-types" "^15.6.2"
     "react-lifecycles-compat" "^3.0.4"
 
-"react@^15.0.0 || ^16.0.0 || ^17.0.0", "react@^15.0.0-0 || ^16.0.0-0", "react@^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=15.0.0", "react@>=15.3.0", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@17.0.2":
->>>>>>> main
+"react@^15.0.0 || ^16.0.0 || ^17.0.0", "react@^15.0.0-0 || ^16.0.0-0", "react@^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=15.0.0", "react@>=15.3.0", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

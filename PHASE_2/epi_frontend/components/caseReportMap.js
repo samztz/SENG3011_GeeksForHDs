@@ -9,12 +9,20 @@ import * as d3 from 'd3';
 import { PatternLines } from "@vx/pattern";
 import { geoCentroid } from "d3-geo";
 import allStates from "./allStates.json";
+import hospital from '../data/hospitalandrisk.json';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Typography } from "@mui/material";
+import { legendColor } from 'd3-svg-legend';
 
 const geoURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 const COLOR_RANGE = [
-    "#F3F3F3",
-    "#D2DED8",
+    "#c7f0e7",
+    "#bbe3db",
     "#9ECCC3",
     "#79BFB4",
     "#44AD9E",
@@ -23,6 +31,14 @@ const COLOR_RANGE = [
     "#275053",
     "#1F363D"
 ];
+const RISK_COLOR = [
+    "#00c940",
+    "#ffda00",
+    "#ff9a00",
+    "#ff2200",
+    "#be1900",
+    "#630000"
+]
 
 const offsets = {
     VT: [50, -8],
@@ -39,15 +55,34 @@ const offsets = {
 const LinearGradient = props => {
     const { data } = props;
     const boxStyle = {
-      width: 500,
-      margin: 'auto'
+      width: '100%',
     };
     const gradientStyle = {
       backgroundImage: `linear-gradient(to right, ${data.colourRange.join(',')})`,
       height: 20
     };
+
+    // map maptype to name
+    let names = [
+        {
+            mapType: 'risk',
+            label: 'Risk Level'
+        },
+        {
+            mapType: 'vaccinationsInitiatedRatio',
+            label: 'Ratio of population with 1st vaccine dose'
+        }
+    ]
+
+    let label = data.mapType
+    for (let item of names) {
+        if (item.mapType == data.mapType) {
+            label = item.label;
+        }
+    }
+
     return (
-      <Box width={500}>
+      <Box width={'50%'}>
         <Grid
             container
             direction="row"
@@ -58,54 +93,56 @@ const LinearGradient = props => {
                 {data.min}
             </Grid>
             <Grid item>
-                {d3.max(data.results, function(d) {return d.cases})}
+                {data.max}
             </Grid>
             
         </Grid>
         <div style={{ ...boxStyle, ...gradientStyle }} className="mt8"></div>
+        <Typography>{label}</Typography>
       </Box>
     );
-  };
+};
 
 const CaseReportMap = ({dataSource, setCurrentCounty}) => {
     const [data, setData] = useState([]);
     const [isMounted,setIsMounted] = useState(false); // Need this for the react-tooltip
+    const [mapType, setMapType] = useState('risk');
+
+    // NOTE: maybe have array to map keyword to data e.g. if word is risk, map risk data, if hospital beds, map hospital beds
 
     useEffect(() => {
-        // https://www.bls.gov/lau/
-        csv(dataSource, function(d) {
-            let a = {};
-            a.cases = +d.cases;
-            if (d.geoid) {
-                a.fips = d.geoid.replace("USA-", "")
-            } else {
-                a.fips = d.fips
-            }
-            //a.fips = d.fips
-            //a.fips = d.fips ? d.fips : d.geoid.replace("USA-", "");
-            return a;
-        })
-        .then(counties => {
-            setData(counties);
-        });
+        setData(hospital);
         setIsMounted(true);
-    }, [dataSource]);
+    }, [hospital]);
 
-    const colorScale = scaleQuantile()
-    .domain(data.map(d => d.cases))
-    .range(COLOR_RANGE);
+    function getMaxValue() {
+        return d3.max(data, item => item[mapType])
+    }
+
+    function getMinValue() {
+        return d3.min(data, item => item[mapType])
+    }
+
+    const riskColorScale = d3.scaleQuantize()
+        .domain([getMinValue(), getMaxValue()])
+        .range(RISK_COLOR);
+
+    const colorScale = d3.scaleQuantile()
+        .domain([getMinValue(), d3.quantile(data, 0.25, item => item[mapType]), d3.median(data, item => item[mapType]), d3.quantile(data, 0.75, item => item[mapType]), getMaxValue()])
+        .range(COLOR_RANGE);
 
     const gradientData = {
-        colourRange: COLOR_RANGE,
+        colourRange: mapType == 'risk' ? RISK_COLOR : COLOR_RANGE,
         results: data,
-        min: 0,
-        max: data.reduce((max, item) => (item.cases > max ? item.cases : max), 0)
+        min: getMinValue(),
+        max: getMaxValue(),
+        mapType: mapType
     };
 
     const [tooltipContent, setTooltipContent] = useState('');
-    const onMouseEnter = (geo, cur = { cases: 'NA' }) => {
+    const onMouseEnter = (geo, cur) => {
         return () => {
-            setTooltipContent(`${geo.properties.name}: ${cur.cases} cases`);
+            setTooltipContent(`${geo.properties.name}: ${cur[mapType] || 'unknown'}`);
         };
     };
 
@@ -122,22 +159,29 @@ const CaseReportMap = ({dataSource, setCurrentCounty}) => {
         const centroid = projection.invert(path.centroid(geography));
         setCurrentCounty(geography);
         setCenter(centroid);
-        setZoom(4);
+        setZoom(8);
+        county == geography ? setCounty('') : setCounty(geography);
+    };
+
+    function countyColour(cur, mapType) {
+        if (mapType == 'risk') {
+            return riskColorScale(cur[mapType])
+        } else if (mapType in cur && cur[mapType] != null) {
+            return colorScale(cur[mapType])
+        } else {
+            return "#f3f3f3";
+        }
+    }
+
+    const handleMapChange = (event) => {
+        setMapType(event.target.value);
+        //console.log(mapType)
     };
 
     return (
         <>
-        <ComposableMap projection="geoAlbersUsa" style={{ height: '100%' }}>
+        <ComposableMap projection="geoAlbersUsa" style={{ height: '100%', backgroundColor: '#30bfe3' }}>
             <ZoomableGroup center={center} zoom={zoom}>
-                <PatternLines
-                    id="lines"
-                    height={6}
-                    width={6}
-                    stroke="red"
-                    strokeWidth={1}
-                    background="#F6F0E9"
-                    orientation={["diagonal"]}
-                />
                 <Geographies geography={geoURL}>
                     {({ geographies, projection, path }) =>
                     geographies.map(geo => {
@@ -146,11 +190,17 @@ const CaseReportMap = ({dataSource, setCurrentCounty}) => {
                         <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={cur ? colorScale(cur.cases) : "url('#lines')"}
+                            stroke={county == geo ? "black" : "#FFFFFF"} 
+                            strokeWidth={0.4}
+                            fill={cur ? countyColour(cur, mapType) : "blue"}
                             onMouseEnter={onMouseEnter(geo, cur)}
                             onMouseLeave={onMouseLeave}
                             onClick={handleCountyClick(geo, projection, path)}
-                            strokeWidth={100}
+                            style={{
+                                default: { outline: "none" },
+                                hover: { outline: "none" },
+                                pressed: { outline: "none" },
+                            }}
                         />
                         );
                     })
@@ -160,7 +210,7 @@ const CaseReportMap = ({dataSource, setCurrentCounty}) => {
                     {({geographies}) => (
                         <>
                             {geographies.map(geo => {
-                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} strokeWidth={2} />);
+                                return (<Geography key={geo.rsmKey} geography={geo} stroke={"#FFFFFF"} fill={'none'} strokeWidth={0.7} />);
                             })}
                             {geographies.map(geo => {
                                 const centroid = geoCentroid(geo);
@@ -195,7 +245,29 @@ const CaseReportMap = ({dataSource, setCurrentCounty}) => {
                 </Geographies>
             </ZoomableGroup>
         </ComposableMap>
-        <LinearGradient data={gradientData} />
+        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', mt:1 }}>
+            <LinearGradient data={gradientData} />
+            <Box sx={{ flexGrow: 1 }}>
+                <FormControl sx={{ m: 1, mb: 0, width: '100%' }}>
+                    <InputLabel id="demo-simple-select-helper-label">Map Type</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={mapType}
+                    label="Map Type"
+                    onChange={handleMapChange}
+                    >
+                        <MenuItem value={'risk'}>Risk Level</MenuItem>
+                        <MenuItem value={'vaccinationsInitiatedRatio'}>Vaccinations</MenuItem>
+                        <MenuItem value={'Staffed All Beds [Per 1000 Adults (20+)]'}>Staffed All Beds [Per 1000 Adults (20+)]</MenuItem>
+                        <MenuItem value={'Staffed ICU Beds [Per 1000 Adults (20+)]'}>Staffed ICU Beds [Per 1000 Adults (20+)]</MenuItem>
+                        <MenuItem value={'Licensed All Beds [Per 1000 Adults (20+)]'}>Licensed All Beds [Per 1000 Adults (20+)]</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
+            
+        </Box>
+        
         {isMounted && <ReactTooltip>{tooltipContent}</ReactTooltip>}
         </>
     );

@@ -77,7 +77,7 @@ export default function Home() {
             </Link>
           </Box>
         </Modal>
-        <Navbar />
+        <Navbar handleOpen={handleOpen}/>
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default' }}

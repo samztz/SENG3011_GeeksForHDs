@@ -121,7 +121,6 @@ const CaseReportMap = ({dataSource, setCurrentCounty}) => {
     const handleCountyClick = (geography, projection, path) => event => {
         const centroid = projection.invert(path.centroid(geography));
         setCurrentCounty(geography);
-        console.log('set county to ', geography);
         setCenter(centroid);
         setZoom(4);
     };

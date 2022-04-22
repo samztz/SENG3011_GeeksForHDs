@@ -75,6 +75,14 @@ export default function Home() {
             >
               Confluence Link
             </Link>
+            <Link 
+              href="https://raw.githubusercontent.com/samztz/SENG3011_GeeksForHDs/main/PHASE_2/epi_frontend/data/hospitalandrisk.json?token=GHSAT0AAAAAABRFSTK5R3J5QFEH75QQ6QAWYS7RNNQ" 
+              target='_blank'
+              rel="noopener"
+              sx={{ml: 2}}
+            >
+              Data Source
+            </Link>
           </Box>
         </Modal>
         <Navbar handleOpen={handleOpen}/>
